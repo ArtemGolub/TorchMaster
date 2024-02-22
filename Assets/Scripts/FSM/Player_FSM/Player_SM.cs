@@ -1,40 +1,30 @@
-using System;
 using FSM;
 using Movement;
-using UnityEngine;
 
-public class Player_SM : MonoBehaviour
-{ 
-    [SerializeField] private JoystickMovementController joystickMovementController;
-    private MovementComponent _movementComponent;
+public class Player_SM: StateMachine
+{
+    private IMovable _movementComponent;
+    private JoystickMovementController _joystickMovementController;
     
     private StateMachine _sm;
 
     private Idle_State _idleState;
     private Move_State _moveState;
 
-    void Start()
+    public Player_SM(IMovable movementComponent, JoystickMovementController joystickMovementController)
     {
-        InitMovement();
-        Init_FSM();
-    }
+        _movementComponent = movementComponent;
+        _joystickMovementController = joystickMovementController;
 
-    void Update()
-    {
-        _sm.CurrentState.Update();
+        Init_FSM();
     }
     
     void Init_FSM()
     {
         _sm = new StateMachine();
         _idleState = new Idle_State();
-        _moveState = new Move_State(_movementComponent, joystickMovementController);
+        _moveState = new Move_State(_movementComponent, _joystickMovementController);
         
         _sm.Initialize(_moveState);
-    }
-    
-    private void InitMovement()
-    {
-        _movementComponent = new MovementComponent(transform, 2f);
     }
 }

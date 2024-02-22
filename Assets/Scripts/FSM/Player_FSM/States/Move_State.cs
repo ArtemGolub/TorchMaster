@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Move_State : State
 {
-    readonly MovementComponent _movementComponent;
+    readonly IMovable _movementComponent;
     readonly JoystickMovementController _joystickMovementController;
     
-    public Move_State(MovementComponent movementComponent, JoystickMovementController joystickMovementController)
+    public Move_State(IMovable movementComponent, JoystickMovementController joystickMovementController)
     {
         _movementComponent = movementComponent;
         _joystickMovementController = joystickMovementController;
