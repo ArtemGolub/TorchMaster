@@ -2,29 +2,24 @@ using FSM;
 using Movement;
 using UnityEngine;
 
-public class Move_State : State, IMovable
+public class Move_State : State
 {
-    readonly Transform _player;
+    readonly MovementComponent _movementComponent;
     readonly JoystickMovementController _joystickMovementController;
     
-    public Move_State(Transform player,JoystickMovementController joystickMovementController)
+    public Move_State(MovementComponent movementComponent, JoystickMovementController joystickMovementController)
     {
-        _player = player;
+        _movementComponent = movementComponent;
         _joystickMovementController = joystickMovementController;
     }
     
     public override void Enter()
     {
-        _joystickMovementController.AddObserver(this);
+        _joystickMovementController.AddObserver(_movementComponent);
     }
 
     public override void Exit()
     {
-        _joystickMovementController.RemoveObserver(this);
-    }
-    
-    public void OnMove(Vector3 direction)
-    {
-        _player.transform.position += direction;
+        _joystickMovementController.RemoveObserver(_movementComponent);
     }
 }
