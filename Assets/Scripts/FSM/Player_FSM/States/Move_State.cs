@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class Move_State : State
 {
-    readonly IMovable _movementComponent;
-    readonly JoystickMovementController _joystickMovementController;
-    
-    public Move_State(IMovable movementComponent, JoystickMovementController joystickMovementController)
+    readonly IMovementStategy _movementStategy;
+
+    public Move_State(IMovementStategy movementStategy)
     {
-        _movementComponent = movementComponent;
-        _joystickMovementController = joystickMovementController;
+        _movementStategy = movementStategy;
     }
-    
+
     public override void Enter()
     {
-        _joystickMovementController.AddObserver(_movementComponent);
+        JoystickMovementController.current.AddObserver(_movementStategy);
     }
 
     public override void Exit()
     {
-        _joystickMovementController.RemoveObserver(_movementComponent);
+        JoystickMovementController.current.RemoveObserver(_movementStategy);
     }
 }

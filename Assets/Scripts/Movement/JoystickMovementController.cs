@@ -1,14 +1,15 @@
-using System;
 using UnityEngine;
 
 namespace Movement
 {
-    public sealed class JoystickMovementController : AObserver<IMovable>
+    public sealed class JoystickMovementController : AObserver<IMovementStategy>
     {
+        public static JoystickMovementController current;
         private Joystick _joystick;
 
         private void Awake()
         {
+            current = this;
             _joystick = GetComponentInChildren<Joystick>();
         }
         private void FixedUpdate()
@@ -21,7 +22,7 @@ namespace Movement
         {
             foreach (var observer in observers)
             {
-                observer.OnMove(direction);
+                observer.Move(direction);
             }
         }
     }

@@ -8,11 +8,7 @@ namespace FSM
             CurrentState = startState;
             CurrentState.Enter();
         }
-
-        public void UpdateState()
-        {
-            CurrentState.Update();
-        }
+        
         public void ChangeState(State newState)
         {
             if (CurrentState == newState) return;

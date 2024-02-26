@@ -1,30 +1,31 @@
 using FSM;
-using Movement;
+using UnityEngine;
 
-public class Player_SM: StateMachine
+public class Player_SM: StateMachine, IStateMachine
 {
-    private IMovable _movementComponent;
-    private JoystickMovementController _joystickMovementController;
+    private Player _player;
     
     private StateMachine _sm;
 
     private Idle_State _idleState;
     private Move_State _moveState;
 
-    public Player_SM(IMovable movementComponent, JoystickMovementController joystickMovementController)
+    public Player_SM(Transform transform)
     {
-        _movementComponent = movementComponent;
-        _joystickMovementController = joystickMovementController;
-
-        Init_FSM();
+        _player = transform.GetComponent<Player>();
+       
     }
     
-    void Init_FSM()
+    public void InitBehaviour()
     {
         _sm = new StateMachine();
         _idleState = new Idle_State();
-        _moveState = new Move_State(_movementComponent, _joystickMovementController);
-        
+       _moveState = new Move_State(_player.Character.MovementType);
         _sm.Initialize(_moveState);
+    }
+
+    public void UpdateBehaviour()
+    {
+        _sm.CurrentState.Update();
     }
 }
