@@ -27,6 +27,6 @@
 
         public void SetFSM(Transform transform, FSMType type)
         {
-            _item.SM = FSMFactory.CreateStrategy(transform, type);
+            _item.SM = FSMFactory.CreateItemStrategy(transform, type);
         }
     }

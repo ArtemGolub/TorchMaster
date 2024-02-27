@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class Burn_State : State
 {
+    private Item _item;
     private float _lifeTime;
-    public Burn_State(float lifeTime)
+    public Burn_State(Item item)
     {
-        _lifeTime = lifeTime;
+        _item = item;
+        _lifeTime = _item.LifeTime;
     }
 
 
@@ -15,7 +17,7 @@ public class Burn_State : State
         _lifeTime -= Time.deltaTime;
         if (_lifeTime <= 0)
         {
-            
+            _item.SM.Burned();
         }
     }
 }

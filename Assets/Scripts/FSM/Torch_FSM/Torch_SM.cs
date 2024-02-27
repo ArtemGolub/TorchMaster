@@ -1,7 +1,7 @@
 using FSM;
 using UnityEngine;
 
-public class Torch_SM : StateMachine, IStateMachine
+public class Torch_SM : StateMachine, IItemStateMachine
 {
     private Torch torch;
     
@@ -20,7 +20,7 @@ public class Torch_SM : StateMachine, IStateMachine
         _sm = new StateMachine();
         
         _placedState = new Placed_State();
-        _burnState = new Burn_State(torch.item.LifeTime);
+        _burnState = new Burn_State(torch.item);
         _burnedState = new Burned_State(torch.transform);
         
         _sm.Initialize(_placedState);
@@ -29,5 +29,15 @@ public class Torch_SM : StateMachine, IStateMachine
     public void UpdateBehaviour()
     {
         _sm.CurrentState.Update();
+    }
+
+    public void Grab()
+    {
+        _sm.ChangeState(_burnState);
+    }
+
+    public void Burned()
+    {
+        _sm.ChangeState(_burnedState);
     }
 }

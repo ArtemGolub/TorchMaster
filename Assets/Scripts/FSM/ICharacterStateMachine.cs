@@ -1,6 +1,6 @@
 namespace FSM
 {
-    public interface IStateMachine
+    public interface ICharacterStateMachine
     {
         public void InitBehaviour();
         public void UpdateBehaviour();

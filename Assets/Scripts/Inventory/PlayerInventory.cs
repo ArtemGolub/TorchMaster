@@ -19,17 +19,7 @@
             AddItemToInventory(item);
             PlaceItem(transform, item);
         }
-
-        private void PlaceItem(Transform transform,Item item)
-        {
-            transform.SetParent(_inventoryPose);
-            float poseY = _inventoryPose.position.y + (_offSet * _items[item.ID].Count);
-            Vector3 itemPosition = _inventoryPose.position;
-            itemPosition.y = poseY;
-            
-            transform.position = itemPosition;
-        }
-
+        
         private void AddItemToInventory(Item item)
         {
             if (_items.ContainsKey(item.ID))
@@ -42,6 +32,17 @@
                 newItemList.Add(item);
                 _items.Add(item.ID, newItemList);
             }
+        }
+        private void PlaceItem(Transform transform,Item item)
+        {
+            transform.SetParent(_inventoryPose);
+            float poseY = _inventoryPose.position.y + (_offSet * _items[item.ID].Count);
+            Vector3 itemPosition = _inventoryPose.position;
+            itemPosition.y = poseY;
+            
+            transform.position = itemPosition;
+            
+            item.SM.Grab();
         }
 
         public void ThrowItem(Item item)

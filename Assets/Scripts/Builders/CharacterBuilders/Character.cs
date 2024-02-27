@@ -11,7 +11,7 @@ public class Character
     
     public CharacterType CharacterType;
     public IMovementStategy MovementType;
-    public IStateMachine SM;
+    public ICharacterStateMachine SM;
     public IInventory Inventory;
 
 

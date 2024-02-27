@@ -1,7 +1,7 @@
 using FSM;
 using UnityEngine;
 
-public class Player_SM: StateMachine, IStateMachine
+public class Player_SM: StateMachine, ICharacterStateMachine
 {
     private Player _player;
     

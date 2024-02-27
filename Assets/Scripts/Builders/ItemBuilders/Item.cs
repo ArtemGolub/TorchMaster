@@ -7,5 +7,5 @@ public class Item
     public int ID;
 
     public float LifeTime;
-    public IStateMachine SM;
+    public IItemStateMachine SM;
 }
