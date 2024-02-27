@@ -4,6 +4,7 @@ using UnityEngine;
 public sealed class Player : MonoBehaviour
 {
     [SerializeField] private CharacterSO characterPreset;
+    [SerializeField] private Transform inventoryPose;
     public Character Character;
 
     private void Awake()
@@ -23,6 +24,6 @@ public sealed class Player : MonoBehaviour
 
     private void InitCharacter()
     {
-        Character = CharacterBuilder.current.CreateCharacter(transform, characterPreset);
+        Character = CharacterBuilder.current.CreateCharacter(transform, inventoryPose, characterPreset);
     }
 }

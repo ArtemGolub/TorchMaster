@@ -17,10 +17,10 @@ public class CharacterBuilder : MonoBehaviour
         }
     }
 
-    public Character CreateCharacter(Transform transform, CharacterSO characterData)
+    public Character CreateCharacter(Transform transform, Transform invetoryPose, CharacterSO characterData)
     {
         _characterDirector = new CharacterDirector();
-        Character character = _characterDirector.CreateCharacter(transform,characterData);
+        Character character = _characterDirector.CreateCharacter(transform,invetoryPose,characterData);
         return character;
     }
 }

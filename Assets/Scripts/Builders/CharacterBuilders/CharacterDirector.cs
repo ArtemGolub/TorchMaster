@@ -4,12 +4,12 @@ public class CharacterDirector
 {
     private ICharacterBuilder _characterBuilder;
     
-    public Character CreateCharacter(Transform transform,CharacterSO characterData)
+    public Character CreateCharacter(Transform transform, Transform inventoryPose, CharacterSO characterData)
     {
         _characterBuilder = CharacterBuilderFabric.CharacterBuilder(characterData.characterType);
         
         SetParams(characterData);
-        SetBehaviour(transform, characterData);
+        SetBehaviour(transform, inventoryPose, characterData);
         
         Character character =  _characterBuilder.GetCharacter();
         return character;
@@ -23,10 +23,11 @@ public class CharacterDirector
         _characterBuilder.SetSpeed(characterData.speed);
     }
 
-    private void SetBehaviour(Transform transform, CharacterSO characterData)
+    private void SetBehaviour(Transform transform, Transform inventoryPose, CharacterSO characterData)
     {
         _characterBuilder.SetMovement(transform, characterData.movementType);
         _characterBuilder.SetFSM(transform, characterData.fsmType);
+        _characterBuilder.SetInventory(inventoryPose, characterData.inventoryType);
     }
     
 }

@@ -11,8 +11,10 @@
             {
                 case FSMType.Player:
                     return new Player_SM(transform);
+                case FSMType.Torch:
+                    return new Torch_SM(transform);
                 default:
-                    throw new ArgumentException("Invalid movement type");
+                    throw new ArgumentException("Invalid FSM type");
             }
         }
     }

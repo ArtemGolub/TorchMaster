@@ -29,6 +29,11 @@ public class PlayerBuilder : ICharacterBuilder
         _character.SM = FSMFactory.CreateStrategy(transform, type);
     }
 
+    public void SetInventory(Transform transform, InventoryType type)
+    {
+        _character.Inventory = InventoryFabric.CreateInventory(transform, type);
+    }
+
     public Character GetCharacter()
     {
         return _character;

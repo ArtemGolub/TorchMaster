@@ -12,4 +12,7 @@ public class Character
     public CharacterType CharacterType;
     public IMovementStategy MovementType;
     public IStateMachine SM;
+    public IInventory Inventory;
+
+
 }

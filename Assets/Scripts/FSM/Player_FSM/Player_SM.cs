@@ -13,7 +13,6 @@ public class Player_SM: StateMachine, IStateMachine
     public Player_SM(Transform transform)
     {
         _player = transform.GetComponent<Player>();
-       
     }
     
     public void InitBehaviour()

@@ -8,5 +8,6 @@ public interface ICharacterBuilder
     void SetSpeed(float speed);
     void SetMovement(Transform transform, MovementType movementType);
     void SetFSM(Transform transform, FSMType type);
-   
+    void SetInventory(Transform transform, InventoryType type);
+
 }

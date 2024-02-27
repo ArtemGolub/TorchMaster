@@ -1,5 +1,6 @@
 
     public enum FSMType
     {
-        Player
+        Player,
+        Torch
     }
