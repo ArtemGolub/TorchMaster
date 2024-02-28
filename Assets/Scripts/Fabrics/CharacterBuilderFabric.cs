@@ -10,6 +10,11 @@
                     var playerBuilder = new PlayerBuilder();
                     return playerBuilder;
                 }
+                case CharacterType.Enemy:
+                {
+                    var enemyBuilder = new EnemyBuilder();
+                    return enemyBuilder;
+                }
             }
 
             return null;

@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18da3e77a9a4422991f4b0ec660fc877, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 627f1100d0f3496fb74e82cc34138fd1, type: 3}
+  m_Name: Oil
   m_EditorClassIdentifier: 
-  Name: Player
-  iD: 0
-  prefab: {fileID: 5158191798327346186, guid: 3c023d4c4231e4ac89c4f612fa6dbb83, type: 3}
-  characterType: 0
-  movementType: 0
-  fsmType: 0
-  speed: 2
+  Name: Oil
+  iD: 4
+  prefab: {fileID: 7950075373133631704, guid: b389fde53d9b14617b203bd5d244df89, type: 3}
+  itemType: 1
+  fsmType: 3
+  lifeTime: 2

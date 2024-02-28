@@ -6,7 +6,7 @@ public class CharacterFabric: MonoBehaviour
     public static CharacterFabric current;
     
     [SerializeField]private Transform startPoint;
-    private List<Transform> spawnPoints;
+    [SerializeField]private List<Transform> spawnPoints;
 
     private void Awake()
     {
@@ -27,11 +27,22 @@ public class CharacterFabric: MonoBehaviour
             case CharacterType.Player:
             {
                 var obj = Instantiate(preset.prefab, startPoint.position, startPoint.rotation);
+                EnemyMovementController.current.player = obj.GetComponent<Player>();
+                return obj;
+            }
+            case CharacterType.Enemy:
+            {
+                Transform randomSpawnPoint = RandomiseSpawnPoint();
+                var obj = Instantiate(preset.prefab, randomSpawnPoint.position, randomSpawnPoint.rotation);
                 return obj;
             }
         }
-
         return null;
     }
-    
+
+    private Transform RandomiseSpawnPoint()
+    {
+        var randomIndex = Random.Range(0, spawnPoints.Count);
+        return spawnPoints[randomIndex];
+    }
 }

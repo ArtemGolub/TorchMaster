@@ -11,6 +11,8 @@
             {
                 case FSMType.Player:
                     return new Player_SM(transform);
+                case FSMType.Skeleton:
+                    return new Enemy_SM(transform);
                 default:
                     throw new ArgumentException("Invalid FSM type");
             }
@@ -22,6 +24,8 @@
             {
                 case FSMType.Torch:
                     return new Torch_SM(transform);
+                case FSMType.Oil:
+                    return new Oil_SM(transform);
                 default:
                     throw new ArgumentException("Invalid FSM type");
             }

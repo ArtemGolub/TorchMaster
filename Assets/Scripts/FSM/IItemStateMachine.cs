@@ -4,6 +4,7 @@
         public void InitBehaviour();
         public void UpdateBehaviour();
         
-        public void Grab();
-        public void Burned();
+        public void Grab(IInventory inventory);
+        public void Active();
+        public void Removed();
     }

@@ -2,5 +2,7 @@
     public enum FSMType
     {
         Player,
-        Torch
+        Skeleton,
+        Torch,
+        Oil
     }

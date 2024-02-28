@@ -15,5 +15,16 @@ public class Walk_Strategy : IMovementStategy
     {
         Vector3 move = direction * (_speed * Time.deltaTime);
         _transform.position += move;
+        
+        Rotate(direction);
+    }
+
+    private void Rotate(Vector3 direction)
+    {
+        if (direction != Vector3.zero)
+        {
+            Quaternion newRotation = Quaternion.LookRotation(direction, Vector3.up);
+            _transform.rotation = newRotation;
+        }
     }
 }

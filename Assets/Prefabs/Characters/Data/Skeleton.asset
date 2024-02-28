@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627f1100d0f3496fb74e82cc34138fd1, type: 3}
-  m_Name: Torch
+  m_Script: {fileID: 11500000, guid: 18da3e77a9a4422991f4b0ec660fc877, type: 3}
+  m_Name: Skeleton
   m_EditorClassIdentifier: 
-  Name: 
-  iD: 0
-  prefab: {fileID: 0}
-  itemType: 0
-  fsmType: 0
-  lifeTime: 0
+  Name: Skeleton
+  iD: 3
+  prefab: {fileID: 7480328922246008330, guid: 1a6647100107c4f64964ef16a3bd1bf8, type: 3}
+  characterType: 1
+  movementType: 1
+  fsmType: 1
+  inventoryType: 1
+  speed: 2

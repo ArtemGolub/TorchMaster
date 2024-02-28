@@ -10,6 +10,11 @@
                     var itemBuilder = new TorchBuilder();
                     return itemBuilder;
                 }
+                case ItemType.Oil:
+                {
+                    var itemBuilder = new OilBuilder();
+                    return itemBuilder;
+                }
             }
 
             return null;

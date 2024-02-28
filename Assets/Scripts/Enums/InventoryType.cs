@@ -1,5 +1,6 @@
 
     public enum InventoryType
     {
-        Player
+        Player,
+        Skeleton
     }

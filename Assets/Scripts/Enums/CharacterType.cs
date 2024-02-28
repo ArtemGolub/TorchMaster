@@ -1,5 +1,6 @@
 
     public enum CharacterType
     {
-        Player
+        Player,
+        Enemy
     }

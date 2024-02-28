@@ -1,5 +1,6 @@
 
     public enum ItemType
     {
-        Torch
+        Torch,
+        Oil
     }

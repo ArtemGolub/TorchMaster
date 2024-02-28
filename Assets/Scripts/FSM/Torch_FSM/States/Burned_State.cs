@@ -13,6 +13,6 @@ public class Burned_State : State
     public override void Enter()
     {
         _transform.SetParent(null);
-        Debug.Log(_transform.name + " Burned");
+        _transform.GetComponent<Collider>().enabled = false;
     }
 }

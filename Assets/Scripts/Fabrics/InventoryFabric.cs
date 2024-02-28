@@ -9,6 +9,8 @@ public static class InventoryFabric
         {
             case InventoryType.Player:
                 return new PlayerInventory(inventoryPose);
+            case InventoryType.Skeleton:
+                return null;
             default:
                 throw new ArgumentException("Invalid FSM type");
         }

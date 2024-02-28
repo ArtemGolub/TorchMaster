@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Torch : MonoBehaviour
+public sealed class Torch : MonoBehaviour
 {
     [SerializeField] private ItemSO itemPreset;
     public Item item;
-
+    
     private void Awake()
     {
         InitItem();
