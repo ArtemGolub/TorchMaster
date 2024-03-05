@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPreset: {fileID: 11400000, guid: 328edcb70162c492fb6f89834e65d9cc, type: 2}
-  collider: {fileID: 5819155664495147609}
 --- !u!135 &5819155664495147609
 SphereCollider:
   m_ObjectHideFlags: 0

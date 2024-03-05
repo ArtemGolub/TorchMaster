@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using FSM;
-using UnityEngine;
 
 public class Player_SM: StateMachine, ICharacterStateMachine
 {
     private Character _character;
     
     private StateMachine _sm;
-    private Dictionary<StateType, State> _states = new Dictionary<StateType, State>();
+    private Dictionary<CharacterStateType, State> _states = new Dictionary<CharacterStateType, State>();
   
     
     public Player_SM(Character character)
@@ -18,9 +17,9 @@ public class Player_SM: StateMachine, ICharacterStateMachine
     public void InitBehaviour()
     {
         _sm = new StateMachine();
-        AddState(StateType.Idle, new Idle_State());
-        AddState(StateType.Move, new Move_State(_character.CommandManager));
-        _sm.Initialize(_states[StateType.Move]);
+        AddState(CharacterStateType.Idle, new Idle_State());
+        AddState(CharacterStateType.Move, new Move_State(_character.CommandManager));
+        _sm.Initialize(_states[CharacterStateType.Move]);
         Subscribe();
      
     }
@@ -30,23 +29,26 @@ public class Player_SM: StateMachine, ICharacterStateMachine
         _sm.CurrentState.Update();
     }
 
-    public void ChancgeState(StateType stateType)
+    public void ChancgeState(CharacterStateType characterStateType)
     {
-        _sm.ChangeState(_states[stateType]);
+        _sm.ChangeState(_states[characterStateType]);
     }
     
+    private void AddState(CharacterStateType characterStateType, State state)
+    {
+        _states[characterStateType] = state;
+    }
+    
+    // TODO REFACTOR
     private void Subscribe()
     {
         CharacterFSMObserver.current.AddObserver(this);
     }
-
+    // TODO REFACTOR
     private void UnSubscribe()
     {
         CharacterFSMObserver.current.RemoveObserver(this);
     }
 
-    private void AddState(StateType stateType, State state)
-    {
-        _states[stateType] = state;
-    }
+
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
     public static class StrategyFabric
     {
-        public static IStrategy CreateAttackStrategy(AttackType type)
+        public static IStrategy CreateAttackStrategy(Character character,AttackType type)
         {
             switch (type)
             {
@@ -13,7 +13,7 @@ using UnityEngine;
                 }
                 case AttackType.Ranged:
                 {
-                    return null; //new RangedAttack();
+                    return new RangedAttack(character);
                 }
                 default:
                 {
@@ -30,7 +30,7 @@ using UnityEngine;
                 case MovementType.Walk:
                     return new Walk_Strategy(character);
                 case MovementType.Follow:
-                    return null; //new Follow_Strategy();
+                    return new Follow_Strategy(character);
                 default:
                 {
                     return null;

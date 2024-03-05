@@ -7,12 +7,12 @@
             {
                 case ItemType.Torch:
                 {
-                    var itemBuilder = new ItemBuilder();
+                    var itemBuilder = new TorchBuilder();
                     return itemBuilder;
                 }
                 case ItemType.Oil:
                 {
-                    var itemBuilder = new ItemBuilder();
+                    var itemBuilder = new OilBuilder();;
                     return itemBuilder;
                 }
             }

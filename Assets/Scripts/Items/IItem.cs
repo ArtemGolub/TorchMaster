@@ -1,7 +1,4 @@
-
-    using UnityEngine;
-
-    public interface IItem
-    {
-        Item item { get; set; }
-    }
+public interface IItem
+{
+    Item item { get; set; }
+}

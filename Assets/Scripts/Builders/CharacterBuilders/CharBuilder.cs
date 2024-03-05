@@ -46,6 +46,8 @@ public class CharBuilder : MonoBehaviour
     {
         _characterBuilder.SetName(characterData.Name);
         _characterBuilder.SetSpeed(characterData.speed);
+        _characterBuilder.SetAttackRange(characterData.attackRange);
+        _characterBuilder.SetRaloadTime(characterData.raloadTime);
     }
 
     private void SetBehaviour(CharacterSO characterData)
@@ -55,6 +57,9 @@ public class CharBuilder : MonoBehaviour
         _characterBuilder.SetInventory(characterData.inventoryType);
         _characterBuilder.SetAmmoType(characterData.ammoType);
         _characterBuilder.SetAttackType(characterData.attackType);
+        _characterBuilder.SetCollisions(characterData.collisionTags);
+        _characterBuilder.SetFireObserver();
+        _characterBuilder.SetOilObserver();
         _characterBuilder.SetFSM(characterData.fsmType);
     }
 

@@ -12,8 +12,11 @@ public interface ICharacterBuilder
     void SetFSM(FSMType type);
     void SetInventory(InventoryType type);
     void SetAmmoType(AmmoType type);
-
-
+    void SetCollisions(CollisionTags[] tags);
+    void SetFireObserver();
+    void SetOilObserver();
+    void SetAttackRange(float range);
+    void SetRaloadTime(float time);
 
 
 }

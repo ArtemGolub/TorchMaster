@@ -5,7 +5,7 @@
     public class InventoryCommandManager
     {
         private readonly IInventory _inventory;
-        private Dictionary<CommandType, IInventoryCommand> commands = new Dictionary<CommandType, IInventoryCommand>();
+        private Dictionary<CharacterCommandType, IInventoryCommand> commands = new Dictionary<CharacterCommandType, IInventoryCommand>();
         
         public InventoryCommandManager(IInventory inventory)
         {
@@ -15,22 +15,14 @@
         {
             _inventory.SetInventoryCapacity(torchCapacity, oilCapacity);
         }
-        public void CollectItem(Item item)
+        
+        public void AddCommand(CharacterCommandType characterCommandType, IInventoryCommand inventoryCommand)
         {
-            _inventory.AddItem(item);
+            commands.Add(characterCommandType, inventoryCommand);
         }
-        public void RemoveItem(Item item)
+        public void ExecuteCommand(CharacterCommandType characterCommandType, Item item = null)
         {
-            _inventory.RemoveItem(item);
-        }
-
-        public void AddCommand(CommandType commandType, IInventoryCommand inventoryCommand)
-        {
-            commands.Add(commandType, inventoryCommand);
-        }
-        public void ExecuteCommand(CommandType commandType, Item item = null)
-        {
-            if (commands.TryGetValue(commandType, out IInventoryCommand strategy))
+            if (commands.TryGetValue(characterCommandType, out IInventoryCommand strategy))
             {
                 strategy.Execute(item);
             }

@@ -1,6 +1,3 @@
-
-
-
 using UnityEngine;
 
 public class Item
@@ -9,6 +6,8 @@ public class Item
 
     public ItemType ItemType;
 
+    public ItemCommandManager ItemCommandManager;
+    
     public Transform Transform;
     public Collider Collider;
 

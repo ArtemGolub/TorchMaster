@@ -1,11 +1,6 @@
-using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : ACharacter, IEnemy
 {
-    [SerializeField] private CharacterSO characterPreset;
-    [SerializeField] private Transform inventoryPose;
-    public Character Character;
-
     private void Awake()
     {
         InitCharacter();
@@ -20,9 +15,5 @@ public class Enemy : MonoBehaviour
     {
         Character.SM.UpdateBehaviour();
     }
-
-    private void InitCharacter()
-    {
-        //Character = Builder.current.CreateCharacter(transform, inventoryPose, characterPreset);
-    }
+    
 }

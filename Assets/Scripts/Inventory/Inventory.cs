@@ -6,17 +6,18 @@ public sealed class Inventory : IInventory
 {
     public Transform _transform;
     private InventoryVisualaser _visualaser;
-
-    public Dictionary<ItemType, ItemList<Item>> _items = new Dictionary<ItemType, ItemList<Item>>();
-
+    public Dictionary<ItemType, ItemList<Item>> _items { get; set; }
+    
     public Inventory(Transform inventoryPosition)
     {
         _transform = inventoryPosition;
         _visualaser = new InventoryVisualaser(this);
+        _items = new Dictionary<ItemType, ItemList<Item>>();
     }
-
+    
     public void AddItem(Item item)
     {
+       
         if (_items.ContainsKey(item.ItemType))
         {
             _items[item.ItemType].Add(item);

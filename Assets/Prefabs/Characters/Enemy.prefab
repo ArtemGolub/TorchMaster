@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5745226087105539121}
   - component: {fileID: 3049522451176254391}
   - component: {fileID: 3636847851506750848}
-  - component: {fileID: 1837234904009885218}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1837234904009885218
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819443373561976488}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3276287329450514164
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +94,7 @@ GameObject:
   - component: {fileID: 7480328922246008330}
   - component: {fileID: 2721596124884421243}
   - component: {fileID: -5872805320912013167}
+  - component: {fileID: 5617710184208093809}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -144,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb507bb734f9a4cc4be6262f10db3271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPreset: {fileID: 11400000, guid: 05be37badca5043108bbb300dfdece35, type: 2}
-  inventoryPose: {fileID: 1509322359744634970}
+  CharacterPreset: {fileID: 11400000, guid: 05be37badca5043108bbb300dfdece35, type: 2}
+  inventoryTransform: {fileID: 1509322359744634970}
 --- !u!54 &-5872805320912013167
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,6 +149,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &5617710184208093809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276287329450514164}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5301909164890945836
 GameObject:
   m_ObjectHideFlags: 0

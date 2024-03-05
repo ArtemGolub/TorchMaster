@@ -1,17 +1,20 @@
-using Unity.VisualScripting;
-using UnityEngine;
+using System;
 
 public sealed class Player : ACharacter
 {
     private void Awake()
     {
         InitCharacter();
-        InitCollisionObserver();
     }
 
     private void Start()
     {
         Character.SM.InitBehaviour();
+        
+        Character.CommandManager.SubscribeCommand(CharacterCommandType.Attack);
+        
+        InvokeRepeating("UpdateTorch", 0, 0.1f);
+        InvokeRepeating("CheckTargets", 0, 0.1f);
     }
 
     private void Update()
@@ -19,23 +22,15 @@ public sealed class Player : ACharacter
         Character.SM.UpdateBehaviour();
     }
 
-    protected override void InitCollisionObserver()
+
+    private void UpdateTorch()
     {
-        EnemyCollisionObserver();
-        ItemCollisionObserver();
+        Character.TorchObserver.CheckBurningObjects();
     }
 
-    private void EnemyCollisionObserver()
+    private void CheckTargets()
     {
-        var enemyCollisionObserver = Character.Components.characterTransform.AddComponent<EnemyCollisionObserver>();
-        var EnemyCollisionHandler = new EnemyCollisionHandler(Character);
-        enemyCollisionObserver.AddCollisionHandler("Enemy",EnemyCollisionHandler);
+        Character.OilObserver.CheckAvaliableOil();
     }
-
-    private void ItemCollisionObserver()
-    {
-        var itemCollisionObserver = Character.Components.characterTransform.AddComponent<ItemCollisionObserver>();
-        var ItemCollisionHandler = new ItemCollisionHandler(Character);
-        itemCollisionObserver.AddCollisionHandler("Item",ItemCollisionHandler);
-    }
+    
 }

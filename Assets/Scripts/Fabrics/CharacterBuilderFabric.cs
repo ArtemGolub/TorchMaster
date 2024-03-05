@@ -12,8 +12,8 @@
                 }
                 case CharacterType.Enemy:
                 {
-                    //var enemyBuilder = new EnemyBuilder();
-                    return null;
+                    var enemyBuilder = new CharacterBuilder();
+                    return enemyBuilder;
                 }
             }
 

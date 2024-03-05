@@ -22,3 +22,6 @@ MonoBehaviour:
   ammoType: 1
   attackType: 1
   speed: 5
+  attackRange: 5
+  raloadTime: 0.5
+  collisionTags: 0100000002000000

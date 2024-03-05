@@ -7,5 +7,6 @@ public interface IItemBuilder
     void SetItemType(ItemType type);
     void SetTransform(Transform transform);
     void SetCollider(Collider collider);
+    void SetItemCommandManager();
     void SetFSM(FSMType type);
 }

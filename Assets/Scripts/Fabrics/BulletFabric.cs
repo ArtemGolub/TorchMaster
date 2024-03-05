@@ -1,22 +1,34 @@
+using System;
 using UnityEngine;
 
 public static class BulletFabric
 {
-
-    public static void TryThrowItem(Character attacker,AmmoType type, Transform target)
+    public static IBullet TryThrowItem(Character attacker, Item item)
     {
-        switch (type)
+        switch (attacker.AmmoType)
         {
             case AmmoType.None:
             {
-                Debug.Log("get null");
-                return;
+                Debug.LogError("Ammo type not set");
+                return null;
             }
             case AmmoType.Oil:
             {
-                Debug.Log("get oil");
-               // attacker.Inventory.ThrowItem(ItemType.Oil, target);
-                return;
+                GameObject bullet = InstanceHelper.InstantiatePrefab("Bullet",
+                    attacker.Components.characterTransform.position,
+                    attacker.Components.characterTransform.rotation);
+
+
+                item.Transform.SetParent(bullet.transform);
+                item.Transform.position = bullet.transform.position;
+
+                var bulletGo = bullet.GetComponent<IBullet>();
+                return bulletGo;
+            }
+            default:
+            {
+                Debug.LogError("No implementation for AmmoType: " + attacker.AmmoType);
+                return null;
             }
         }
     }

@@ -21,6 +21,7 @@ public class InventoryVisualaser
     public void RemoveItem(Item item)
     {
         item.Transform.SetParent(null);
+       // AdjustItemPositions();
     }
 
     private bool Intersects(Item item1, Item item2)
@@ -33,7 +34,7 @@ public class InventoryVisualaser
 
     private void AdjustItemPositions()
     {
-        List<Item> allItems = _inventory._items.SelectMany(pair => pair.Value).ToList();
+        List<Item> allItems = _inventory._items.SelectMany(pair => pair.Value ?? Enumerable.Empty<Item>()).ToList();
         allItems = allItems.OrderBy(item => item.Transform.position.y).ToList();
         
         for (int i = 1; i < allItems.Count; i++)

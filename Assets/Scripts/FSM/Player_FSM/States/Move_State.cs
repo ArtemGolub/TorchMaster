@@ -10,11 +10,11 @@ public class Move_State : State
 
     public override void Enter()
     {
-        _commandManager.SubscribeCommand(CommandType.Move);
+        _commandManager.SubscribeCommand(CharacterCommandType.Move);
     }
 
     public override void Exit()
     {
-        _commandManager.UnSubscribeCommand(CommandType.Move);
+        //_commandManager.UnSubscribeCommand(CharacterCommandType.Move);
     }
 }

@@ -15,7 +15,12 @@ public class CharacterSO : ScriptableObject
     public InventoryType inventoryType;
     public AmmoType ammoType;
     public AttackType attackType;
-
+    
     [Header("Settings")] 
     public float speed;
+    public float attackRange;
+    public float raloadTime;
+    
+    [Header("Collision Tags")]
+    public CollisionTags[] collisionTags;
 }

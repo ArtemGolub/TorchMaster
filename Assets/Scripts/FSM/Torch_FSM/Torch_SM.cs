@@ -1,16 +1,12 @@
+using System.Collections.Generic;
 using FSM;
-using UnityEngine;
 
 public class Torch_SM : StateMachine, IItemStateMachine
 {
     private Item _item;
     
     private StateMachine _sm;
-
-    private Grabed_State _grabedState;
-    private Burn_State _burnState;
-    private Placed_State _placedState;
-    private Burned_State _burnedState;
+    private Dictionary<ItemStateType, State> _states = new Dictionary<ItemStateType, State>();
     
     public Torch_SM(Item item)
     {
@@ -19,38 +15,31 @@ public class Torch_SM : StateMachine, IItemStateMachine
     public void InitBehaviour()
     {
         _sm = new StateMachine();
-        
-        _placedState = new Placed_State();
-        _grabedState = new Grabed_State(_item);
-        _burnState = new Burn_State(_item, _item.Transform);
-        _burnedState = new Burned_State(_item.Transform);
-        
-        _sm.Initialize(_placedState);
-    }
 
+        AddState(ItemStateType.Idle, new Item_Idle_State());
+        AddState(ItemStateType.Grab, new Item_Grabed_State());
+        AddState(ItemStateType.Active, new Item_Active_State(_item));
+        AddState(ItemStateType.Used, new Item_Used_State());
+        
+        _sm.Initialize(_states[ItemStateType.Idle]);
+    }
     public void UpdateBehaviour()
     {
         _sm.CurrentState.Update();
     }
-
-    public void Grab(IInventory inventory)
+    
+    public void ChangeState(ItemStateType characterStateType)
     {
-        _burnState.SetInventory(inventory);
-        _sm.ChangeState(_grabedState);
+        _sm.ChangeState(_states[characterStateType]);
     }
 
-    public void Active()
+    public bool CheckState(ItemStateType stateType)
     {
-        _sm.ChangeState(_burnState);
+        return _states[stateType] == _sm.CurrentState;
     }
 
-    public void Removed()
+    private void AddState(ItemStateType characterStateType, State state)
     {
-        _sm.ChangeState(_burnedState);
-    }
-
-    public void Seek(Transform target)
-    {
-        return;
+        _states[characterStateType] = state;
     }
 }

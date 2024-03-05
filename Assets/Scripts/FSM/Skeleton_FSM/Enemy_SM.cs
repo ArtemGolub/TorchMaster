@@ -1,33 +1,41 @@
+using System.Collections.Generic;
 using FSM;
-using UnityEngine;
 
 public class Enemy_SM : StateMachine, ICharacterStateMachine
 {
-    private Enemy _enemy;
+    private Character _character;
     
     private StateMachine _sm;
-
-    private Follow_State _followState;
-
-    public Enemy_SM(Transform transform)
+    private Dictionary<CharacterStateType, State> _states = new Dictionary<CharacterStateType, State>();
+    
+    
+    public Enemy_SM(Character character)
     {
-        _enemy = transform.GetComponent<Enemy>();
+        _character = character;
     }
     
     public void InitBehaviour()
     {
         _sm = new StateMachine();
-        //_followState = new Follow_State(_enemy.Character.MovementType);
-        _sm.Initialize(_followState);
+        AddState(CharacterStateType.Idle, new Idle_State());
+        AddState(CharacterStateType.Move, new Move_State(_character.CommandManager));
+        AddState(CharacterStateType.Slowed, new Slowed_State(_character));
+        AddState(CharacterStateType.Fired, new Fired_State(_character));
+        _sm.Initialize(_states[CharacterStateType.Move]);
     }
-
+    
     public void UpdateBehaviour()
     {
         _sm.CurrentState.Update();
     }
 
-    public void ChancgeState(StateType stateType)
+    public void ChancgeState(CharacterStateType characterStateType)
     {
-        throw new System.NotImplementedException();
+        _sm.ChangeState(_states[characterStateType]);
+    }
+    
+    private void AddState(CharacterStateType characterStateType, State state)
+    {
+        _states[characterStateType] = state;
     }
 }

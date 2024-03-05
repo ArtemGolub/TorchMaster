@@ -4,6 +4,6 @@ namespace FSM
     {
         public void InitBehaviour();
         public void UpdateBehaviour();
-        public void ChancgeState(StateType stateType);
+        public void ChancgeState(CharacterStateType characterStateType);
     }
 }

@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class CharacterCommandManager
 {
-    private Dictionary<CommandType, IStrategy> commands = new Dictionary<CommandType, IStrategy>();
-
-    public void AddCommand(CommandType type, IStrategy command)
+    private Dictionary<CharacterCommandType, IStrategy> commands = new Dictionary<CharacterCommandType, IStrategy>();
+    public void AddCommand(CharacterCommandType type, IStrategy command)
     {
         commands.Add(type, command);
     }
     
-    public void SubscribeCommand(CommandType type)
+    public void SubscribeCommand(CharacterCommandType type)
     {
         if (!commands.ContainsKey(type))
         {
@@ -22,7 +21,7 @@ public class CharacterCommandManager
         command.Subscribe();
     }
 
-    public void UnSubscribeCommand(CommandType type)
+    public void UnSubscribeCommand(CharacterCommandType type)
     {
         if (!commands.ContainsKey(type))
         {
@@ -32,5 +31,13 @@ public class CharacterCommandManager
         
         IStrategy command = commands[type];
         command.UnSubscribe();
+    }
+
+    public void UnSubscribeAll()
+    {
+        foreach (var command in commands.Keys)
+        {
+            UnSubscribeCommand(command);
+        }
     }
 }

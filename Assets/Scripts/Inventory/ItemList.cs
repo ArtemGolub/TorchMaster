@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemList<T>: List<T>
 {
-    public int _maxSize;
+    private int _maxSize;
 
     public ItemList(int maxSize)
     {

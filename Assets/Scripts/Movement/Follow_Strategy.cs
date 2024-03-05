@@ -3,36 +3,36 @@ using UnityEngine;
 
 public class Follow_Strategy : IMovementStategy, IStrategy
 {
-    private Transform _transform;
+    private Character _character;
     private float _speed;
 
-    public Follow_Strategy(Transform transform, float speed)
+    public Follow_Strategy(Character character)
     {
-        _transform = transform;
-        _speed = speed;
+        _character = character;
     }
-
+    
     public void Move(Vector3 direction)
     {
-        var dir = direction - _transform.position;
+        if(_character == null) return;
+        var dir = direction - _character.Components.characterTransform.position;
         Rotate(dir);
-        Vector3 move = dir * (_speed * Time.deltaTime);
-        _transform.position += move;
+        Vector3 move = dir * (_character.Speed * Time.deltaTime);
+        _character.Components.characterTransform.position += move;
     }
 
     private void Rotate(Vector3 direction)
     {
         Quaternion newRotation = Quaternion.LookRotation(direction, Vector3.up);
-        _transform.rotation = newRotation;
+        _character.Components.characterTransform.rotation = newRotation;
     }
 
     public void Subscribe()
     {
-        throw new System.NotImplementedException();
+        EnemyMovementController.current.AddObserver(this);
     }
 
     public void UnSubscribe()
     {
-        throw new System.NotImplementedException();
+        EnemyMovementController.current.RemoveObserver(this);
     }
 }

@@ -27,6 +27,7 @@ public class CharacterFabric: MonoBehaviour
             case CharacterType.Player:
             {
                 var obj = Instantiate(preset.prefab, startPoint.position, startPoint.rotation);
+                EnemyMovementController.current.player = obj.GetComponent<Player>();
                 return obj;
             }
             case CharacterType.Enemy:

@@ -1,18 +1,16 @@
-using UnityEngine;
-
-public sealed class Torch : MonoBehaviour
+public sealed class Torch : AItem
 {
-    [SerializeField] private ItemSO itemPreset;
-    public Item item { get; set; }
-    public Collider collider;
-    private bool isCollected;
     private void Awake()
     {
         InitItem();
     }
-    
-    private void InitItem()
+    private void Start()
     {
-        item = ItemsBuilder.current.CreateItem(transform, itemPreset, collider);
+        item.FSM.InitBehaviour();
+    }
+    
+    private void Update()
+    {
+        item.FSM.UpdateBehaviour();
     }
 }

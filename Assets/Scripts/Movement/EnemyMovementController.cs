@@ -14,14 +14,16 @@ public class EnemyMovementController: AObserver<IMovementStategy>
     private void FixedUpdate()
     {
         if(player == null) return;
+        if(observers == null) return;
         Move(player.transform.position);
     }
     
     private void Move(Vector3 direction)
     {
-        foreach (var observer in observers)
+        for (int i = 0; i < observers.Count; i++)
         {
-            observer.Move(direction);
+            if(observers[i] == null) return;
+            observers[i].Move(direction);
         }
     }
 }

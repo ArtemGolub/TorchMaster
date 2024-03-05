@@ -21,6 +21,8 @@ public class ItemDirector
         _itemBuilder.SetTransform(transform);
         _itemBuilder.SetCollider(collider);
         
+        _itemBuilder.SetItemCommandManager();
+        
         _itemBuilder.SetFSM(itemData.fsmType);
     }
     

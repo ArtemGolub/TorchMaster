@@ -1,60 +1,45 @@
+using System.Collections.Generic;
 using FSM;
-using UnityEngine;
-
-public class Oil_SM : StateMachine, IItemStateMachine, IBullet
-    
+public class Oil_SM : StateMachine, IItemStateMachine
 {
-    private Oil oil;
-    private IInventory _inventory;
-
+    private Item _item;
     private StateMachine _sm;
-    private Placed_State _placedState;
-    private Grabed_State _grabedState;
-    private TargetSearch_State _targetSearch;
-    private Throw_State _throwState;
-
-    public Oil_SM(Transform transform)
+    private Dictionary<ItemStateType, State> _states = new Dictionary<ItemStateType, State>();
+    
+    public Oil_SM(Item item)
     {
-        oil = transform.GetComponent<Oil>();
+        _item = item;
     }
     public void InitBehaviour()
     {
         _sm = new StateMachine();
-        
-        _placedState = new Placed_State();
-        _grabedState = new Grabed_State(oil.item);
-        _targetSearch = new TargetSearch_State();
-        _throwState = new Throw_State(oil.item, oil.transform);
-        
-        _sm.Initialize(_placedState);
-    }
 
+        AddState(ItemStateType.Idle, new Item_Idle_State());
+        AddState(ItemStateType.Grab, new Item_Grabed_State());
+        AddState(ItemStateType.Active, new Item_Active_State(_item));
+        AddState(ItemStateType.Used, new Item_Used_State());
+        
+        _sm.Initialize(_states[ItemStateType.Idle]);
+    }
     public void UpdateBehaviour()
     {
-       _sm.CurrentState.Update();
+        _sm.CurrentState.Update();
+    }
+    
+    public void ChangeState(ItemStateType characterStateType)
+    {
+        _sm.ChangeState(_states[characterStateType]);
     }
 
-    public void Grab(IInventory inventory)
+    public bool CheckState(ItemStateType stateType)
     {
-        _inventory = inventory;
-        _throwState.SetHolder(inventory);
-        _sm.ChangeState(_grabedState);
+        return _states[stateType] == _sm.CurrentState;
     }
 
-    public void Active()
+    private void AddState(ItemStateType characterStateType, State state)
     {
-        Debug.Log("Active");
-        _sm.ChangeState(_throwState);
+        _states[characterStateType] = state;
     }
 
-    public void Removed()
-    {
-        //_sm.ChangeState(_throwState);
-    }
 
-    public void Seek(Transform target)
-    {
-        Debug.Log("seek for: " + target);
-        _throwState.SetTarget(target);
-    }
 }
