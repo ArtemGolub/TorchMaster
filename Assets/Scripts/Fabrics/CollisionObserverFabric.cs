@@ -50,6 +50,19 @@ public static class CollisionObserverFabric
                 observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
                 break;
             }
+            case CollisionTags.DeathWall:
+            {
+                CollisionObserver<IDeathWall> observer =
+                    character.Components.characterTransform.GetComponent<DeathWallObserver>();
+                if (observer == null)
+                {
+                    observer = character.Components.characterTransform.AddComponent<DeathWallObserver>();
+                }
+
+                var collisionHandler = new DeathWallCollisionHandler(character);
+                observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
+                break;
+            }
         }
     }
 
@@ -72,6 +85,10 @@ public static class CollisionObserverFabric
             case CollisionTags.FirePoint:
             {
                 return "FirePoint";
+            }
+            case CollisionTags.DeathWall:
+            {
+                return "DeathWall";
             }
             default:
             {

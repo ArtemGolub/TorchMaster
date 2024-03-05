@@ -5,5 +5,6 @@
         Move,
         Slowed,
         Fired,
-        Fear
+        Fear,
+        Death
     }

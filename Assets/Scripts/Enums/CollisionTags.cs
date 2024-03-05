@@ -5,4 +5,5 @@
         Enemy,
         Item,
         FirePoint,
+        DeathWall
     }

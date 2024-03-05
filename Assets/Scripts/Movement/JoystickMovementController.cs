@@ -15,6 +15,7 @@ namespace Movement
         }
         private void FixedUpdate()
         {
+            if(observers == null) return;
             Vector3 direction = new Vector3(_joystick.Direction.x, 0f, _joystick.Direction.y).normalized;
             if (direction == Vector3.zero)
             {
@@ -27,10 +28,12 @@ namespace Movement
         }
         private void Move(Vector3 direction)
         {
-            foreach (var observer in observers)
+            for (int i = 0; i < observers.Count; i++)
             {
-                observer.Move(direction);
+                if(observers[i] == null) return;
+                observers[i].Move(direction);
             }
+
         }
     }
 }

@@ -13,6 +13,12 @@ public class Walk_Strategy : IMovementStategy, IStrategy
     public void Move(Vector3 direction)
     {
         if(!subscribed) return;
+        if (_character == null || _character.Components == null || _character.Components.characterTransform == null)
+        {
+            Debug.LogWarning("Character or its components are null!");
+            UnSubscribe();
+            return;
+        }
         Vector3 move = direction * (_character.Speed * Time.deltaTime);
         _character.Components.characterTransform.position += move;
         
