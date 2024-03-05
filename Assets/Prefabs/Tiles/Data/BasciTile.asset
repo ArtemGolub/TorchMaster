@@ -16,7 +16,8 @@ MonoBehaviour:
   ID: 2
   prefab: {fileID: 2891300260980682962, guid: d24f395238d204567934d7b1666e74ad, type: 3}
   possibleItems:
-  - {fileID: 11400000, guid: 0a68b3470546d49abad630cd33358221, type: 2}
+  - {fileID: 11400000, guid: 328edcb70162c492fb6f89834e65d9cc, type: 2}
+  - {fileID: 11400000, guid: 47bce669e012e4f3181321e2c5e8c59c, type: 2}
   possibleEnimies:
   - {fileID: 11400000, guid: 46758530d0a16414c9ba8bcd3e410816, type: 2}
   NextTileVariants:

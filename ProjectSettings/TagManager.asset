@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Item
-  - CollisionObserver
+  - FirePoint
   layers:
   - Default
   - TransparentFX

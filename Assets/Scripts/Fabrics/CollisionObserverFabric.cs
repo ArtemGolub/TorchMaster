@@ -37,6 +37,19 @@ public static class CollisionObserverFabric
                 observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
                 break;
             }
+            case CollisionTags.FirePoint:
+            {
+                CollisionObserver<IFirePoint> observer =
+                    character.Components.characterTransform.GetComponent<FirePointCollisionObserver>();
+                if (observer == null)
+                {
+                    observer = character.Components.characterTransform.AddComponent<FirePointCollisionObserver>();
+                }
+
+                var collisionHandler = new FirePointCollisionHandler(character);
+                observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
+                break;
+            }
         }
     }
 
@@ -55,6 +68,10 @@ public static class CollisionObserverFabric
             case CollisionTags.Item:
             {
                 return "Item";
+            }
+            case CollisionTags.FirePoint:
+            {
+                return "FirePoint";
             }
             default:
             {

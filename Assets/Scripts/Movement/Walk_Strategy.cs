@@ -31,14 +31,12 @@ public class Walk_Strategy : IMovementStategy, IStrategy
     public void Subscribe()
     {
         JoystickMovementController.current.AddObserver(this);
-        Debug.Log("Sub");
         subscribed = true;
     }
 
     public void UnSubscribe()
     {
         JoystickMovementController.current.RemoveObserver(this);
-        Debug.Log("Unsubscribed");
         subscribed = false;
     }
 }
