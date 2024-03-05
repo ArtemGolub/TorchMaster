@@ -1,14 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ItemFabric : MonoBehaviour
 {
     public static ItemFabric current;
-    
-   [SerializeField]private List<Transform> _spawnPoints;
-
     private void Awake()
     {
         if (current == null)
@@ -20,23 +15,6 @@ public class ItemFabric : MonoBehaviour
             Destroy(transform);
         }
     }
-
-    public void AddSpawnPoints(List<Transform> spawnPoints)
-    {
-        foreach (var spawnPoint in spawnPoints)
-        {
-            _spawnPoints.Add(spawnPoint);
-        }
-    }
-
-    public void SpawnAllItems(ItemSO preset)
-    {
-        foreach (var spawnPoint in _spawnPoints)
-        {
-            SpawnItem(preset, spawnPoint);
-        }
-    }
-
     public void SpawnItems(Tile tile, List<Transform> spawnPoints)
     {
         for (int i = 0; i < spawnPoints.Count; i++)
@@ -47,7 +25,7 @@ public class ItemFabric : MonoBehaviour
 
     }
     
-    public Transform SpawnItem(ItemSO preset, Transform spawnPose)
+    private Transform SpawnItem(ItemSO preset, Transform spawnPose)
     {
         switch (preset.itemType)
         {

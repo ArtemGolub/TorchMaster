@@ -19,4 +19,6 @@ MonoBehaviour:
   movementType: 1
   fsmType: 1
   inventoryType: 1
-  speed: 2
+  ammoType: 0
+  attackType: 0
+  speed: 0

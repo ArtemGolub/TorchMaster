@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -25,6 +23,6 @@ public class Enemy : MonoBehaviour
 
     private void InitCharacter()
     {
-        Character = CharacterBuilder.current.CreateCharacter(transform, inventoryPose, characterPreset);
+        //Character = Builder.current.CreateCharacter(transform, inventoryPose, characterPreset);
     }
 }

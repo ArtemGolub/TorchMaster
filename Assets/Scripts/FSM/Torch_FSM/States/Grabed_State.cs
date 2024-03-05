@@ -10,6 +10,6 @@ public class Grabed_State : State
     }
     public override void Update()
     {
-        Debug.Log(_item.Name + "In wait list");
+        
     }
 }

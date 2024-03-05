@@ -1,27 +1,37 @@
 
     using UnityEngine;
 
-    public class ItemBuilder: MonoBehaviour
+    public class ItemBuilder: IItemBuilder
     {
-        public static ItemBuilder current;
-        private ItemDirector _itemDirector;
-
-        private void Awake()
+        private Item _item = new Item();
+        
+        public Item GetItem()
         {
-            if (current == null)
-            {
-                current = this;
-            }
-            if (current != this)
-            {
-                Destroy(transform);
-            }
+            return _item;
+        }
+
+        public void SetName(string name)
+        {
+            _item.Name = name;
         }
         
-        public Item CreateItem(Transform transform, ItemSO itemData)
+        public void SetItemType(ItemType type)
         {
-            _itemDirector = new ItemDirector();
-            Item item = _itemDirector.CreateItem(transform, itemData);
-            return item;
+            _item.ItemType = type;
+        }
+
+        public void SetTransform(Transform transform)
+        {
+            _item.Transform = transform;
+        }
+
+        public void SetCollider(Collider collider)
+        {
+            _item.Collider = collider;
+        }
+
+        public void SetFSM(FSMType type)
+        {
+            _item.FSM = FSMFactory.CreateItemStrategy(_item, type);
         }
     }

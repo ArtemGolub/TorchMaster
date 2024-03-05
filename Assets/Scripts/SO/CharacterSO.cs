@@ -13,6 +13,8 @@ public class CharacterSO : ScriptableObject
     public MovementType movementType;
     public FSMType fsmType;
     public InventoryType inventoryType;
+    public AmmoType ammoType;
+    public AttackType attackType;
 
     [Header("Settings")] 
     public float speed;

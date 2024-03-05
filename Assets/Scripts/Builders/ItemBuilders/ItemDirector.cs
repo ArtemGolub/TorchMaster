@@ -4,28 +4,24 @@ public class ItemDirector
 {
     private IItemBuilder _itemBuilder;
     
-    public Item CreateItem(Transform transform, ItemSO itemData)
+    public Item CreateItem(Transform transform, ItemSO itemData, Collider collider)
     {
         _itemBuilder = ItemBuilderFabric.ItemBuilder(itemData.itemType);
         
-        SetParams(itemData);
-        SetBehaviour(transform, itemData);
+        SetParams(itemData, transform, collider);
         
         Item item =  _itemBuilder.GetItem();
         return item;
     }
 
-    private void SetParams(ItemSO itemData)
+    private void SetParams(ItemSO itemData, Transform transform, Collider collider)
     {
         _itemBuilder.SetName(itemData.Name);
-        _itemBuilder.SetID(itemData.iD);
+        _itemBuilder.SetItemType(itemData.itemType);
+        _itemBuilder.SetTransform(transform);
+        _itemBuilder.SetCollider(collider);
         
-        _itemBuilder.SetLifeTime(itemData.lifeTime);
-    }
-
-    private void SetBehaviour(Transform transform, ItemSO itemData)
-    {
-        _itemBuilder.SetFSM(transform, itemData.fsmType);
+        _itemBuilder.SetFSM(itemData.fsmType);
     }
     
 }

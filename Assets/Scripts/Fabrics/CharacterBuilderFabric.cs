@@ -7,13 +7,13 @@
             {
                 case CharacterType.Player:
                 {
-                    var playerBuilder = new PlayerBuilder();
+                    var playerBuilder = new CharacterBuilder();
                     return playerBuilder;
                 }
                 case CharacterType.Enemy:
                 {
-                    var enemyBuilder = new EnemyBuilder();
-                    return enemyBuilder;
+                    //var enemyBuilder = new EnemyBuilder();
+                    return null;
                 }
             }
 

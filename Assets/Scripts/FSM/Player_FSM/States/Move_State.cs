@@ -1,23 +1,20 @@
 using FSM;
-using Movement;
-using UnityEngine;
-
 public class Move_State : State
 {
-    readonly IMovementStategy _movementStategy;
+    private CharacterCommandManager _commandManager;
 
-    public Move_State(IMovementStategy movementStategy)
+    public Move_State(CharacterCommandManager commandManager)
     {
-        _movementStategy = movementStategy;
+        _commandManager = commandManager;
     }
 
     public override void Enter()
     {
-        JoystickMovementController.current.AddObserver(_movementStategy);
+        _commandManager.SubscribeCommand(CommandType.Move);
     }
 
     public override void Exit()
     {
-        JoystickMovementController.current.RemoveObserver(_movementStategy);
+        _commandManager.UnSubscribeCommand(CommandType.Move);
     }
 }

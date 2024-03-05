@@ -1,30 +1,52 @@
+using System.Collections.Generic;
 using FSM;
 using UnityEngine;
 
 public class Player_SM: StateMachine, ICharacterStateMachine
 {
-    private Player _player;
+    private Character _character;
     
     private StateMachine _sm;
-
-    private Idle_State _idleState;
-    private Move_State _moveState;
-
-    public Player_SM(Transform transform)
+    private Dictionary<StateType, State> _states = new Dictionary<StateType, State>();
+  
+    
+    public Player_SM(Character character)
     {
-        _player = transform.GetComponent<Player>();
+        _character = character;
     }
     
     public void InitBehaviour()
     {
         _sm = new StateMachine();
-        _idleState = new Idle_State();
-       _moveState = new Move_State(_player.Character.MovementType);
-        _sm.Initialize(_moveState);
+        AddState(StateType.Idle, new Idle_State());
+        AddState(StateType.Move, new Move_State(_character.CommandManager));
+        _sm.Initialize(_states[StateType.Move]);
+        Subscribe();
+     
     }
-
+    
     public void UpdateBehaviour()
     {
         _sm.CurrentState.Update();
+    }
+
+    public void ChancgeState(StateType stateType)
+    {
+        _sm.ChangeState(_states[stateType]);
+    }
+    
+    private void Subscribe()
+    {
+        CharacterFSMObserver.current.AddObserver(this);
+    }
+
+    private void UnSubscribe()
+    {
+        CharacterFSMObserver.current.RemoveObserver(this);
+    }
+
+    private void AddState(StateType stateType, State state)
+    {
+        _states[stateType] = state;
     }
 }

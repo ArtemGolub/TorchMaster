@@ -1,26 +1,62 @@
+
 using UnityEngine;
 
-public class CharacterBuilder : MonoBehaviour
+public class CharacterBuilder : ICharacterBuilder
 {
-    public static CharacterBuilder current;
-    private CharacterDirector _characterDirector;
+    private Character _character = new Character();
 
-    private void Awake()
+    public void SetComponents(CharacterComponents components)
     {
-        if (current == null)
-        {
-            current = this;
-        }
-        if (current != this)
-        {
-            Destroy(transform);
-        }
+        _character.Components = components;
     }
 
-    public Character CreateCharacter(Transform transform, Transform invetoryPose, CharacterSO characterData)
+    public void SetCommandManager()
     {
-        _characterDirector = new CharacterDirector();
-        Character character = _characterDirector.CreateCharacter(transform,invetoryPose,characterData);
-        return character;
+        _character.CommandManager = new CharacterCommandManager();
+    }
+
+    public void SetName(string name)
+    {
+        _character.Name = name;
+    }
+    public void SetSpeed(float speed)
+    {
+        _character.Speed = speed;
+    }
+    
+    public void SetMovement(MovementType type)
+    {
+        _character.MovementType = StrategyFabric.CreateMovementStrategy(_character, type);
+        _character.CommandManager.AddCommand(CommandType.Move, _character.MovementType);
+    }
+
+    public void SetAttackType(AttackType type)
+    {
+        _character.AttackStrategy = StrategyFabric.CreateAttackStrategy(type);
+        _character.CommandManager.AddCommand(CommandType.Attack, _character.AttackStrategy);
+    }
+    
+    public void SetFSM(FSMType type)
+    {
+        _character.SM = FSMFactory.CreateStrategy(_character, type);
+    }
+
+    public void SetInventory(InventoryType type)
+    {
+        _character.Inventory = ComponentFabric.CreateInventory(type, _character);
+        _character.InventoryCommandManager = new InventoryCommandManager(_character.Inventory);
+        
+        _character.InventoryCommandManager.AddCommand(CommandType.Collect, new CollectCommand(_character.Inventory));
+        
+    }
+
+    public void SetAmmoType(AmmoType type)
+    {
+        _character.AmmoType = type;
+    }
+
+    public Character GetCharacter()
+    {
+        return _character;
     }
 }

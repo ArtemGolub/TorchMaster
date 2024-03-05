@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: -1336089975233195474}
   m_Layer: 0
   m_Name: Oil
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPreset: {fileID: 11400000, guid: 0a68b3470546d49abad630cd33358221, type: 2}
+  collider: {fileID: -1336089975233195474}
 --- !u!135 &-1336089975233195474
 SphereCollider:
   m_ObjectHideFlags: 0

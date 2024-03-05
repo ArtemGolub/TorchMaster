@@ -1,18 +1,27 @@
+using System.Collections.Generic;
 using FSM;
-using Movement;
 
 
 public class Character
 {
     public string Name;
-    public int ID;
-
+    
     public float Speed;
     
+    public CharacterComponents Components;
+    
+    public CharacterCommandManager CommandManager;
+    public InventoryCommandManager InventoryCommandManager;
+    
     public CharacterType CharacterType;
-    public IMovementStategy MovementType;
-    public ICharacterStateMachine SM;
+    public AmmoType AmmoType;
+    
+    public IStrategy MovementType;
+    public IStrategy AttackStrategy;
+    
     public IInventory Inventory;
+    
+    public ICharacterStateMachine SM;
 
 
 }

@@ -11,7 +11,7 @@ public class Burn_State : State
     public Burn_State(Item item, Transform transform)
     {
         _item = item;
-        _lifeTime = _item.LifeTime;
+        //_lifeTime = _item.LifeTime;
         _transform = transform;
     }
 
@@ -23,14 +23,13 @@ public class Burn_State : State
     public override void Update()
     {
         _lifeTime -= Time.deltaTime;
-        Debug.Log(_item.Name + " Currently burning");
         if (_lifeTime <= 0)
         {
-            _inventory.RemoveItem(_transform,_item);
+         //   _inventory.RemoveItem(_transform,_item);
         }
     }
     public override void Exit()
     {
-        _item.LifeTime = _lifeTime;
+     //   _item.LifeTime = _lifeTime;
     }
 }

@@ -1,11 +1,16 @@
 
 
 
+using UnityEngine;
+
 public class Item
 {
     public string Name;
-    public int ID;
-    
-    public float LifeTime;
-    public IItemStateMachine SM;
+
+    public ItemType ItemType;
+
+    public Transform Transform;
+    public Collider Collider;
+
+    public IItemStateMachine FSM;
 }

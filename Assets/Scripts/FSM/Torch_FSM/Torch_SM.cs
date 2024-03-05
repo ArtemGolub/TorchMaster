@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Torch_SM : StateMachine, IItemStateMachine
 {
-    private Torch torch;
-    private IInventory _inventory;
+    private Item _item;
     
     private StateMachine _sm;
 
@@ -13,18 +12,18 @@ public class Torch_SM : StateMachine, IItemStateMachine
     private Placed_State _placedState;
     private Burned_State _burnedState;
     
-    public Torch_SM(Transform transform)
+    public Torch_SM(Item item)
     {
-        torch = transform.GetComponent<Torch>();
+        _item = item;
     }
     public void InitBehaviour()
     {
         _sm = new StateMachine();
         
         _placedState = new Placed_State();
-        _grabedState = new Grabed_State(torch.item);
-        _burnState = new Burn_State(torch.item, torch.transform);
-        _burnedState = new Burned_State(torch.transform);
+        _grabedState = new Grabed_State(_item);
+        _burnState = new Burn_State(_item, _item.Transform);
+        _burnedState = new Burned_State(_item.Transform);
         
         _sm.Initialize(_placedState);
     }
@@ -48,5 +47,10 @@ public class Torch_SM : StateMachine, IItemStateMachine
     public void Removed()
     {
         _sm.ChangeState(_burnedState);
+    }
+
+    public void Seek(Transform target)
+    {
+        return;
     }
 }

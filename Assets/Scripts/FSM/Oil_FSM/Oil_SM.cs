@@ -1,7 +1,7 @@
 using FSM;
 using UnityEngine;
 
-public class Oil_SM : StateMachine, IItemStateMachine
+public class Oil_SM : StateMachine, IItemStateMachine, IBullet
     
 {
     private Oil oil;
@@ -24,7 +24,7 @@ public class Oil_SM : StateMachine, IItemStateMachine
         _placedState = new Placed_State();
         _grabedState = new Grabed_State(oil.item);
         _targetSearch = new TargetSearch_State();
-        _throwState = new Throw_State();
+        _throwState = new Throw_State(oil.item, oil.transform);
         
         _sm.Initialize(_placedState);
     }
@@ -36,16 +36,25 @@ public class Oil_SM : StateMachine, IItemStateMachine
 
     public void Grab(IInventory inventory)
     {
+        _inventory = inventory;
+        _throwState.SetHolder(inventory);
         _sm.ChangeState(_grabedState);
     }
 
     public void Active()
     {
-        _sm.ChangeState(_targetSearch);
+        Debug.Log("Active");
+        _sm.ChangeState(_throwState);
     }
 
     public void Removed()
     {
-        _sm.ChangeState(_throwState);
+        //_sm.ChangeState(_throwState);
+    }
+
+    public void Seek(Transform target)
+    {
+        Debug.Log("seek for: " + target);
+        _throwState.SetTarget(target);
     }
 }

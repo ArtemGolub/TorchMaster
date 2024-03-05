@@ -1,7 +1,7 @@
 using Movement;
 using UnityEngine;
 
-public class Follow_Strategy : IMovementStategy
+public class Follow_Strategy : IMovementStategy, IStrategy
 {
     private Transform _transform;
     private float _speed;
@@ -24,5 +24,15 @@ public class Follow_Strategy : IMovementStategy
     {
         Quaternion newRotation = Quaternion.LookRotation(direction, Vector3.up);
         _transform.rotation = newRotation;
+    }
+
+    public void Subscribe()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void UnSubscribe()
+    {
+        throw new System.NotImplementedException();
     }
 }

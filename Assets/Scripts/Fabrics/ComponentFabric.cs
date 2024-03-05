@@ -1,14 +1,13 @@
 using System;
-using UnityEngine;
 
-public static class InventoryFabric
+public static class ComponentFabric
 {
-    public static IInventory CreateInventory(Transform inventoryPose,InventoryType type)
+    public static IInventory CreateInventory(InventoryType type, Character character)
     {
         switch (type)
         {
             case InventoryType.Player:
-                return new PlayerInventory(inventoryPose);
+                return new Inventory(character.Components.inventoryTransform);
             case InventoryType.Skeleton:
                 return null;
             default:

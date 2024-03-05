@@ -1,15 +1,12 @@
-using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public sealed class Player : MonoBehaviour
+public sealed class Player : ACharacter
 {
-    [SerializeField] private CharacterSO characterPreset;
-    [SerializeField] private Transform inventoryPose;
-    public Character Character;
-
     private void Awake()
     {
         InitCharacter();
+        InitCollisionObserver();
     }
 
     private void Start()
@@ -22,8 +19,23 @@ public sealed class Player : MonoBehaviour
         Character.SM.UpdateBehaviour();
     }
 
-    private void InitCharacter()
+    protected override void InitCollisionObserver()
     {
-        Character = CharacterBuilder.current.CreateCharacter(transform, inventoryPose, characterPreset);
+        EnemyCollisionObserver();
+        ItemCollisionObserver();
+    }
+
+    private void EnemyCollisionObserver()
+    {
+        var enemyCollisionObserver = Character.Components.characterTransform.AddComponent<EnemyCollisionObserver>();
+        var EnemyCollisionHandler = new EnemyCollisionHandler(Character);
+        enemyCollisionObserver.AddCollisionHandler("Enemy",EnemyCollisionHandler);
+    }
+
+    private void ItemCollisionObserver()
+    {
+        var itemCollisionObserver = Character.Components.characterTransform.AddComponent<ItemCollisionObserver>();
+        var ItemCollisionHandler = new ItemCollisionHandler(Character);
+        itemCollisionObserver.AddCollisionHandler("Item",ItemCollisionHandler);
     }
 }

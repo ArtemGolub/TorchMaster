@@ -1,20 +1,19 @@
 using Movement;
 using UnityEngine;
 
-public class Walk_Strategy : IMovementStategy
+public class Walk_Strategy : IMovementStategy, IStrategy
 {
-    private Transform _transform;
-    private float _speed;
-
-    public Walk_Strategy(Transform transform, float speed)
+     Character _character;
+    
+    public Walk_Strategy(Character character)
     {
-        _transform = transform;
-        _speed = speed;
+        _character = character;
     }
+    
     public void Move(Vector3 direction)
     {
-        Vector3 move = direction * (_speed * Time.deltaTime);
-        _transform.position += move;
+        Vector3 move = direction * (_character.Speed * Time.deltaTime);
+        _character.Components.characterTransform.position += move;
         
         Rotate(direction);
     }
@@ -24,7 +23,17 @@ public class Walk_Strategy : IMovementStategy
         if (direction != Vector3.zero)
         {
             Quaternion newRotation = Quaternion.LookRotation(direction, Vector3.up);
-            _transform.rotation = newRotation;
+            _character.Components.characterTransform.rotation = newRotation;
         }
+    }
+
+    public void Subscribe()
+    {
+        JoystickMovementController.current.AddObserver(this);
+    }
+
+    public void UnSubscribe()
+    {
+        JoystickMovementController.current.RemoveObserver(this);
     }
 }

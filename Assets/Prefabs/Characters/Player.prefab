@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424d70df30d04130b27012d0987aaee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPreset: {fileID: 11400000, guid: ecd936e4a5a5c4141970e454ed9b02ae, type: 2}
-  inventoryPose: {fileID: 6043657949237394094}
+  CharacterPreset: {fileID: 11400000, guid: ecd936e4a5a5c4141970e454ed9b02ae, type: 2}
+  inventoryTransform: {fileID: 6043657949237394094}
 --- !u!54 &8066485233644314374
 Rigidbody:
   m_ObjectHideFlags: 0
