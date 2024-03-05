@@ -3,6 +3,7 @@
     {
         Player,
         Skeleton,
+        Gost,
         Torch,
         Oil
     }

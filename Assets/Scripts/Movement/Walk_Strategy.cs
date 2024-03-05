@@ -4,7 +4,7 @@ using UnityEngine;
 public class Walk_Strategy : IMovementStategy, IStrategy
 {
      Character _character;
-    
+     private bool subscribed;
     public Walk_Strategy(Character character)
     {
         _character = character;
@@ -12,6 +12,7 @@ public class Walk_Strategy : IMovementStategy, IStrategy
     
     public void Move(Vector3 direction)
     {
+        if(!subscribed) return;
         Vector3 move = direction * (_character.Speed * Time.deltaTime);
         _character.Components.characterTransform.position += move;
         
@@ -30,10 +31,14 @@ public class Walk_Strategy : IMovementStategy, IStrategy
     public void Subscribe()
     {
         JoystickMovementController.current.AddObserver(this);
+        Debug.Log("Sub");
+        subscribed = true;
     }
 
     public void UnSubscribe()
     {
         JoystickMovementController.current.RemoveObserver(this);
+        Debug.Log("Unsubscribed");
+        subscribed = false;
     }
 }

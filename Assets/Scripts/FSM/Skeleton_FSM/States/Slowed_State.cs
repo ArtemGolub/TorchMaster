@@ -14,7 +14,6 @@ public class Slowed_State : State
     public override void Enter()
     {
         _character.Speed /= 2f;
-        Debug.Log("Slowed");
     }
 
     public override void Update()

@@ -29,5 +29,7 @@ public class Character
     
     public ICharacterStateMachine SM;
 
+    public List<Transform> patrolPoints;
+
 
 }

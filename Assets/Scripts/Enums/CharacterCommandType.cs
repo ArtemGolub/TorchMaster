@@ -4,6 +4,8 @@ public enum CharacterCommandType
     Attack,
     Collect,
     Throw,
-    Burn
+    Drop,
+    Burn,
+    Fear
     
 }

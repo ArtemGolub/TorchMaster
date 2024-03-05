@@ -31,6 +31,10 @@ using UnityEngine;
                     return new Walk_Strategy(character);
                 case MovementType.Follow:
                     return new Follow_Strategy(character);
+                case MovementType.Patrol:
+                {
+                    return new Patrol_Strategy(character);
+                }
                 default:
                 {
                     return null;

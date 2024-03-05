@@ -13,6 +13,7 @@ public class Fired_State : State
     public override void Enter()
     {
         _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Move);
+
         DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
     }
 }

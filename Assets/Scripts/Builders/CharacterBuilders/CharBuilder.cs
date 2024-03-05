@@ -54,12 +54,16 @@ public class CharBuilder : MonoBehaviour
     {
         _characterBuilder.SetCommandManager();
         _characterBuilder.SetMovement(characterData.movementType);
-        _characterBuilder.SetInventory(characterData.inventoryType);
         _characterBuilder.SetAmmoType(characterData.ammoType);
         _characterBuilder.SetAttackType(characterData.attackType);
         _characterBuilder.SetCollisions(characterData.collisionTags);
-        _characterBuilder.SetFireObserver();
-        _characterBuilder.SetOilObserver();
+        
+        if (characterData.characterType == CharacterType.Player)
+        {
+            _characterBuilder.SetInventory(characterData.inventoryType);
+            _characterBuilder.SetFireObserver();
+            _characterBuilder.SetOilObserver();
+        }
         _characterBuilder.SetFSM(characterData.fsmType);
     }
 

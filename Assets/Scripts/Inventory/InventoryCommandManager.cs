@@ -31,4 +31,17 @@
                 Console.WriteLine("Command not found.");
             }
         }
+
+        public Item GetItem(ItemType itemType)
+        {
+            if (_inventory._items.ContainsKey(itemType))
+            {
+                ItemList<Item> itemList = _inventory._items[itemType];
+                if (itemList != null && itemList.Count > 0)
+                {
+                    return itemList[0];
+                }
+            }
+            return null;
+        }
     }

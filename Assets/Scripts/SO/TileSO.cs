@@ -12,6 +12,9 @@ public class TileSO : ScriptableObject
     [Header("Items")]
     public List<ItemSO> possibleItems;
     
+    [Header("Enemies")]
+    public List<CharacterSO> possibleEnimies;
+    
     [Header("Next Tile")]
     public List<TileSO> NextTileVariants;
 }

@@ -12,7 +12,7 @@
         
         public void HandleCollision(IEnemy collidedObject)
         {
-            Debug.Log("Enemy collision");
-            //_character.CommandManager.SubscribeCommand(CommandType.Attack);
+            _character.SM.ChancgeState(CharacterStateType.Fear);
+            collidedObject._Character.SM.ChancgeState(CharacterStateType.Fired); // Change to Disapear or smthing
         }
     }

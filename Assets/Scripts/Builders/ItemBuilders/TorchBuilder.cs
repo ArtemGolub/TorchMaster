@@ -38,7 +38,7 @@
         
         public void SetBurnCommand()
         {
-            var burnCommand = new BurnStrategy(_item, 2f);
+            var burnCommand = new BurnStrategy(_item, 200f);
             _item.ItemCommandManager.AddCommand(ItemCommandType.Active, burnCommand);
         }
 

@@ -13,6 +13,7 @@ public class CharacterFSMObserver : AObserver<ICharacterStateMachine>
     {
         foreach (var observer in observers)
         {
+            if(observer.StateCondition(CharacterStateType.Fear)) return;
             observer.ChancgeState(CharacterStateType.Move);
         }
     }
@@ -21,6 +22,7 @@ public class CharacterFSMObserver : AObserver<ICharacterStateMachine>
     {
         foreach (var observer in observers)
         {
+            if(observer.StateCondition(CharacterStateType.Fear)) return;
             observer.ChancgeState(CharacterStateType.Idle);
         }
     }

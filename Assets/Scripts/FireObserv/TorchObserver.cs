@@ -22,6 +22,7 @@ public class TorchObserver
         }
         return anyActive;
     }
+    
     public TorchObserver(IInventory inventory)
     {
         _inventory = inventory;

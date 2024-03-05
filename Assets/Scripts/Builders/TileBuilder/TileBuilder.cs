@@ -31,6 +31,16 @@ public class TileBuilder : ITileBuilder
         _tile.ItemSpawnPoints = itemSpawnPoints;
     }
 
+    public void SetPossibleEnemies(List<CharacterSO> possibleEnimies)
+    {
+        _tile.PossibleEnemies = possibleEnimies;
+    }
+
+    public void SetCharacterSpawnPoints(List<Transform> characterSpawnPoints)
+    {
+        _tile.CharacterSpawnPoints = characterSpawnPoints;
+    }
+
     public void SetNextTileSpawnPoints(Dictionary<Transform, bool> nextTileSpawnPoints)
     {
         _tile.NextTileSpawnPoints = nextTileSpawnPoints;

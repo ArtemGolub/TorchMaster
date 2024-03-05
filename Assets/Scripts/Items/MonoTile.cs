@@ -8,7 +8,9 @@ public sealed class MonoTile : MonoBehaviour
     public List<Transform> itemSpawnPoints;
     [SerializeField] private List<Transform> TileSpawnPoints = new List<Transform>();
     public Dictionary<Transform, bool> nextTileSpawnPoints = new Dictionary<Transform, bool>();
-    
+
+    [SerializeField]private List<Transform> enemySpawnPoints = new List<Transform>();
+    [SerializeField]private List<Transform> patrolPoints = new List<Transform>();
     
     private Tile _tile;
 
@@ -18,6 +20,7 @@ public sealed class MonoTile : MonoBehaviour
         
         ItemFabric.current.SpawnItems(_tile, itemSpawnPoints);
         TileFabric.current.GenerateNextTile(_tile, nextTileSpawnPoints);
+        CharacterFabric.current.TileSpawnCharacter(_tile, enemySpawnPoints, patrolPoints);
     }
     
     void CreateTile()

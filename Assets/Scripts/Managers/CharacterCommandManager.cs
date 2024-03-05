@@ -37,6 +37,7 @@ public class CharacterCommandManager
     {
         foreach (var command in commands.Keys)
         {
+            if (commands[command] == null) return;
             UnSubscribeCommand(command);
         }
     }

@@ -11,8 +11,9 @@ public abstract class ACharacter : MonoBehaviour
         Character = CharBuilder.current.CreateCharacter(CharacterPreset, transform, inventoryTransform);
     }
 
-    protected void UnSubscribeAll()
+    protected void Destroy()
     {
         Character.CommandManager.UnSubscribeAll();
+        Destroy(Character.Components.characterTransform.gameObject);
     }
 }

@@ -4,5 +4,6 @@
         Idle,
         Move,
         Slowed,
-        Fired
+        Fired,
+        Fear
     }

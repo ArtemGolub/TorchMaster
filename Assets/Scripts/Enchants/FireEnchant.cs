@@ -8,6 +8,7 @@ public class FireEnchant : EnchantmentDecorator
     public FireEnchant(Bullet bullet) : base(bullet)
     {
         _bullet = bullet;
+        damageRadius = 5f;
     }
 
     public override void Hit()
@@ -17,8 +18,9 @@ public class FireEnchant : EnchantmentDecorator
         {
             if (collider.gameObject.tag == "Enemy")
             {
+                Debug.Log(collider.gameObject.name);
                 var character = collider.gameObject.GetComponent<Enemy>();
-                if (!character) return;
+                if (!character) continue;
                 character.Character.SM.ChancgeState(CharacterStateType.Fired);
             }
         }

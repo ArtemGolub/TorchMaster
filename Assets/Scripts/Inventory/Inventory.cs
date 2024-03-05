@@ -27,6 +27,7 @@ public sealed class Inventory : IInventory
 
     public void RemoveItem(Item item)
     {
+        if(item == null) return;
         if (_items.ContainsKey(item.ItemType))
         {
             _items[item.ItemType].Remove(item);

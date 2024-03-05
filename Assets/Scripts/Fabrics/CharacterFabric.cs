@@ -19,7 +19,19 @@ public class CharacterFabric: MonoBehaviour
             Destroy(transform);
         }
     }
-    
+
+    public Transform TileSpawnCharacter(Tile tile, List<Transform> spawnPoints, List<Transform> patrolPoints)
+    {
+        CharacterSO characterSO = RandomiseEnemy(tile.PossibleEnemies);
+        Transform randomSpawnPoint = TileRandomiseSpawnPoint(spawnPoints);
+
+        Transform character = Instantiate(characterSO.prefab, randomSpawnPoint);
+        
+        // TODO Refactor
+        character.GetComponent<Enemy>().Character.patrolPoints = patrolPoints;
+        
+        return character;
+    }
     public Transform SpawnCharacter(CharacterSO preset)
     {
         switch (preset.characterType)
@@ -40,6 +52,16 @@ public class CharacterFabric: MonoBehaviour
         return null;
     }
 
+    private CharacterSO RandomiseEnemy(List<CharacterSO> possibleEnimies)
+    {
+        var randomIndex = Random.Range(0, possibleEnimies.Count);
+        return possibleEnimies[randomIndex];
+    }
+    private Transform TileRandomiseSpawnPoint(List<Transform> spawnPoints)
+    {
+        var randomIndex = Random.Range(0, spawnPoints.Count);
+        return spawnPoints[randomIndex];
+    }
     private Transform RandomiseSpawnPoint()
     {
         var randomIndex = Random.Range(0, spawnPoints.Count);

@@ -5,5 +5,6 @@ namespace FSM
         public void InitBehaviour();
         public void UpdateBehaviour();
         public void ChancgeState(CharacterStateType characterStateType);
+        public bool StateCondition(CharacterStateType characterStateType);
     }
 }

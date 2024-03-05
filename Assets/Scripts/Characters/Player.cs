@@ -32,5 +32,9 @@ public sealed class Player : ACharacter
     {
         Character.OilObserver.CheckAvaliableOil();
     }
-    
+
+    private void OnDestroy()
+    {
+        Destroy();
+    }
 }

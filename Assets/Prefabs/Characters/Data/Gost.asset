@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18da3e77a9a4422991f4b0ec660fc877, type: 3}
-  m_Name: Player
+  m_Name: Gost
   m_EditorClassIdentifier: 
-  Name: Player
+  Name: Gost
   iD: 0
-  prefab: {fileID: 5158191798327346186, guid: 3c023d4c4231e4ac89c4f612fa6dbb83, type: 3}
-  characterType: 0
-  movementType: 0
-  fsmType: 0
-  inventoryType: 0
-  ammoType: 1
-  attackType: 1
+  prefab: {fileID: 4220031496458638459, guid: 633d26ca511b648d38b937f27b2b202c, type: 3}
+  characterType: 1
+  movementType: 2
+  fsmType: 1
+  inventoryType: 1
+  ammoType: 0
+  attackType: 0
   speed: 2
-  attackRange: 5
-  raloadTime: 0.5
-  collisionTags: 0100000002000000
+  attackRange: 0
+  raloadTime: 0
+  collisionTags: 00000000

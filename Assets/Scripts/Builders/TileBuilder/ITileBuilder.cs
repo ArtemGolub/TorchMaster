@@ -10,6 +10,10 @@ public interface ITileBuilder
 
     void SetNextTileVariants(List<TileSO> nextTileVariants);
     void SetItemSpawnPoints(List<Transform> itemSpawnPoints);
+
+    void SetPossibleEnemies(List<CharacterSO> possibleEnimies);
+    void SetCharacterSpawnPoints(List<Transform> characterSpawnPoints);
+    
    // void SetNextTileSpawnPoints(Dictionary<Transform, bool> nextTileSpawnPoints);
     
     void SetPossibleItems(List<ItemSO> possibleItems);

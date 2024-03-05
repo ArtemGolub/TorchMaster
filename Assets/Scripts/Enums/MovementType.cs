@@ -1,5 +1,6 @@
 public enum MovementType
 {
     Walk,
-    Follow
+    Follow,
+    Patrol
 }

@@ -33,7 +33,12 @@ public class Enemy_SM : StateMachine, ICharacterStateMachine
     {
         _sm.ChangeState(_states[characterStateType]);
     }
-    
+
+    public bool StateCondition(CharacterStateType characterStateType)
+    {
+        return _sm.CurrentState == _states[characterStateType];
+    }
+
     private void AddState(CharacterStateType characterStateType, State state)
     {
         _states[characterStateType] = state;

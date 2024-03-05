@@ -21,5 +21,6 @@ public sealed class TileDirector
         _tileBuilder.SetID(tileData.ID);
         _tileBuilder.SetNextTileVariants(tileData.NextTileVariants);
         _tileBuilder.SetPossibleItems(tileData.possibleItems);
+        _tileBuilder.SetPossibleEnemies(tileData.possibleEnimies);
     }
 }

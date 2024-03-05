@@ -64,11 +64,11 @@ public class RangedAttack : IAttackStrategy, IStrategy
             
             if (_attacker.TorchObserver.IsTorchBurning())
             {
-                bullet.SetEnchant(EnchantType.Fire);
+                bullet.SetEnchant(EnchantType.Oil);
             }
             else
             {
-                bullet.SetEnchant(EnchantType.Oil);
+                bullet.SetEnchant(EnchantType.Fire);
             }
             
             
