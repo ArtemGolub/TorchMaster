@@ -17,4 +17,6 @@ public class TileSO : ScriptableObject
     
     [Header("Next Tile")]
     public List<TileSO> NextTileVariants;
+
+    public List<TileSO> NextPossibleCorridors;
 }

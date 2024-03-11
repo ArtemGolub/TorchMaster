@@ -17,6 +17,7 @@ public class ItemFabric : MonoBehaviour
     }
     public void SpawnItems(Tile tile, List<Transform> spawnPoints)
     {
+        if(tile.PossibleItems == null || spawnPoints == null) return;
         for (int i = 0; i < spawnPoints.Count; i++)
         {
             int randomIndex = Random.Range(0, tile.PossibleItems.Count);

@@ -24,4 +24,4 @@ MonoBehaviour:
   speed: 2
   attackRange: 5
   raloadTime: 0.5
-  collisionTags: 010000000200000003000000
+  collisionTags: 01000000020000000300000004000000
