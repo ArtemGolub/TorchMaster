@@ -1,4 +1,4 @@
-public enum Orientation
+public enum Direction
 {
     Forward,
     Backward,

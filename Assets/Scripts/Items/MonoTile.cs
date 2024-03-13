@@ -8,14 +8,12 @@ public sealed class MonoTile : MonoBehaviour
     [Serializable]
     public class Directions
     {
-        [FormerlySerializedAs("Direction")] public Orientation orientation;
-        [FormerlySerializedAs("type")] [FormerlySerializedAs("DirectionType")] public DirectionType directionType;
+        [FormerlySerializedAs("orientation")] public Direction direction;
+        public DirectionType directionType;
         public Transform transform;
         public Transform ConnectTo;
     }
     
-    
-
     [SerializeField] private TileSO tilePreset;
 
     public List<Transform> itemSpawnPoints;
@@ -44,11 +42,11 @@ public sealed class MonoTile : MonoBehaviour
         //CharacterFabric.current.TileSpawnCharacter(_tile, enemySpawnPoints, patrolPoints);
     }
     
-    public Directions GetDoorByDirection(Orientation orientation)
+    public Directions GetDoorByDirection(Direction direction)
     {
         for (int i = 0; i < directions.Count; i++)
         {
-            if (directions[i].orientation == orientation)
+            if (directions[i].direction == direction)
             {
                 return directions[i];
             }
@@ -57,30 +55,30 @@ public sealed class MonoTile : MonoBehaviour
         return null;
     }
 
-    public Orientation ReverseDirection(Orientation orientation)
+    public Direction ReverseDirection(Direction direction)
     {
-        switch (orientation)
+        switch (direction)
         {
-            case Orientation.Forward:
+            case Direction.Forward:
             {
-                return Orientation.Backward;
+                return Direction.Backward;
             }
-            case Orientation.Backward:
+            case Direction.Backward:
             {
-                return Orientation.Forward;
+                return Direction.Forward;
             }
-            case Orientation.Left:
+            case Direction.Left:
             {
-                return Orientation.Right;
+                return Direction.Right;
             }
-            case Orientation.Right:
+            case Direction.Right:
             {
-                return Orientation.Left;
+                return Direction.Left;
             }
             default:
             {
-                Debug.LogError("No reverse direction for: " + orientation);
-                return Orientation.Forward;
+                Debug.LogError("No reverse direction for: " + direction);
+                return Direction.Forward;
             }
         }
     }

@@ -1,205 +1,338 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    public class Cell
+    public List<DungeonRoom> roomPrefabs;
+    public Vector2Int mapSize;
+    private DungeonRoom[,] spawnedRooms;
+
+    private Queue<Vector2Int> recalculatePossibleRoomsQueue = new Queue<Vector2Int>();
+    private List<DungeonRoom>[,] possibleRooms;
+    public DungeonRoom startRoom;
+    public DungeonRoom endRoom;
+
+    public DungeonRoom darkRoom;
+
+    private void Start()
     {
-        public bool visited = false;
-        public bool[] status = new bool[4];
+        spawnedRooms = new DungeonRoom[mapSize.x, mapSize.y];
+
+        CreateRotatedRooms();
+        Generate();
     }
 
-    [System.Serializable]
-    public class Rule
+    private void CreateRotatedRooms()
     {
-        public GameObject room;
-        public Vector2Int minPosiotion;
-        public Vector2Int maxPosition;
-
-        public bool obligatory;
-        
-        public int ProbabilityOfSpawning(int x, int y)
+        var countBeforeAdding = roomPrefabs.Count;
+        DungeonRoom clone;
+        for (int i = 0; i < countBeforeAdding; i++)
         {
-            // 0 - cannot spawn
-            // 1 - can spawn
-            // 2 - has to spawn
-            if (x >= minPosiotion.x && x <= maxPosition.x && y >= minPosiotion.y && y <= maxPosition.y)
+            switch (roomPrefabs[i].Rotation)
             {
-                return obligatory ? 2 : 1;
-            }
-            
-            return 0;
-        }
-    }
-    
-    public Vector2Int size;
-    public int startPos = 0;
-    public Rule[] rooms;
-    public Vector2 offSet;
-    private List<Cell> _board;
-    void Start()
-    {
-        MazeGenerator();
-    }
-    
-    void GenerateDungeon()
-    {
-        for (int i = 0; i < size.x; i++)
-        {
-            for (int j = 0; j < size.y; j++)
-            {
-                var randomRoom = -1;
-                List<int> avaliableRooms = new List<int>();
-
-                for (int k = 0; k < rooms.Length; k++)
-                {
-                    int p = rooms[k].ProbabilityOfSpawning(i, j);
-                    if (p == 2)
-                    {
-                        randomRoom = k;
-                        break;
-                    }
-                    else if(p == 1)
-                    {
-                        avaliableRooms.Add(k);
-                    }
-                }
-
-                if (randomRoom == - 1)
-                {
-                    if (avaliableRooms.Count > 0)
-                    {
-                        randomRoom = avaliableRooms[Random.Range(0, avaliableRooms.Count)];
-                    }
-                    else
-                    {
-                        randomRoom = 0;
-                    }
-                }
-                
-                Cell currentCell = _board[i + j * size.x];
-                if (currentCell.visited)
-                {
-                    var newRoom = Instantiate(rooms[randomRoom].room, new Vector3(i * offSet.x, 0, -j * offSet.y), Quaternion.identity, transform).GetComponent<RoomBehaviour>();
-                    newRoom.UpdateRoom(_board[i+ j*size.x].status);
-                
-                    newRoom.name += " " + i + "-" + j;
-                }
-            }
-        }
-    }
-    
-    
-    
-    void MazeGenerator()
-    {
-        _board = new List<Cell>();
-
-        for (int i = 0; i < size.x; i++)
-        {
-            for (int j = 0; j < size.y; j++)
-            {
-                _board.Add(new Cell());
-            }
-        }
-
-        int currentCell = startPos;
-
-        Stack<int> path = new Stack<int>();
-
-        int k = 0;
-
-        while (k < 1000)
-        {
-            k++;
-
-            _board[currentCell].visited = true;
-            if(currentCell == _board.Count - 1)
-            {
-                break;
-            }
-            
-            List<int> neigbors = CheckNeighbors(currentCell);
-            if (neigbors.Count == 0)
-            {
-                if (path.Count == 0)
-                {
+                case DungeonRoom.RotationType.OnlyRotation:
                     break;
-                }
-                else
-                {
-                    currentCell = path.Pop();
-                }
-            }
-            else
-            {
-                path.Push(currentCell);
+                case DungeonRoom.RotationType.TwoRotations:
+                    roomPrefabs[i].Weight /= 2;
+                    if (roomPrefabs[i].Weight <= 0) roomPrefabs[i].Weight = 1;
 
-                int newCell = neigbors[Random.Range(0, neigbors.Count)];
+                    clone = Instantiate(roomPrefabs[i], transform.position + Vector3.right * -200, Quaternion.identity);
+                    clone.RotateRoom90();
+                    clone.transform.name += " +90";
+                    roomPrefabs.Add(clone);
+                    break;
+                case DungeonRoom.RotationType.FourRotations:
+                    roomPrefabs[i].Weight /= 4;
+                    if (roomPrefabs[i].Weight <= 0) roomPrefabs[i].Weight = 1;
 
-                if (newCell > currentCell)
-                {
-                    // down or right
-                    if (newCell - 1 == currentCell)
-                    {
-                        _board[currentCell].status[2] = true;
-                        currentCell = newCell;
-                        _board[currentCell].status[3] = true;
-                    }
-                    else
-                    {
-                        _board[currentCell].status[1] = true;
-                        currentCell = newCell;
-                        _board[currentCell].status[0] = true;
-                    }
-                }
-                else
-                {
-                    // up or left
-                    if (newCell + 1 == currentCell)
-                    {
-                        _board[currentCell].status[3] = true;
-                        currentCell = newCell;
-                        _board[currentCell].status[2] = true;
-                    }
-                    else
-                    {
-                        _board[currentCell].status[0] = true;
-                        currentCell = newCell;
-                        _board[currentCell].status[1] = true;
-                    }
-                }
+                    clone = Instantiate(roomPrefabs[i], transform.position + Vector3.right * -200, Quaternion.identity);
+                    clone.RotateRoom90();
+                    clone.transform.name += " +90";
+                    roomPrefabs.Add(clone);
+
+                    clone = Instantiate(roomPrefabs[i], transform.position + Vector3.right * -200, Quaternion.identity);
+                    clone.RotateRoom90();
+                    clone.RotateRoom90();
+                    clone.transform.name += " +180";
+                    roomPrefabs.Add(clone);
+
+                    clone = Instantiate(roomPrefabs[i], transform.position + Vector3.right * -200, Quaternion.identity);
+                    clone.RotateRoom90();
+                    clone.RotateRoom90();
+                    clone.RotateRoom90();
+                    clone.transform.name += " -90";
+                    roomPrefabs.Add(clone);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
-        
-        GenerateDungeon();
     }
 
-    List<int> CheckNeighbors(int cell)
+    private void Update()
     {
-        List<int> neighbors = new List<int>();
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            RegenerateDungeon();
+        }
+    }
 
-        // checkUp
-        if (cell - size.x >= 0 && !_board[cell - size.x].visited)
+    private void RegenerateDungeon()
+    {
+        foreach (DungeonRoom room in spawnedRooms)
         {
-            neighbors.Add(cell - size.x);
+            if (room != null) Destroy(room.gameObject);
         }
-        // checkDown
-        if (cell + size.x < _board.Count && !_board[cell + size.x].visited)
+
+        Generate();
+    }
+
+    private void Generate()
+    {
+        possibleRooms = new List<DungeonRoom>[mapSize.x, mapSize.y];
+
+        int maxAttempts = 10;
+        int attempts = 0;
+
+        while (attempts++ < maxAttempts)
         {
-            neighbors.Add(cell + size.x);
+            for (int x = 0; x < mapSize.x; x++)
+            {
+                for (int y = 0; y < mapSize.y; y++)
+                {
+                    possibleRooms[x, y] = new List<DungeonRoom>(roomPrefabs);
+                }
+            }
+
+            possibleRooms[1, 1] = new List<DungeonRoom> { startRoom };
+            possibleRooms[mapSize.x - 2, mapSize.y - 2] = new List<DungeonRoom> { endRoom };
+
+            recalculatePossibleRoomsQueue.Clear();
+            EnqueNeighborToRecalculate(new Vector2Int(1, 1));
+
+            bool success = GenerateAllPossibleTiles();
+
+            if (success) break;
         }
-        // checkRight
-        if ((cell+1) % size.x != 0 && !_board[cell + 1].visited)
+
+        PlaceAllTiles();
+    }
+
+
+    private bool GenerateAllPossibleTiles()
+    {
+        int maxIterations = mapSize.x * mapSize.y;
+        int iterations = 0;
+        int backtrack = 0;
+
+        while (iterations++ < maxIterations)
         {
-            neighbors.Add(cell + 1);
+            int maxInnerIterations = 500;
+            int innerIterations = 0;
+
+            while (recalculatePossibleRoomsQueue.Count > 0 && innerIterations++ < maxInnerIterations)
+            {
+                Vector2Int position = recalculatePossibleRoomsQueue.Dequeue();
+
+                var borderCondition = position.x == 0 || position.y == 0 ||
+                                      position.x == mapSize.x - 1 || position.y == mapSize.y - 1;
+                var startTileCondition = position == new Vector2Int(1, 1);
+                var endTileCondition = position == new Vector2Int(mapSize.x - 2, mapSize.y - 2);
+                if (borderCondition || startTileCondition || endTileCondition)
+                {
+                    continue;
+                }
+
+                List<DungeonRoom> possibleRoomsHere = possibleRooms[position.x, position.y];
+                int countRemove = possibleRoomsHere.RemoveAll(t => !IsTilePossible(t, position));
+
+                if (countRemove > 0) EnqueNeighborToRecalculate(position);
+
+                if (possibleRoomsHere.Count == 0)
+                {
+                    //possibleRooms[position.x, position.y] = new List<DungeonRoom> { darkRoom };
+
+                    possibleRoomsHere.AddRange(roomPrefabs);
+                    possibleRooms[position.x + 1, position.y] = new List<DungeonRoom>(roomPrefabs);
+                    possibleRooms[position.x - 1, position.y] = new List<DungeonRoom>(roomPrefabs);
+                    possibleRooms[position.x, position.y + 1] = new List<DungeonRoom>(roomPrefabs);
+                    possibleRooms[position.x, position.y - 1] = new List<DungeonRoom>(roomPrefabs);
+
+                    EnqueNeighborToRecalculate(position);
+                }
+            }
+
+            if (innerIterations == maxIterations) break;
+
+            List<DungeonRoom> maxCountTile = possibleRooms[1, 1];
+            Vector2Int maxTileCountPosition = new Vector2Int(1, 1);
+            for (int x = 1; x < mapSize.x - 1; x++)
+            {
+                for (int y = 1; y < mapSize.y - 1; y++)
+                {
+                    if (possibleRooms[x, y] == possibleRooms[1, 1]) continue;
+                    if (possibleRooms[x, y] == possibleRooms[mapSize.x - 2, mapSize.y - 2]) continue;
+
+                    if (possibleRooms[x, y].Count > maxCountTile.Count)
+                    {
+                        maxCountTile = possibleRooms[x, y];
+                        maxTileCountPosition = new Vector2Int(x, y);
+                    }
+                }
+            }
+
+            if (maxCountTile.Count == 1)
+            {
+                Debug.Log($"Generate for:  {iterations} iterations with {backtrack} backtracks");
+                return true;
+            }
+
+            DungeonRoom roomToCollapse = GetRandomRoom(maxCountTile);
+            possibleRooms[maxTileCountPosition.x, maxTileCountPosition.y] = new List<DungeonRoom> { roomToCollapse };
+            EnqueNeighborToRecalculate(maxTileCountPosition);
         }
-        //checkLeft
-        if (cell % size.x != 0 && !_board[cell - 1].visited)
+
+
+        Debug.Log("Generation Failed");
+        return false;
+    }
+
+    private bool IsTilePossible(DungeonRoom room, Vector2Int position)
+    {
+        bool isAllRightImpossible = possibleRooms[position.x + 1, position.y]
+            .All(rightTile => !CanConnectRooms(room, rightTile, Direction.Right));
+        if (isAllRightImpossible) return false;
+
+        bool isAllLeftImpossible = possibleRooms[position.x - 1, position.y]
+            .All(leftTile => !CanConnectRooms(room, leftTile, Direction.Left));
+        if (isAllLeftImpossible) return false;
+
+        bool isAllForwardImpossible = possibleRooms[position.x, position.y + 1]
+            .All(fwdTile => !CanConnectRooms(room, fwdTile, Direction.Forward));
+        if (isAllForwardImpossible) return false;
+
+        bool isAllBackImpossible = possibleRooms[position.x, position.y - 1]
+            .All(backTile => !CanConnectRooms(room, backTile, Direction.Backward));
+        if (isAllBackImpossible) return false;
+
+        return true;
+    }
+
+    private void PlaceAllTiles()
+    {
+        for (int x = 1; x < mapSize.x - 1; x++)
         {
-            neighbors.Add(cell -1);
+            for (int y = 1; y < mapSize.y - 1; y++)
+            {
+                PlaceTile(x, y);
+            }
         }
-        return neighbors;
+    }
+
+    private void EnqueNeighborToRecalculate(Vector2Int position)
+    {
+        recalculatePossibleRoomsQueue.Enqueue(new Vector2Int(position.x + 1, position.y));
+        recalculatePossibleRoomsQueue.Enqueue(new Vector2Int(position.x - 1, position.y));
+        recalculatePossibleRoomsQueue.Enqueue(new Vector2Int(position.x, position.y + 1));
+        recalculatePossibleRoomsQueue.Enqueue(new Vector2Int(position.x, position.y - 1));
+    }
+
+    private void PlaceTile(int x, int y)
+    {
+        List<DungeonRoom> availableRooms = possibleRooms[x, y];
+        if (availableRooms.Count == 0) return;
+
+        DungeonRoom selectedRoom = GetRandomRoom(availableRooms);
+        if (selectedRoom == null)
+        {
+            throw new ArgumentException($"Selected room: {selectedRoom.name} is null");
+        }
+
+        Vector3 size = selectedRoom.transform.GetChild(0).GetComponent<Renderer>().bounds.size;
+        var angle = selectedRoom.transform.rotation.eulerAngles;
+        var rotate = Quaternion.Euler(angle.x, angle.y, angle.z);
+        spawnedRooms[x, y] = Instantiate(selectedRoom, new Vector3(x * size.x, 0, y * size.z), rotate);
+        spawnedRooms[x, y].name = $"{x} - {y}";
+    }
+
+    private DungeonRoom GetRandomRoom(List<DungeonRoom> availableRooms)
+    {
+        List<float> chances = new List<float>();
+        for (int i = 0; i < availableRooms.Count; i++)
+        {
+            chances.Add(availableRooms[i].Weight);
+        }
+
+        float value = Random.Range(0, chances.Sum());
+        float sum = 0;
+
+        for (int i = 0; i < chances.Count; i++)
+        {
+            sum += chances[i];
+            if (value < sum)
+            {
+                return availableRooms[i];
+            }
+        }
+
+        return availableRooms[availableRooms.Count - 1];
+    }
+
+
+    private bool CanConnectRooms(DungeonRoom existingRoom, DungeonRoom roomToConnect, Direction direction)
+    {
+        if (existingRoom == null) return true;
+
+        var existingRoomDirection = GetDirection(existingRoom, direction);
+        var roomToConnectDirection = GetDirection(roomToConnect, ReverseDirection(direction));
+
+        var directionTypeCondition =
+            Enumerable.SequenceEqual(existingRoomDirection.DirectionTypes, roomToConnectDirection.DirectionTypes);
+
+        return directionTypeCondition;
+    }
+
+    private DungeonRoom.RoomDirection GetDirection(DungeonRoom room, Direction direction)
+    {
+        foreach (var dir in room.Directions)
+        {
+            if (dir.Direction == direction)
+            {
+                return dir;
+            }
+        }
+
+        throw new ArgumentException("No Direction in: " + room + " With the direction: " + direction);
+    }
+
+    private Direction ReverseDirection(Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.Forward:
+            {
+                return Direction.Backward;
+            }
+            case Direction.Backward:
+            {
+                return Direction.Forward;
+            }
+            case Direction.Left:
+            {
+                return Direction.Right;
+            }
+            case Direction.Right:
+            {
+                return Direction.Left;
+            }
+            default:
+            {
+                throw new ArgumentException("Wrong ReverseDirection: " + dir);
+            }
+        }
     }
 }

@@ -250,7 +250,7 @@ public class TileFabric : MonoBehaviour
         GeneratedTiles.Add(generatedTile);
 
 
-        if (generatedTile.GetDoorByDirection(generatedTile.ReverseDirection(randomDoor.orientation)) == null)
+        if (generatedTile.GetDoorByDirection(generatedTile.ReverseDirection(randomDoor.direction)) == null)
         {
             generatedTile = null;
             Debug.Log("Need to replace: Door Direction");
@@ -258,11 +258,11 @@ public class TileFabric : MonoBehaviour
             yield break;
         }
         
-        generatedTile.GetDoorByDirection(generatedTile.ReverseDirection(randomDoor.orientation)).ConnectTo =
+        generatedTile.GetDoorByDirection(generatedTile.ReverseDirection(randomDoor.direction)).ConnectTo =
             randomDoor.transform;
 
         if (randomDoor.directionType != generatedTile
-                .GetDoorByDirection(generatedTile.ReverseDirection(randomDoor.orientation)).directionType)
+                .GetDoorByDirection(generatedTile.ReverseDirection(randomDoor.direction)).directionType)
         {
             generatedTile = null;
             Debug.Log("Need to replace: Direction Type");
@@ -304,7 +304,7 @@ public class TileFabric : MonoBehaviour
         if (generatedTile != null)
         {
             randomDoor.ConnectTo = generatedTile
-                .GetDoorByDirection(generatedTile.ReverseDirection(randomDoor.orientation)).transform;
+                .GetDoorByDirection(generatedTile.ReverseDirection(randomDoor.direction)).transform;
             levelTiles++;
             AddTile();
             triesToCreate = 10;
@@ -377,7 +377,7 @@ public class TileFabric : MonoBehaviour
 
             foreach (var wall in freeWalls)
             {
-                if (wall.orientation == collidedTilesToCheck[i].ReverseDirection(doorsToCheck[i].orientation))
+                if (wall.direction == collidedTilesToCheck[i].ReverseDirection(doorsToCheck[i].direction))
                 {
                     wall.ConnectTo = doorsToCheck[i].transform;
                     doorsToCheck[i].ConnectTo = wall.transform;
@@ -402,7 +402,7 @@ public class TileFabric : MonoBehaviour
 
             foreach (var wall in freeWalls)
             {
-                if (wall.orientation == collidedTilesToCheck[i].ReverseDirection(wallToCheck[i].orientation))
+                if (wall.direction == collidedTilesToCheck[i].ReverseDirection(wallToCheck[i].direction))
                 {
                     wall.ConnectTo = wallToCheck[i].transform;
                     wallToCheck[i].ConnectTo = wall.transform;
@@ -478,7 +478,7 @@ public class TileFabric : MonoBehaviour
 
             foreach (var freeDoor in getFreeDoors)
             {
-                if (freeDoor.orientation == collidedTilesToCheck[i].ReverseDirection(wallsToCheck[i].orientation))
+                if (freeDoor.direction == collidedTilesToCheck[i].ReverseDirection(wallsToCheck[i].direction))
                 {
                     return false;
                 }
@@ -511,7 +511,7 @@ public class TileFabric : MonoBehaviour
 
             foreach (var emptySpace in freeEmptySpace)
             {
-                if (emptySpace.orientation == collidedTilesToCheck[i].ReverseDirection(wallsToCheck[i].orientation))
+                if (emptySpace.direction == collidedTilesToCheck[i].ReverseDirection(wallsToCheck[i].direction))
                 {
                     wallsToCheck[i].ConnectTo = emptySpace.transform;
                     emptySpace.ConnectTo = wallsToCheck[i].transform;
@@ -544,7 +544,7 @@ public class TileFabric : MonoBehaviour
 
             foreach (var collidedTileDoor in freeDoors)
             {
-                if (collidedTileDoor.orientation == collidedTile[i].ReverseDirection(doorsToCheck[i].orientation))
+                if (collidedTileDoor.direction == collidedTile[i].ReverseDirection(doorsToCheck[i].direction))
                 {
                     doorsToCheck[i].ConnectTo = collidedTileDoor.transform;
                     collidedTileDoor.ConnectTo = doorsToCheck[i].transform;
@@ -596,7 +596,7 @@ public class TileFabric : MonoBehaviour
         {
             foreach (var dir in deadEnds[i].GetAllDirectionsByType(DirectionType.Door))
             {
-                if (dir.orientation == tile.ReverseDirection(door.orientation))
+                if (dir.direction == tile.ReverseDirection(door.direction))
                 {
                     deadEnd = deadEnds[i];
                     

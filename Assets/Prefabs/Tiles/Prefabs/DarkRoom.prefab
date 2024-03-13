@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5661235321682227713}
   m_Layer: 0
-  m_Name: Mid_Door
+  m_Name: Mid_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +483,7 @@ Transform:
   m_GameObject: {fileID: 2024193604118762892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2891300261127064703}
@@ -679,7 +679,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 59e4faf24927edf4a82f463ad16f1c37, type: 2}
+  - {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -726,7 +726,7 @@ GameObject:
   - component: {fileID: 2891300260980682962}
   - component: {fileID: 2457886452350125280}
   m_Layer: 0
-  m_Name: End
+  m_Name: DarkRoom
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -762,14 +762,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Directions:
   - Direction: 0
-    DirectionTypes: 010000000000000001000000
+    DirectionTypes: 030000000300000003000000
   - Direction: 1
-    DirectionTypes: 010000000000000001000000
+    DirectionTypes: 030000000300000003000000
   - Direction: 2
-    DirectionTypes: 010000000100000001000000
+    DirectionTypes: 030000000300000003000000
   - Direction: 3
-    DirectionTypes: 010000000100000001000000
-  Weight: 100
+    DirectionTypes: 030000000300000003000000
+  Weight: 1
   Rotation: 0
 --- !u!1 &2891300261127064702
 GameObject:
@@ -781,7 +781,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2891300261127064703}
   m_Layer: 0
-  m_Name: Mid_Wall
+  m_Name: Mid_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -829,7 +829,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5010041170868255320}
   - {fileID: 6292667291687818705}
@@ -995,7 +995,7 @@ Transform:
   m_GameObject: {fileID: 4593164858673449781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5661235321682227713}
