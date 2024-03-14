@@ -531,6 +531,8 @@ GameObject:
   m_Component:
   - component: {fileID: 735906539}
   - component: {fileID: 735906540}
+  - component: {fileID: 735906541}
+  - component: {fileID: 735906542}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -565,14 +567,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f6a61aecebd456eb87d45aeafea3c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomMask:
+    serializedVersion: 2
+    m_Bits: 192
   roomPrefabs:
   - {fileID: 2457886452350125280, guid: a7707af471d804c719b319cf176c86aa, type: 3}
   - {fileID: 2457886452350125280, guid: 795d85d853887461d93ab039d3f55e3f, type: 3}
   - {fileID: 2457886452350125280, guid: 0e2c8b5849825427799c69704b883b6e, type: 3}
-  mapSize: {x: 20, y: 20}
+  - {fileID: 2457886452350125280, guid: 9c3d5a3a72b954972becc1560d0ee24a, type: 3}
+  mapSize: {x: 7, y: 7}
   startRoom: {fileID: 2457886452350125280, guid: dc6484469f296434db00ea4658173224, type: 3}
   endRoom: {fileID: 2457886452350125280, guid: a5db99862de7f485fa2c1ccf4f8b3011, type: 3}
-  darkRoom: {fileID: 2457886452350125280, guid: d21f05068b60348cc916d68dec2d9e86, type: 3}
+  darkRoom: {fileID: 2457886452350125280, guid: b081218f25d7445f283483f308ed6523, type: 3}
+--- !u!114 &735906541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735906537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212b1d79a0644fd498c8a918a845cb92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unwalkableMask:
+    serializedVersion: 2
+    m_Bits: 64
+  nodeRadius: 0.5
+--- !u!114 &735906542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735906537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d986759ec3074c0089fda0ab12fda74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movedPath: []
 --- !u!1 &766861456
 GameObject:
   m_ObjectHideFlags: 0

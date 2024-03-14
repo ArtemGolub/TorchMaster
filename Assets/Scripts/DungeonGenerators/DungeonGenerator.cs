@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    public LayerMask roomMask;
     public List<DungeonRoom> roomPrefabs;
     public Vector2Int mapSize;
     private DungeonRoom[,] spawnedRooms;
@@ -15,8 +16,12 @@ public class DungeonGenerator : MonoBehaviour
     private List<DungeonRoom>[,] possibleRooms;
     public DungeonRoom startRoom;
     public DungeonRoom endRoom;
-
     public DungeonRoom darkRoom;
+
+    private Grid _grid;
+    private PathFinder _pathFinder;
+    private Vector3 cellSize;
+
 
     private void Start()
     {
@@ -24,6 +29,74 @@ public class DungeonGenerator : MonoBehaviour
 
         CreateRotatedRooms();
         Generate();
+
+        _grid = GetComponent<Grid>();
+        _pathFinder = GetComponent<PathFinder>();
+
+
+        StartCoroutine(PathCheck());
+    }
+
+    private IEnumerator PathCheck()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        _grid.SetGrid(mapSize.x - 2, mapSize.y - 2, spawnedRooms[mapSize.x / 2, mapSize.y / 2].transform, cellSize);
+
+        yield return new WaitForSeconds(0.3f);
+
+        var pathFound = _pathFinder.GetPath(spawnedRooms[1, 1].transform,
+            spawnedRooms[mapSize.x - 2, mapSize.y - 2].transform, _grid);
+
+        int maxAttempts = 50;
+        int attempts = 0;
+
+        while (!pathFound && attempts < maxAttempts)
+        {
+            var closestNode = _pathFinder.FindClosestNodeToTarget();
+            Collider[] colliders = Physics.OverlapSphere(closestNode.worldPosition, 0.5f, roomMask);
+            var roomPosition = colliders[0].GetComponentInParent<DungeonRoom>().gridPosition;
+            Debug.Log(roomPosition);
+            
+            List<DungeonRoom> roomsToRegenerate = new List<DungeonRoom>();
+            
+            for (int x = roomPosition.x - 1; x < mapSize.x-1; x++)
+            {
+                for (int y = roomPosition.y - 1; y < mapSize.y-1; y++)
+                {
+                    var borderCondition = x == 0 || y == 0 ||
+                                          x == mapSize.x - 1 || y == mapSize.y - 1;
+                    var startTileCondition = new Vector2Int(x, y) == new Vector2Int(1, 1);
+                    var endTileCondition =  new Vector2Int(x, y) == new Vector2Int(mapSize.x - 2, mapSize.y - 2);
+                    if (borderCondition || startTileCondition || endTileCondition)
+                    {
+                        Debug.Log($"{borderCondition} {startTileCondition} {endTileCondition}");
+                        continue;
+                    }
+                    roomsToRegenerate.Add(spawnedRooms[x, y]);
+                    Debug.Log($"added: {x} - {y}");
+                }
+            }
+
+            Debug.Log(roomsToRegenerate.Count);
+            yield return new WaitForSeconds(0.2f);
+            ReGenerate(roomsToRegenerate);
+            yield return new WaitForSeconds(0.2f);
+            _grid.SetGrid(mapSize.x - 2, mapSize.y - 2, spawnedRooms[mapSize.x / 2, mapSize.y / 2].transform, cellSize);
+            yield return new WaitForSeconds(0.2f);
+            pathFound = _pathFinder.GetPath(spawnedRooms[1, 1].transform,
+                spawnedRooms[mapSize.x - 2, mapSize.y - 2].transform, _grid);
+            Debug.Log($"trying to change times: {attempts}");
+            attempts++;
+        }
+
+        if (!pathFound)
+        {
+            Debug.Log("Path not found after 50 attempts.");
+            yield break;
+        }
+        //Debug.Log("Path found.");
+        yield break;
     }
 
     private void CreateRotatedRooms()
@@ -89,7 +162,10 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Generate();
+
+        StartCoroutine(PathCheck());
     }
+
 
     private void Generate()
     {
@@ -105,22 +181,89 @@ public class DungeonGenerator : MonoBehaviour
                 for (int y = 0; y < mapSize.y; y++)
                 {
                     possibleRooms[x, y] = new List<DungeonRoom>(roomPrefabs);
+
+                    possibleRooms[0, y] = new List<DungeonRoom> { darkRoom };
+                    possibleRooms[x, 0] = new List<DungeonRoom> { darkRoom };
+                    possibleRooms[mapSize.x - 1, y] = new List<DungeonRoom> { darkRoom };
+                    possibleRooms[x, mapSize.y - 1] = new List<DungeonRoom> { darkRoom };
                 }
             }
 
             possibleRooms[1, 1] = new List<DungeonRoom> { startRoom };
             possibleRooms[mapSize.x - 2, mapSize.y - 2] = new List<DungeonRoom> { endRoom };
 
+
             recalculatePossibleRoomsQueue.Clear();
             EnqueNeighborToRecalculate(new Vector2Int(1, 1));
 
             bool success = GenerateAllPossibleTiles();
-
             if (success) break;
         }
 
         PlaceAllTiles();
     }
+
+    private void ReGenerate(List<DungeonRoom> roomsToRegenerate)
+    {
+        int maxAttempts = 10;
+        int attempts = 0;
+        List<bool>  successes = new List<bool>();
+        while (attempts++ < maxAttempts)
+        {
+            recalculatePossibleRoomsQueue.Clear();
+            foreach (var room in roomsToRegenerate)
+            {
+                Vector2Int position = new Vector2Int(room.gridPosition.x, room.gridPosition.y);
+                List<DungeonRoom> possibleRoomsHere = possibleRooms[position.x, position.y];
+                int countRemove = possibleRoomsHere.RemoveAll(t => IsTilePossible(t, position));
+                
+                if (countRemove > 0) EnqueNeighborToRecalculate(position);
+                
+                possibleRoomsHere.AddRange(roomPrefabs);
+                
+                var PlusborderCondition = position.x + 1 == 0 || position.y + 1 == 0 ||
+                                      position.x + 1 == mapSize.x - 1 || position.y + 1 == mapSize.y - 1;
+                
+                var MinusBorderCondition = position.x - 1 == 0 || position.y - 1 == 0 ||
+                                           position.x - 1 == mapSize.x - 1 || position.y - 1 == mapSize.y - 1;
+                
+                var PlusstartTileCondition = position.x + 1 == 1 || position.y + 1 == 1;
+                var MinusStartCondition = position.x - 1 == 1 || position.y - 1 == 1;
+                
+                var PlusendTileCondition = position.x + 1 == mapSize.x - 2 || position.y + 1 == mapSize.y - 2;
+                var MinusendTileCondition = position.x - 1 == mapSize.x - 2 || position.y - 1 == mapSize.y - 2;
+                
+                if (PlusborderCondition || MinusBorderCondition || PlusstartTileCondition || MinusStartCondition || PlusendTileCondition || MinusendTileCondition)
+                {
+                    
+                }
+                else
+                {
+                    possibleRooms[position.x + 1, position.y] = new List<DungeonRoom>(roomPrefabs);
+                    possibleRooms[position.x - 1, position.y] = new List<DungeonRoom>(roomPrefabs);
+                    possibleRooms[position.x, position.y + 1] = new List<DungeonRoom>(roomPrefabs);
+                    possibleRooms[position.x, position.y - 1] = new List<DungeonRoom>(roomPrefabs);
+                }
+
+
+                EnqueNeighborToRecalculate(position);
+                
+                successes.Add(GenerateAllPossibleTiles());
+            }
+
+            foreach (var success in successes)
+            {
+                if (!success)
+                {
+                    Debug.Log("No Succes");
+                }
+            }
+            break;
+        }
+
+        RePlaceAllTiles(roomsToRegenerate);
+    }
+
 
 
     private bool GenerateAllPossibleTiles()
@@ -154,7 +297,7 @@ public class DungeonGenerator : MonoBehaviour
 
                 if (possibleRoomsHere.Count == 0)
                 {
-                    //possibleRooms[position.x, position.y] = new List<DungeonRoom> { darkRoom };
+                    // possibleRooms[position.x, position.y] = new List<DungeonRoom> { darkRoom };
 
                     possibleRoomsHere.AddRange(roomPrefabs);
                     possibleRooms[position.x + 1, position.y] = new List<DungeonRoom>(roomPrefabs);
@@ -163,6 +306,7 @@ public class DungeonGenerator : MonoBehaviour
                     possibleRooms[position.x, position.y - 1] = new List<DungeonRoom>(roomPrefabs);
 
                     EnqueNeighborToRecalculate(position);
+                    backtrack++;
                 }
             }
 
@@ -187,7 +331,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (maxCountTile.Count == 1)
             {
-                Debug.Log($"Generate for:  {iterations} iterations with {backtrack} backtracks");
+                //Debug.Log($"Generate for:  {iterations} iterations with {backtrack} backtracks");
                 return true;
             }
 
@@ -224,12 +368,22 @@ public class DungeonGenerator : MonoBehaviour
 
     private void PlaceAllTiles()
     {
-        for (int x = 1; x < mapSize.x - 1; x++)
+        for (int x = 0; x < mapSize.x; x++)
         {
-            for (int y = 1; y < mapSize.y - 1; y++)
+            for (int y = 0; y < mapSize.y; y++)
             {
                 PlaceTile(x, y);
             }
+        }
+    }
+
+    private void RePlaceAllTiles(List<DungeonRoom> roomsToReplace)
+    {
+        foreach (var room in roomsToReplace)
+        {
+            Vector2Int position = new Vector2Int(room.gridPosition.x, room.gridPosition.y);
+            Destroy(room.gameObject);
+            ReplaceTile(position.x, position.y);
         }
     }
 
@@ -244,6 +398,7 @@ public class DungeonGenerator : MonoBehaviour
     private void PlaceTile(int x, int y)
     {
         List<DungeonRoom> availableRooms = possibleRooms[x, y];
+
         if (availableRooms.Count == 0) return;
 
         DungeonRoom selectedRoom = GetRandomRoom(availableRooms);
@@ -253,11 +408,42 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Vector3 size = selectedRoom.transform.GetChild(0).GetComponent<Renderer>().bounds.size;
+        if (cellSize == Vector3.zero)
+        {
+            cellSize = size;
+        }
+
         var angle = selectedRoom.transform.rotation.eulerAngles;
         var rotate = Quaternion.Euler(angle.x, angle.y, angle.z);
         spawnedRooms[x, y] = Instantiate(selectedRoom, new Vector3(x * size.x, 0, y * size.z), rotate);
         spawnedRooms[x, y].name = $"{x} - {y}";
+        spawnedRooms[x, y].gridPosition = new Vector2Int(x, y);
     }
+
+    private void ReplaceTile(int x, int y)
+    {
+        List<DungeonRoom> availableRooms = possibleRooms[x, y];
+        if (availableRooms.Count == 0) return;
+
+        DungeonRoom selectedRoom = GetRandomRoom(availableRooms);
+        if (selectedRoom == null)
+        {
+            throw new ArgumentException($"Selected room: {selectedRoom.name} is null");
+        }
+
+        Vector3 size = selectedRoom.transform.GetChild(0).GetComponent<Renderer>().bounds.size;
+        if (cellSize == Vector3.zero)
+        {
+            cellSize = size;
+        }
+
+        var angle = selectedRoom.transform.rotation.eulerAngles;
+        var rotate = Quaternion.Euler(angle.x, angle.y, angle.z);
+        spawnedRooms[x, y] = Instantiate(selectedRoom, new Vector3(x * size.x, 0, y * size.z), rotate);
+        spawnedRooms[x, y].name = $"{x} - {y}";
+        spawnedRooms[x, y].gridPosition = new Vector2Int(x, y);
+    }
+
 
     private DungeonRoom GetRandomRoom(List<DungeonRoom> availableRooms)
     {
@@ -287,11 +473,12 @@ public class DungeonGenerator : MonoBehaviour
     {
         if (existingRoom == null) return true;
 
+
         var existingRoomDirection = GetDirection(existingRoom, direction);
-        var roomToConnectDirection = GetDirection(roomToConnect, ReverseDirection(direction));
+        var roomToConnectRverceDirection = GetDirection(roomToConnect, ReverseDirection(direction));
 
         var directionTypeCondition =
-            Enumerable.SequenceEqual(existingRoomDirection.DirectionTypes, roomToConnectDirection.DirectionTypes);
+            Enumerable.SequenceEqual(existingRoomDirection.DirectionTypes, roomToConnectRverceDirection.DirectionTypes);
 
         return directionTypeCondition;
     }

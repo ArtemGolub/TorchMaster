@@ -30,7 +30,7 @@ public class DungeonRoom : MonoBehaviour
     public int Weight = 50;
 
     public RotationType Rotation;
-
+    public Vector2Int gridPosition;
 
 
     public void RotateRoom90()
