@@ -13,6 +13,8 @@ public class FirePointCollisionHandler : ICollisionHandler<IFirePoint>
         if (torch != null && !collidedObject.burned)
         {
             _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Throw, torch);
+            _character.Components.animator.SetBool("isTorch", false);
+            torch.FSM.ChangeState(ItemStateType.Used);
             collidedObject.Burn();
         }
     }

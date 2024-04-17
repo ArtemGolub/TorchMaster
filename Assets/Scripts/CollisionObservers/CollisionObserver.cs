@@ -27,5 +27,13 @@ public class CollisionObserver<T> : MonoBehaviour, ICollisionObserver<T>
             collisionHandlers[tag].HandleCollision(other.transform.GetComponent<T>());
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        string tag = other.gameObject.tag;
+        if (collisionHandlers.ContainsKey(tag))
+        {
+            collisionHandlers[tag].HandleCollision(other.transform.GetComponent<T>());
+        }
+    }
 }

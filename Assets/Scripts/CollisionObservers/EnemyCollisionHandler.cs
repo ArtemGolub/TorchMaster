@@ -13,6 +13,7 @@
         public void HandleCollision(IEnemy collidedObject)
         {
             _character.SM.ChancgeState(CharacterStateType.Fear);
-            collidedObject._Character.SM.ChancgeState(CharacterStateType.Fired); // Change to Disapear or smthing
+            collidedObject._Character.SM.ChancgeState(CharacterStateType.Attack);
+            collidedObject._Character.Components.characterTransform.LookAt(_character.Components.characterTransform);
         }
     }

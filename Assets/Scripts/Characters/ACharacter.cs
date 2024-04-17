@@ -3,12 +3,13 @@ using UnityEngine;
 public abstract class ACharacter : MonoBehaviour
 {
     [SerializeField] protected CharacterSO CharacterPreset;
+    [SerializeField] protected Animator _animator;
     public Character Character;
     public Transform inventoryTransform;
 
     protected void InitCharacter()
     {
-        Character = CharBuilder.current.CreateCharacter(CharacterPreset, transform, inventoryTransform);
+        Character = CharBuilder.current.CreateCharacter(CharacterPreset, transform, inventoryTransform, _animator);
     }
 
     protected void Destroy()

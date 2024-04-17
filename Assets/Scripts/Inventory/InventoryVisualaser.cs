@@ -15,7 +15,8 @@ public class InventoryVisualaser
     {
         item.Transform.SetParent(_inventory._transform);
         item.Transform.position = _inventory._transform.position;
-        AdjustItemPositions();
+        item.Transform.rotation = _inventory._transform.rotation;
+        //AdjustItemPositions();
     }
 
     public void RemoveItem(Item item)

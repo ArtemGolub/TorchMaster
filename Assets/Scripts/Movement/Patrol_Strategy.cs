@@ -9,7 +9,6 @@ public class Patrol_Strategy : IPatrolStrategy, IStrategy
     public Patrol_Strategy(Character character )
     {
         _character = character;
-        
     }
 
     public void Subscribe()

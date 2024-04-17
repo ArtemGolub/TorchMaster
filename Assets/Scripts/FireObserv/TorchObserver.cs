@@ -28,9 +28,9 @@ public class TorchObserver
         _inventory = inventory;
     }
     
-    public void CheckBurningObjects()
+    public void CheckBurningObjects(Character character)
     {
-        CheckBurnedObjects();
+        CheckBurnedObjects(character);
         bool anyActive = false;
         if (!_inventory._items.ContainsKey(ItemType.Torch)) return;
         foreach (var kvp in _inventory._items)
@@ -43,6 +43,7 @@ public class TorchObserver
                     if (item.FSM.CheckState(ItemStateType.Active))
                     {
                         anyActive = true;
+                        character.Components.animator.SetBool("isTorch", true);
                         break;
                     }
                 }
@@ -54,7 +55,7 @@ public class TorchObserver
         }
     }
     
-    private void CheckBurnedObjects()
+    private void CheckBurnedObjects(Character character)
     {
         if (!_inventory._items.ContainsKey(ItemType.Torch)) return;
         foreach (var kvp in _inventory._items)
@@ -67,6 +68,7 @@ public class TorchObserver
                     if (item.FSM.CheckState(ItemStateType.Used))
                     {
                         _inventory.RemoveItem(item);
+                        character.Components.animator.SetBool("isTorch", false);
                         return;
                     }
                 }

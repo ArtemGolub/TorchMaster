@@ -19,7 +19,7 @@ public class Torch_SM : StateMachine, IItemStateMachine
         AddState(ItemStateType.Idle, new Item_Idle_State());
         AddState(ItemStateType.Grab, new Item_Grabed_State());
         AddState(ItemStateType.Active, new Item_Active_State(_item));
-        AddState(ItemStateType.Used, new Item_Used_State());
+        AddState(ItemStateType.Used, new Item_Used_State(_item));
         
         _sm.Initialize(_states[ItemStateType.Idle]);
     }

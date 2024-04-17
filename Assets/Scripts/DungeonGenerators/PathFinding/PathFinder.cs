@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour
 {
+    public LayerMask roomLayerMask;
     private Grid Grid;
     public List<Node> movedPath;
     private Vector3 endPose;
@@ -14,7 +15,7 @@ public class PathFinder : MonoBehaviour
         
         return condition;
     }
-    public Node FindClosestNodeToTarget()
+    private Node FindClosestNodeToTarget()
     {
         Node closestNode = null;
         float closestDistance = Mathf.Infinity;
@@ -30,6 +31,23 @@ public class PathFinder : MonoBehaviour
         }
         return closestNode;
     }
+
+    public DungeonRoom ClosestFindedRoom()
+    {
+        var closestNode = FindClosestNodeToTarget();
+        Collider[] colliders = Physics.OverlapSphere(closestNode.worldPosition, 1f, roomLayerMask);
+        if (colliders.Length > 0)
+        {
+            foreach (Collider col in colliders)
+            {
+                GameObject collidedObject = col.gameObject;
+                var closestRoom = collidedObject.GetComponentInParent<DungeonRoom>();
+                return closestRoom;
+            }
+        }
+        return null;
+    }
+    
     bool FindPath(Vector3 startPose, Vector3 targetPose)
     {
         movedPath = new List<Node>();

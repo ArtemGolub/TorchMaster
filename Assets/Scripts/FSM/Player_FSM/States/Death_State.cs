@@ -12,6 +12,7 @@ public class Death_State : State
     public override void Enter()
     {
         Debug.Log("Death");
+        _character.Components.animator.SetBool("isDead", true);
         DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
     }
 }

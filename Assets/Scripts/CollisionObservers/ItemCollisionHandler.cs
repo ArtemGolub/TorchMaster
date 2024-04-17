@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public sealed class ItemCollisionHandler : ICollisionHandler<IItem>
 {
     readonly Character _character;
@@ -10,6 +12,5 @@ public sealed class ItemCollisionHandler : ICollisionHandler<IItem>
     public void HandleCollision(IItem collidedObject)
     {
         _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Collect, collidedObject.item);
-       
     }
 }

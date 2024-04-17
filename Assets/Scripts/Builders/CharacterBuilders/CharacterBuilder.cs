@@ -48,8 +48,8 @@ public class CharacterBuilder : ICharacterBuilder
         
         _character.InventoryCommandManager.AddCommand(CharacterCommandType.Collect, new CollectCommand(_character.Inventory));
         _character.InventoryCommandManager.AddCommand(CharacterCommandType.Throw, new ThrowCommand(_character.Inventory));
-        
-        _character.InventoryCommandManager.InitInventory(5,5 );
+        // TODO InventorySO
+        _character.InventoryCommandManager.InitInventory(1,0 );
         
     }
 

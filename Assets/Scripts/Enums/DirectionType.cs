@@ -2,7 +2,7 @@ public enum DirectionType
 {
     Door,
     Wall,
-    Floor,
     Empty,
-    Darkness
+    Shadow,
+    River
 }

@@ -18,8 +18,8 @@ public class Player_SM: StateMachine, ICharacterStateMachine
     public void InitBehaviour()
     {
         _sm = new StateMachine();
-        AddState(CharacterStateType.Idle, new Idle_State());
-        AddState(CharacterStateType.Move, new Move_State(_character.CommandManager));
+        AddState(CharacterStateType.Idle, new Idle_State(_character));
+        AddState(CharacterStateType.Move, new Move_State(_character,_character.CommandManager));
         AddState(CharacterStateType.Fear, new Fear_State(_character));
         AddState(CharacterStateType.Death, new Death_State(_character));
         _sm.Initialize(_states[CharacterStateType.Move]);

@@ -7,7 +7,7 @@ public class Tile
     public string Name;
     public int ID;
 
-    public List<TileSO> NextTileVariants = new List<TileSO>();
+    public List<RoomSO> NextTileVariants = new List<RoomSO>();
     public List<ItemSO> PossibleItems = new List<ItemSO>();
 
     public List<CharacterSO> PossibleEnemies = new List<CharacterSO>();

@@ -18,11 +18,11 @@ public class CharBuilder : MonoBehaviour
         }
     }
     
-    public Character CreateCharacter(CharacterSO characterData, Transform characterTransform, Transform inventoryTransform)
+    public Character CreateCharacter(CharacterSO characterData, Transform characterTransform, Transform inventoryTransform, Animator animator)
     {
         _characterBuilder = CharacterBuilderFabric.CharacterBuilder(characterData.characterType);
         
-        _characterBuilder.SetComponents(SetComponents(characterTransform, inventoryTransform));
+        _characterBuilder.SetComponents(SetComponents(characterTransform, inventoryTransform, animator));
         
         SetParams(characterData);
         SetBehaviour(characterData);
@@ -30,13 +30,15 @@ public class CharBuilder : MonoBehaviour
         Character character =  _characterBuilder.GetCharacter();
         return character;
     }
-    
-    private CharacterComponents SetComponents(Transform characterTransform, Transform inventoryTransform)
+
+    private CharacterComponents SetComponents(Transform characterTransform, Transform inventoryTransform,
+        Animator animator)
     {
         _componentBuilder = new ComponentBuilder();
         
         _componentBuilder.SetCharacterTransform(characterTransform);
         _componentBuilder.SetInventoryTransform(inventoryTransform);
+        _componentBuilder.SetAnimator(animator);
         
         CharacterComponents components = _componentBuilder.GetComponents();
         return components;

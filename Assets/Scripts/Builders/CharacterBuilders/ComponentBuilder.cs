@@ -15,6 +15,11 @@
             _components.inventoryTransform = transform;
         }
 
+        public void SetAnimator(Animator animator)
+        {
+            _components.animator = animator;
+        }
+
         public CharacterComponents GetComponents()
         {
             return _components;

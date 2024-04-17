@@ -14,7 +14,7 @@ public sealed class MonoTile : MonoBehaviour
         public Transform ConnectTo;
     }
     
-    [SerializeField] private TileSO tilePreset;
+    [FormerlySerializedAs("tilePreset")] [SerializeField] private RoomSO roomPreset;
 
     public List<Transform> itemSpawnPoints;
     [SerializeField] public List<Directions> directions = new List<Directions>();
@@ -37,50 +37,11 @@ public sealed class MonoTile : MonoBehaviour
     }
     private void Awake()
     {
-        _tile = TileGenerator.current.CreateTile(tilePreset);
+        _tile = TileGenerator.current.CreateTile(roomPreset);
         //ItemFabric.current.SpawnItems(_tile, itemSpawnPoints);
         //CharacterFabric.current.TileSpawnCharacter(_tile, enemySpawnPoints, patrolPoints);
     }
     
-    public Directions GetDoorByDirection(Direction direction)
-    {
-        for (int i = 0; i < directions.Count; i++)
-        {
-            if (directions[i].direction == direction)
-            {
-                return directions[i];
-            }
-        }
-
-        return null;
-    }
-
-    public Direction ReverseDirection(Direction direction)
-    {
-        switch (direction)
-        {
-            case Direction.Forward:
-            {
-                return Direction.Backward;
-            }
-            case Direction.Backward:
-            {
-                return Direction.Forward;
-            }
-            case Direction.Left:
-            {
-                return Direction.Right;
-            }
-            case Direction.Right:
-            {
-                return Direction.Left;
-            }
-            default:
-            {
-                Debug.LogError("No reverse direction for: " + direction);
-                return Direction.Forward;
-            }
-        }
-    }
+    
     
 }

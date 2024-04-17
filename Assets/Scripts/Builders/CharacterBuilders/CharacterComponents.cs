@@ -5,4 +5,5 @@
     {
         public Transform characterTransform;
         public Transform inventoryTransform;
+        public Animator animator;
     }

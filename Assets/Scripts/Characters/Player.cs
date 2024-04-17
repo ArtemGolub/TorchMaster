@@ -15,6 +15,8 @@ public sealed class Player : ACharacter
         
         InvokeRepeating("UpdateTorch", 0, 0.1f);
         InvokeRepeating("CheckTargets", 0, 0.1f);
+
+        FindObjectOfType<CamraControll>().InitCamera(transform);
     }
 
     private void Update()
@@ -25,7 +27,7 @@ public sealed class Player : ACharacter
 
     private void UpdateTorch()
     {
-        Character.TorchObserver.CheckBurningObjects();
+        Character.TorchObserver.CheckBurningObjects(Character);
     }
 
     private void CheckTargets()

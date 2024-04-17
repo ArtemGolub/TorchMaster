@@ -12,6 +12,8 @@ public class Fear_State : State
 
     public override void Enter()
     {
+        _character.Components.animator.SetBool("isFeared", true);
+        _character.Components.animator.SetBool("isTorch", false);
         var itemToRemove = _character.InventoryCommandManager.GetItem(ItemType.Torch);
         if (itemToRemove != null)
         {
@@ -36,5 +38,6 @@ public class Fear_State : State
     {
         _character.CommandManager.SubscribeCommand(CharacterCommandType.Attack);
         fearTime = 3f;
+        _character.Components.animator.SetBool("isFeared", false);
     }
 }

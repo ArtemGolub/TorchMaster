@@ -26,20 +26,20 @@ public class ItemFabric : MonoBehaviour
 
     }
     
-    private Transform SpawnItem(ItemSO preset, Transform spawnPose)
+    public Transform SpawnItem(ItemSO preset, Transform spawnPose)
     {
         switch (preset.itemType)
         {
             case ItemType.Torch:
             {
                 var obj = Instantiate(preset.prefab, spawnPose.position, spawnPose.rotation);
-                obj.SetParent(spawnPose);
+               // obj.SetParent(spawnPose);
                 return obj;
             }
             case ItemType.Oil:
             {
                 var obj = Instantiate(preset.prefab, spawnPose.position, spawnPose.rotation);
-                obj.SetParent(spawnPose);
+                //obj.SetParent(spawnPose);
                 return obj;
             }
         }

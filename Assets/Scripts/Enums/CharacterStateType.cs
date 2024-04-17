@@ -6,5 +6,6 @@
         Slowed,
         Fired,
         Fear,
-        Death
+        Death,
+        Attack
     }

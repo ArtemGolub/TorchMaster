@@ -18,10 +18,10 @@
             }
         }
         
-        public Tile CreateTile(TileSO tileData)
+        public Tile CreateTile(RoomSO roomData)
         {
             _tileDirector = new TileDirector();
-            Tile tile = _tileDirector.CreateTile(tileData);
+            Tile tile = _tileDirector.CreateTile(roomData);
             return tile;
         }
     }

@@ -11,28 +11,16 @@ public class DungeonRoom : MonoBehaviour
         FourRotations
     }
     
-    [Serializable]
-    public class RoomDirection
-    {
-        public Direction Direction;
-        public DirectionType[] DirectionTypes;
-
-        public RoomDirection(RoomDirection direction)
-        {
-            if(direction == null) return;
-            Direction = direction.Direction;
-            DirectionTypes = direction.DirectionTypes;
-        }
-    }
-
     public List<RoomDirection> Directions;
     [Range(1, 100)]
     public int Weight = 50;
 
     public RotationType Rotation;
     public Vector2Int gridPosition;
-
-
+    public bool MainPath;
+    
+    
+    
     public void RotateRoom90()
     {
         transform.Rotate(0,90,0);

@@ -2,10 +2,11 @@ public sealed class Torch : AItem
 {
     private void Awake()
     {
-        InitItem();
+        
     }
     private void Start()
     {
+        InitItem();
         item.FSM.InitBehaviour();
     }
     

@@ -21,10 +21,7 @@ public class TileBuilder : ITileBuilder
         _tile.ID = id;
     }
 
-    public void SetNextTileVariants(List<TileSO> nextTileVariants)
-    {
-        _tile.NextTileVariants = nextTileVariants;
-    }
+
 
     public void SetItemSpawnPoints(List<Transform> itemSpawnPoints)
     {
@@ -40,12 +37,6 @@ public class TileBuilder : ITileBuilder
     {
         _tile.CharacterSpawnPoints = characterSpawnPoints;
     }
-
-    public void SetNextTileSpawnPoints(Dictionary<Transform, bool> nextTileSpawnPoints)
-    {
-        _tile.NextTileSpawnPoints = nextTileSpawnPoints;
-    }
-
     public void SetPossibleItems(List<ItemSO> possibleItems)
     {
         _tile.PossibleItems = possibleItems;

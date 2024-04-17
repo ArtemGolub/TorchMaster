@@ -1,26 +1,20 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public sealed class TileDirector
 {
     private ITileBuilder _tileBuilder;
     
-    public Tile CreateTile(TileSO tileData)
+    public Tile CreateTile(RoomSO roomData)
     {
         _tileBuilder = new TileBuilder();
         
-        SetParams(tileData);
+        SetParams(roomData);
         
         Tile tile =  _tileBuilder.GetTile();
         return tile;
     }
 
-    private void SetParams(TileSO tileData)
+    private void SetParams(RoomSO roomData)
     {
-        _tileBuilder.SetName(tileData.Name);
-        _tileBuilder.SetID(tileData.ID);
-        _tileBuilder.SetNextTileVariants(tileData.NextTileVariants);
-        _tileBuilder.SetPossibleItems(tileData.possibleItems);
-        _tileBuilder.SetPossibleEnemies(tileData.possibleEnimies);
+        _tileBuilder.SetPossibleItems(roomData.possibleItems);
+        _tileBuilder.SetPossibleEnemies(roomData.possibleEnimies);
     }
 }

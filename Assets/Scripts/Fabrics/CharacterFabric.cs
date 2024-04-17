@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterFabric: MonoBehaviour
@@ -50,6 +51,14 @@ public class CharacterFabric: MonoBehaviour
             }
         }
         return null;
+    }
+
+    public Transform SpawnCharacterAtPoint(CharacterSO preset, Transform spawnPoint)
+    {
+        var character = Instantiate(preset.prefab, spawnPoint.position, spawnPoint.rotation);
+        character.SetParent(spawnPoint);
+        character.GetComponent<Enemy>().Character.patrolPoints = spawnPoint.GetComponentInParent<Room>().PatrolPoints;
+        return character;
     }
 
     private CharacterSO RandomiseEnemy(List<CharacterSO> possibleEnimies)

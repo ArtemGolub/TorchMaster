@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyMovementController: AObserver<IMovementStategy>
 {
     public static EnemyMovementController current;
-    public Player player;
+    [HideInInspector]public Player player;
 
     private void Awake()
     {
