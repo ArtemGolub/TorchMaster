@@ -8,7 +8,7 @@ public sealed class Room : MonoBehaviour
     [SerializeField] private RoomSO preset;
     [SerializeField] private List<Transform> ItemSpawnPoints;
     [SerializeField] private List<Transform> EnemySpawnPoints;
-    public List<Transform> PatrolPoints;
+    [HideInInspector]public List<Transform> PatrolPoints;
     private void Start()
     {
         PatrolPoints.AddRange(ItemSpawnPoints);

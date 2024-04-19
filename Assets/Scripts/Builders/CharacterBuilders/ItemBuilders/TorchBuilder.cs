@@ -1,4 +1,5 @@
 
+    using System.Collections.Generic;
     using UnityEngine;
 
     public class TorchBuilder: IItemBuilder
@@ -45,5 +46,10 @@
         public void SetFSM(FSMType type)
         {
             _item.FSM = FSMFactory.CreateItemStrategy(_item, type);
+        }
+
+        public void SetLightPoints(List<Transform> lightPoints)
+        {
+            _item.LightPoint = lightPoints;
         }
     }

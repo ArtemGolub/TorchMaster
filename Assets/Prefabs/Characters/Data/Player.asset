@@ -21,7 +21,7 @@ MonoBehaviour:
   inventoryType: 0
   ammoType: 1
   attackType: 1
-  speed: 2
+  speed: 4
   attackRange: 5
   raloadTime: 0.5
   collisionTags: 01000000020000000300000004000000

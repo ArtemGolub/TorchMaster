@@ -47,4 +47,9 @@ public class OilBuilder: IItemBuilder
     {
         _item.FSM = FSMFactory.CreateItemStrategy(_item, type);
     }
+
+    public void SetLightPoints(List<Transform> lightPoints)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -13,6 +13,8 @@ public class Death_State : State
     {
         Debug.Log("Death");
         _character.Components.animator.SetBool("isDead", true);
+        
         DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
+        RestartButton.current.OpenRestartCanvas();
     }
 }

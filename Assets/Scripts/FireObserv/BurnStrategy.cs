@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BurnStrategy : IBurnStategy, IStrategy
@@ -5,10 +6,15 @@ public class BurnStrategy : IBurnStategy, IStrategy
     private Item _item;
     private float _burnTime;
     
+    // TODO refactor lightPoints
+    private List<Transform> lightPoint;
+    
     public BurnStrategy(Item item, float burnTime)
     {
         _item = item;
         _burnTime = burnTime;
+        
+        lightPoint = _item.LightPoint;
     }
     public void Burn()
     {
@@ -21,11 +27,20 @@ public class BurnStrategy : IBurnStategy, IStrategy
 
     public void Subscribe()
     {
+        foreach (var point in lightPoint)
+        {
+            point.gameObject.SetActive(true);
+        }
+        
         BurnObserver.current.AddObserver(this);
     }
 
     public void UnSubscribe()
     {
+        foreach (var point in lightPoint)
+        {
+            point.gameObject.SetActive(false);
+        }
         BurnObserver.current.RemoveObserver(this);
     }
 }

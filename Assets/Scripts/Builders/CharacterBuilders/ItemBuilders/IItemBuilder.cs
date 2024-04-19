@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface IItemBuilder
@@ -9,4 +10,5 @@ public interface IItemBuilder
     void SetCollider(Collider collider);
     void SetItemCommandManager();
     void SetFSM(FSMType type);
+    void SetLightPoints(List<Transform> lightPoints);
 }

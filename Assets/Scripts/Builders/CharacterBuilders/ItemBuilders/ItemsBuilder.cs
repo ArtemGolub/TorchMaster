@@ -1,4 +1,5 @@
 
+    using System.Collections.Generic;
     using UnityEngine;
 
     public class ItemsBuilder: MonoBehaviour
@@ -18,10 +19,10 @@
             }
         }
         
-        public Item CreateItem(Transform transform, ItemSO itemData, Collider collider)
+        public Item CreateItem(Transform transform, ItemSO itemData, Collider collider, List<Transform> lightPoints)
         {
             _itemDirector = new ItemDirector();
-            Item item = _itemDirector.CreateItem(transform, itemData, collider);
+            Item item = _itemDirector.CreateItem(transform, itemData, collider, lightPoints);
             return item;
         }
     }

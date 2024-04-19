@@ -24,7 +24,6 @@ public class Player_SM: StateMachine, ICharacterStateMachine
         AddState(CharacterStateType.Death, new Death_State(_character));
         _sm.Initialize(_states[CharacterStateType.Move]);
         Subscribe();
-     
     }
     
     public void UpdateBehaviour()

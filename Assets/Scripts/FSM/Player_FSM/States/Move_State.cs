@@ -18,7 +18,7 @@ public class Move_State : State
 
     public override void Exit()
     {
-        //_commandManager.UnSubscribeCommand(CharacterCommandType.Move);
+        _commandManager.UnSubscribeCommand(CharacterCommandType.Move);
         _character.Components.animator.SetBool("isRunning", false);
     }
 }
