@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MainMenuViewModel
@@ -20,7 +21,15 @@ public class MainMenuViewModel
 
     public void OnLevelClick(string levelName)
     {
-        _model.LoadLevel(levelName);
+        if (!PlayerData.current.TryLoadLevel(levelName))
+        {
+            Debug.Log($"Level:  {levelName} Locked or Not found");
+        }
+        else
+        {
+            _model.LoadLevel(levelName);
+        }
+      
     }
 
     public void OnExitClick()

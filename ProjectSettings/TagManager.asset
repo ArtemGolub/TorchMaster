@@ -10,6 +10,7 @@ TagManager:
   - DeathWall
   - Tile
   - Wall
+  - EndZone
   layers:
   - Default
   - TransparentFX

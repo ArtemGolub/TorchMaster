@@ -33,5 +33,6 @@ public class MainMenuView : MonoBehaviour
         btnExit.onClick.AddListener(_viewModel.OnExitClick);
         
         btnLevel1.onClick.AddListener(() => _viewModel.OnLevelClick("Prototype2"));
+        btnLevel2.onClick.AddListener(() => _viewModel.OnLevelClick("Prototype1"));
     }
 }

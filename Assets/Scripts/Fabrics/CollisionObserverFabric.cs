@@ -63,6 +63,20 @@ public static class CollisionObserverFabric
                 observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
                 break;
             }
+            case CollisionTags.EndZone:
+            {
+                CollisionObserver<IEndZone> observer =
+                    character.Components.characterTransform.GetComponent<EndZoneCollisionObserver>();
+                if (observer == null)
+                {
+                    observer = character.Components.characterTransform.AddComponent<EndZoneCollisionObserver>();
+                }
+
+                var collisionHandler = new EndZoneCollisionHandler(character);
+                observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
+                break;
+            }
+                
         }
     }
 
@@ -89,6 +103,10 @@ public static class CollisionObserverFabric
             case CollisionTags.DeathWall:
             {
                 return "DeathWall";
+            }
+            case CollisionTags.EndZone:
+            {
+                return "EndZone";
             }
             default:
             {
