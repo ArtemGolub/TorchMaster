@@ -18,7 +18,7 @@ public sealed class Room : MonoBehaviour
         PatrolPoints.AddRange(ItemSpawnPoints);
         PatrolPoints.AddRange(EnemySpawnPoints);
         
-        _roomContent = RoomContentGenerator.current.SetContent(preset, ItemSpawnPoints, EnemySpawnPoints);
+        _roomContent = RoomContentGenerator.current.SetContent(preset, ItemSpawnPoints, EnemySpawnPoints, spawnPoints);
         RoomContentGenerator.current.CreateContent(_roomContent);
     }
 }

@@ -9,4 +9,5 @@ public interface IRoomBuilder
     void SetContentCapacity(int capacity);
     void SetItemSpawnPoints(List<Transform> ItemSpawnPoints);
     void SetEnemiesSpawnPoints(List<Transform> EnemiesSpawnPoints);
+    void SetAllSpawnPoints();
 }

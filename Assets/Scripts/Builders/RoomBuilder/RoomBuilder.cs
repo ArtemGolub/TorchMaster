@@ -36,4 +36,18 @@ public class RoomBuilder : IRoomBuilder
         if(EnemiesSpawnPoints == null) return;
         _roomContent.EnemiesSpawnPoints = EnemiesSpawnPoints;
     }
+
+    public void SetAllSpawnPoints()
+    {
+        _roomContent.SpawnPoints = new Dictionary<Transform, bool>();
+        // foreach (var itemSpawnPoint in _roomContent.ItemSpawnPoints)
+        // {
+        //     AllSpawnPoints.Add(itemSpawnPoint, false);
+        // }
+        if(_roomContent.EnemiesSpawnPoints == null) return;
+        foreach (var enemySpawnPoint in _roomContent.EnemiesSpawnPoints)
+        {
+            _roomContent.SpawnPoints.Add(enemySpawnPoint, false);
+        }
+    }
 }
