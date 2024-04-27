@@ -52,12 +52,11 @@ MonoBehaviour:
   preset: {fileID: 11400000, guid: 7a6bc39a732d54006a64364d9c1f1bdb, type: 2}
   ItemSpawnPoints:
   - {fileID: 6850868462553425025}
-  - {fileID: 1235620510334872660}
-  - {fileID: 1235620510334872660}
-  - {fileID: 3175400044139878424}
-  - {fileID: 8903127640209503574}
   EnemySpawnPoints:
+  - {fileID: 3175400044139878424}
   - {fileID: 2168111830749036762}
+  - {fileID: 5685394417245280121}
+  - {fileID: 3127469078012276556}
   PatrolPoints: []
 --- !u!1001 &922271738015603673
 PrefabInstance:
@@ -116,9 +115,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28a768691d13040f4b20b5f5ef7d7b72, type: 3}
---- !u!4 &1235620510334872660 stripped
+--- !u!4 &3127469078012276556 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2155358405466732429, guid: 28a768691d13040f4b20b5f5ef7d7b72, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2858538694162117781, guid: 28a768691d13040f4b20b5f5ef7d7b72, type: 3}
   m_PrefabInstance: {fileID: 922271738015603673}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &9196135826726637046 stripped
@@ -255,6 +254,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2445232692076667486, guid: 069843cb2e06340bfba2782fdf139281, type: 3}
   m_PrefabInstance: {fileID: 4319407746617857949}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5685394417245280121 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8437223887197864164, guid: 069843cb2e06340bfba2782fdf139281, type: 3}
+  m_PrefabInstance: {fileID: 4319407746617857949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4434383838712048592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -320,11 +324,6 @@ Transform:
 --- !u!4 &3538294249017644570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 905385445631409610, guid: 84fe8bcf21f8d4a62b66b6f190d15634, type: 3}
-  m_PrefabInstance: {fileID: 4434383838712048592}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8903127640209503574 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5045258570531872390, guid: 84fe8bcf21f8d4a62b66b6f190d15634, type: 3}
   m_PrefabInstance: {fileID: 4434383838712048592}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8432061012113724758

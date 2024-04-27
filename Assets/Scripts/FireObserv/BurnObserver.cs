@@ -1,7 +1,9 @@
+using UnityEngine;
+
 public class BurnObserver : AObserver<IBurnStategy>
 {
     public static BurnObserver current;
-
+    
     private void Awake()
     {
         current = this;
@@ -9,7 +11,11 @@ public class BurnObserver : AObserver<IBurnStategy>
 
     private void FixedUpdate()
     {
-        if (observers == null) return;
+        if (observers == null)
+        {
+            TorchCanvas.current.DeactivateSlider();
+            return;
+        }
         Burn();
     }
     

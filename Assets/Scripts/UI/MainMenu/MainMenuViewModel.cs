@@ -19,17 +19,15 @@ public class MainMenuViewModel
         _model.EnableCanvas(_levelsCanvas);
     }
 
-    public void OnLevelClick(string levelName)
+    public void OnLevelClick(string levelName, LevelState state)
     {
-        if (!PlayerData.current.TryLoadLevel(levelName))
+        if (state == LevelState.Locked)
         {
-            Debug.Log($"Level:  {levelName} Locked or Not found");
+            return;
         }
-        else
-        {
-            _model.LoadLevel(levelName);
-        }
-      
+        _model.DisableCanvas(_menuCanvas);
+        _model.DisableCanvas(_levelsCanvas);
+        _model.LoadLevel(levelName);
     }
 
     public void OnExitClick()

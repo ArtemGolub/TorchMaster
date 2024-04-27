@@ -21,7 +21,7 @@ public class InventoryVisualaser
 
     public void RemoveItem(Item item)
     {
-        item.Transform.SetParent(null);
+       // item.Transform.SetParent(null);
        // AdjustItemPositions();
     }
 

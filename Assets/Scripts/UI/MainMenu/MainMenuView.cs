@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,7 @@ public class MainMenuView : MonoBehaviour
     public Button btnLevels;
     public Button btnExit;
 
-    public Button btnLevel1;
-    public Button btnLevel2;
+    public List<Button> LevelButtons;
     
     private MainMenuModel _model;
     private MainMenuViewModel _viewModel;
@@ -19,6 +19,10 @@ public class MainMenuView : MonoBehaviour
     {
         Init();
         AddListeners();
+        if (!DataPersistanceManager.current.HasGameData())
+        {
+            // No data
+        }
     }
 
     private void Init()
@@ -31,8 +35,15 @@ public class MainMenuView : MonoBehaviour
     {
         btnLevels.onClick.AddListener(_viewModel.OnLevelsClick);
         btnExit.onClick.AddListener(_viewModel.OnExitClick);
-        
-        btnLevel1.onClick.AddListener(() => _viewModel.OnLevelClick("Prototype2"));
-        btnLevel2.onClick.AddListener(() => _viewModel.OnLevelClick("Prototype1"));
+
+        foreach (var button in LevelButtons)
+        {
+            button.onClick.AddListener(() =>
+            {
+                var levelName = button.GetComponent<LevelProgress>().GetLevelName();
+                var levelState = button.GetComponent<LevelProgress>().GetState();
+                _viewModel.OnLevelClick(levelName, levelState);
+            });
+        }
     }
 }

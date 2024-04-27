@@ -5,7 +5,7 @@
     public class TorchBuilder: IItemBuilder
     {
         private Item _item = new Item();
-        
+        private float burnTime = 10f;
         public Item GetItem()
         {
             return _item;
@@ -39,7 +39,8 @@
         
         public void SetBurnCommand()
         {
-            var burnCommand = new BurnStrategy(_item, 200f);
+            var burnCommand = new BurnStrategy(_item, burnTime);
+            TorchCanvas.current.InitSlider(burnTime);
             _item.ItemCommandManager.AddCommand(ItemCommandType.Active, burnCommand);
         }
 

@@ -53,11 +53,8 @@ MonoBehaviour:
   ItemSpawnPoints:
   - {fileID: 2480629094784308534}
   - {fileID: 6858877661065850365}
-  - {fileID: 232111912929904974}
   EnemySpawnPoints:
-  - {fileID: 6669940875670849146}
-  - {fileID: 6811365452540365870}
-  - {fileID: 6858877661065850365}
+  - {fileID: 2858213559948571244}
   - {fileID: 232111912929904974}
   PatrolPoints: []
 --- !u!1001 &182002254767299430
@@ -194,11 +191,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2159459125153003994, guid: f76ecf277e97d4fe9979b220e8729eee, type: 3}
   m_PrefabInstance: {fileID: 3442033140637666599}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6811365452540365870 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8161184627942080777, guid: f76ecf277e97d4fe9979b220e8729eee, type: 3}
-  m_PrefabInstance: {fileID: 3442033140637666599}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6166742115310341133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -259,6 +251,11 @@ PrefabInstance:
 --- !u!4 &1179965005804059961 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5040856932862406964, guid: 7fa384cd72db145b9a94a30d15c95ced, type: 3}
+  m_PrefabInstance: {fileID: 6166742115310341133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2858213559948571244 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8232229723195047521, guid: 7fa384cd72db145b9a94a30d15c95ced, type: 3}
   m_PrefabInstance: {fileID: 6166742115310341133}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8101485629320956220
@@ -385,11 +382,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e85b73cafbf348abb08464beea3071a, type: 3}
---- !u!4 &6669940875670849146 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2977423312912639785, guid: 3e85b73cafbf348abb08464beea3071a, type: 3}
-  m_PrefabInstance: {fileID: 8485218587796562259}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7796514934077938202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1869913445312871241, guid: 3e85b73cafbf348abb08464beea3071a, type: 3}

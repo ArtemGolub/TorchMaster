@@ -19,6 +19,7 @@ public class BurnStrategy : IBurnStategy, IStrategy
     public void Burn()
     {
         _burnTime -= Time.deltaTime;
+        TorchCanvas.current.UpdateSlider(_burnTime);
         if (_burnTime <= 0)
         {
             _item.FSM.ChangeState(ItemStateType.Used);
@@ -31,7 +32,6 @@ public class BurnStrategy : IBurnStategy, IStrategy
         {
             point.gameObject.SetActive(true);
         }
-        
         BurnObserver.current.AddObserver(this);
     }
 

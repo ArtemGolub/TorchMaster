@@ -11,7 +11,7 @@ public class EndZoneCollisionHandler: ICollisionHandler<IEndZone>
         
     public void HandleCollision(IEndZone collidedObject)
     {
-        PlayerData.current.UpdateLevelProgress();
-        SceneManager.LoadScene("MainMenu");
+        string currentLevelName = SceneManager.GetActiveScene().name;
+        DataPersistanceManager.current.CompleteLevel(currentLevelName);
     }
-}
+}//  PlayerData.current.UpdateLevelProgress();
