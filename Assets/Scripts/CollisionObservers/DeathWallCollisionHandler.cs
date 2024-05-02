@@ -14,4 +14,9 @@ public class DeathWallCollisionHandler : ICollisionHandler<IDeathWall>
     {
         _character.SM.ChancgeState(CharacterStateType.Death);
     }
+
+    public void HandleCollisionExit(IDeathWall collidedObject)
+    {
+        
+    }
 }

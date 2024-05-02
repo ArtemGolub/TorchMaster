@@ -62,9 +62,12 @@ public class CharBuilder : MonoBehaviour
         
         if (characterData.characterType == CharacterType.Player)
         {
-            _characterBuilder.SetInventory(characterData.inventoryType);
+            _characterBuilder.SetInventory(characterData.inventoryType, characterData.TorchCapacity);
             _characterBuilder.SetFireObserver();
             _characterBuilder.SetOilObserver();
+            
+            _characterBuilder.SetMadness(characterData.maxMadness);
+            _characterBuilder.SetMadnessCommandManager();
         }
         _characterBuilder.SetFSM(characterData.fsmType);
     }

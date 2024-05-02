@@ -6,6 +6,10 @@ public enum CharacterCommandType
     Throw,
     Drop,
     Burn,
-    Fear
+    Fear,
+    ReduceMadness,
+    EncreaseMadness,
+    ReduceMadnessValue,
+    EncreaseMadnessValue
     
 }

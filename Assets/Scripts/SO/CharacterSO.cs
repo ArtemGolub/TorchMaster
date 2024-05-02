@@ -4,7 +4,6 @@ using UnityEngine;
 public class CharacterSO : ScriptableObject
 {
     public string Name;
-    public int iD;
 
     public Transform prefab;
     
@@ -20,6 +19,8 @@ public class CharacterSO : ScriptableObject
     public float speed;
     public float attackRange;
     public float raloadTime;
+    public int TorchCapacity;
+    public float maxMadness;
     
     [Header("Collision Tags")]
     public CollisionTags[] collisionTags;

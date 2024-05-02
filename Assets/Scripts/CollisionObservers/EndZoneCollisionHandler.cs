@@ -14,4 +14,9 @@ public class EndZoneCollisionHandler: ICollisionHandler<IEndZone>
         string currentLevelName = SceneManager.GetActiveScene().name;
         DataPersistanceManager.current.CompleteLevel(currentLevelName);
     }
+
+    public void HandleCollisionExit(IEndZone collidedObject)
+    {
+        
+    }
 }//  PlayerData.current.UpdateLevelProgress();

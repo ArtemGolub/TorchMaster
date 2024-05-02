@@ -11,7 +11,9 @@
         public void Execute(Item item)
         {
             if(item.FSM.CheckState(ItemStateType.Used)) return;
-            _inventory.AddItem(item);
-            item.FSM.ChangeState(ItemStateType.Grab);
+            if (_inventory.AddItem(item))
+            {
+                item.FSM.ChangeState(ItemStateType.Grab);
+            }
         }
     }

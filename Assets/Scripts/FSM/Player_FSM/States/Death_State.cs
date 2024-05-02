@@ -11,10 +11,14 @@ public class Death_State : State
 
     public override void Enter()
     {
-        _character.Components.animator.SetBool("isDead", true);
+        if (_character.Components.animator != null)
+        {
+            _character.Components.animator.SetBool("isDead", true);
+        }
         
         _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Throw);
         TorchCanvas.current.DeactivateSlider();
+        MadnessCanvas.current.DeactivateSlider();
         
         DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
         RestartButton.current.OpenRestartCanvas();

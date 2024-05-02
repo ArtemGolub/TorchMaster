@@ -15,14 +15,17 @@ public sealed class Inventory : IInventory
         _items = new Dictionary<ItemType, ItemList<Item>>();
     }
     
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
-       
         if (_items.ContainsKey(item.ItemType))
         {
-            _items[item.ItemType].Add(item);
-            _visualaser.PlaceItem(item);
+            if (_items[item.ItemType].Add(item))
+            {
+                _visualaser.PlaceItem(item);
+                return true;
+            }
         }
+        return false;
     }
 
     public void RemoveItem(Item item)

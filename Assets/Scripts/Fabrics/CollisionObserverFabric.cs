@@ -76,6 +76,19 @@ public static class CollisionObserverFabric
                 observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
                 break;
             }
+            case CollisionTags.LightPoint:
+            {
+                CollisionObserver<ILightingPoint> observer =
+                    character.Components.characterTransform.GetComponent<LightingCollisionObserver>();
+                if (observer == null)
+                {
+                    observer = character.Components.characterTransform.AddComponent<LightingCollisionObserver>();
+                }
+
+                var collisionHandler = new LightingCollisionHandler(character);
+                observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
+                break;
+            }
                 
         }
     }
@@ -107,6 +120,10 @@ public static class CollisionObserverFabric
             case CollisionTags.EndZone:
             {
                 return "EndZone";
+            }
+            case CollisionTags.LightPoint:
+            {
+                return "LightPoint";
             }
             default:
             {

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   Name: Player
-  iD: 0
   prefab: {fileID: 5158191798327346186, guid: 3c023d4c4231e4ac89c4f612fa6dbb83, type: 3}
   characterType: 0
   movementType: 0
@@ -24,4 +23,6 @@ MonoBehaviour:
   speed: 4
   attackRange: 5
   raloadTime: 0.5
-  collisionTags: 0100000002000000030000000400000005000000
+  TorchCapacity: 3
+  maxMadness: 100
+  collisionTags: 010000000200000003000000040000000500000006000000

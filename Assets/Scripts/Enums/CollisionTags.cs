@@ -6,5 +6,6 @@
         Item,
         FirePoint,
         DeathWall,
-        EndZone
+        EndZone,
+        LightPoint
     }

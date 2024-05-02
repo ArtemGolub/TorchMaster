@@ -51,10 +51,6 @@ public sealed class RoomContentGenerator : MonoBehaviour
 
     private void TrySpawnContent(RoomContent roomContent)
     {
-        foreach (var kvp in roomContent.SpawnPoints)
-        {
-            Debug.Log(kvp.Key);
-        }
         int randomNumber = GenerateRandomNumber(0, 100);
         if (randomNumber <= 20)
         {
@@ -79,20 +75,17 @@ public sealed class RoomContentGenerator : MonoBehaviour
         {
             if (!kvp.Value)
             {
-                Debug.Log("Added");
                 availableSpawnPoints.Add(kvp.Key);
             }
         }
         
         if (availableSpawnPoints.Count == 0)
         {
-            Debug.Log("No Avaliable");
             return false;
         }
         
         int randomIndex = UnityEngine.Random.Range(0, availableSpawnPoints.Count);
         spawnPoint = availableSpawnPoints[randomIndex];
-        Debug.Log(spawnPoint.name);
         return true;
     }
     

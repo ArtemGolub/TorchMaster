@@ -1,6 +1,6 @@
 
 using UnityEngine;
-
+// TODO spread to different builders
 public class CharacterBuilder : ICharacterBuilder
 {
     private Character _character = new Character();
@@ -41,7 +41,7 @@ public class CharacterBuilder : ICharacterBuilder
         _character.SM = FSMFactory.CreateStrategy(_character, type);
     }
 
-    public void SetInventory(InventoryType type)
+    public void SetInventory(InventoryType type, int capactiy)
     {
         _character.Inventory = ComponentFabric.CreateInventory(type, _character);
         _character.InventoryCommandManager = new InventoryCommandManager(_character.Inventory);
@@ -49,7 +49,7 @@ public class CharacterBuilder : ICharacterBuilder
         _character.InventoryCommandManager.AddCommand(CharacterCommandType.Collect, new CollectCommand(_character.Inventory));
         _character.InventoryCommandManager.AddCommand(CharacterCommandType.Throw, new ThrowCommand(_character.Inventory));
         // TODO InventorySO
-        _character.InventoryCommandManager.InitInventory(1,0 );
+        _character.InventoryCommandManager.InitInventory(capactiy,0 );
         
     }
 
@@ -84,6 +84,24 @@ public class CharacterBuilder : ICharacterBuilder
     public void SetRaloadTime(float time)
     {
         _character.raloadTime = time;
+    }
+
+    public void SetMadness(float maxMadness)
+    {
+        _character.maxMadness = maxMadness;
+        _character.curMadness = maxMadness;
+        
+    }
+
+    public void SetMadnessCommandManager()
+    {
+        _character.MadnessCommandManager = new MadnessCommandManager();
+        
+        _character.MadnessCommandManager.AddCommand(CharacterCommandType.EncreaseMadnessValue, new EncreaseMadness(_character));
+        _character.MadnessCommandManager.AddCommand(CharacterCommandType.ReduceMadnessValue, new ReduceMadness(_character));
+        
+        _character.MadnessCommandManager.AddCommand(CharacterCommandType.EncreaseMadness, new EncreaseMadness(_character));
+        _character.MadnessCommandManager.AddCommand(CharacterCommandType.ReduceMadness, new ReduceMadness(_character));
     }
 
     public Character GetCharacter()

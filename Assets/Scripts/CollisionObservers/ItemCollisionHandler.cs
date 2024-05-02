@@ -13,4 +13,9 @@ public sealed class ItemCollisionHandler : ICollisionHandler<IItem>
     {
         _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Collect, collidedObject.item);
     }
+
+    public void HandleCollisionExit(IItem collidedObject)
+    {
+        
+    }
 }

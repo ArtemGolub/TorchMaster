@@ -18,4 +18,9 @@ public class FirePointCollisionHandler : ICollisionHandler<IFirePoint>
             collidedObject.Burn();
         }
     }
+
+    public void HandleCollisionExit(IFirePoint collidedObject)
+    {
+        
+    }
 }

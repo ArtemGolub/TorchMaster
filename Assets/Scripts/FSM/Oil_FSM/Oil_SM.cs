@@ -15,7 +15,7 @@ public class Oil_SM : StateMachine, IItemStateMachine
         _sm = new StateMachine();
 
         AddState(ItemStateType.Idle, new Item_Idle_State());
-        AddState(ItemStateType.Grab, new Item_Grabed_State());
+        AddState(ItemStateType.Grab, new Item_Grabed_State(_item));
         AddState(ItemStateType.Active, new Item_Active_State(_item));
         AddState(ItemStateType.Used, new Item_Used_State(_item));
         
