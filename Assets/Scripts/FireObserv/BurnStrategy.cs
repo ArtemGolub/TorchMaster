@@ -39,6 +39,7 @@ public class BurnStrategy : IBurnStategy, IStrategy
     {
         foreach (var point in lightPoint)
         {
+            if(point == null) continue;
             point.gameObject.SetActive(false);
         }
         BurnObserver.current.RemoveObserver(this);

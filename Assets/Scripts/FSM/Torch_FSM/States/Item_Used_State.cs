@@ -11,6 +11,7 @@ public class Item_Used_State : State
     public override void Enter()
     {
         TorchCanvas.current.DeactivateSlider();
+        if(_item.Transform == null) return;
         DestroyHelper.Destroy(_item.Transform.gameObject);
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,12 +12,19 @@ public class RestartButton : MonoBehaviour
     public Button restartButton;
     public Button toMainMenu;
 
-    
+    public LoadingScreenController LoadingScreenController = null;
+
+
+
     private void Start()
     {
         current = this;
         restartButton.onClick.AddListener(RestartGame);
         toMainMenu.onClick.AddListener(ToMainMenu);
+
+
+        this.LoadingScreenController = FindObjectOfType<LoadingScreenController>();
+
     }
 
     public void OpenRestartCanvas()
@@ -28,11 +34,27 @@ public class RestartButton : MonoBehaviour
     
     private void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // Проверяем наличие LoadingScreenController перед загрузкой сцены
+        if (LoadingScreenController != null)
+        {
+            LoadingScreenController.LoadNewScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            Debug.LogWarning("LoadingScreenController is not initialized. Skipping scene reload.");
+        }
     }
 
     private void ToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        // Проверяем наличие LoadingScreenController перед загрузкой сцены
+        if (LoadingScreenController != null)
+        {
+            LoadingScreenController.LoadNewScene("MainMenu");
+        }
+        else
+        {
+            Debug.LogWarning("LoadingScreenController is not initialized. Skipping scene reload.");
+        }
     }
 }

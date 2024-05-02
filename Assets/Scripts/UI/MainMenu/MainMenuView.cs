@@ -14,7 +14,13 @@ public class MainMenuView : MonoBehaviour
     
     private MainMenuModel _model;
     private MainMenuViewModel _viewModel;
+    public LoadingScreenController LoadingScreenController = null;
 
+    private void Awake()
+    {
+        // Переместите инициализацию LoadingScreenController сюда из Start
+        this.LoadingScreenController = FindObjectOfType<LoadingScreenController>();
+    }
     private void Start()
     {
         Init();
@@ -42,7 +48,7 @@ public class MainMenuView : MonoBehaviour
             {
                 var levelName = button.GetComponent<LevelProgress>().GetLevelName();
                 var levelState = button.GetComponent<LevelProgress>().GetState();
-                _viewModel.OnLevelClick(levelName, levelState);
+                _viewModel.OnLevelClick(levelName, levelState, LoadingScreenController);
             });
         }
     }

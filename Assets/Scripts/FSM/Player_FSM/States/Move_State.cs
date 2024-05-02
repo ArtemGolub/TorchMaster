@@ -13,12 +13,14 @@ public class Move_State : State
     public override void Enter()
     {
         _commandManager.SubscribeCommand(CharacterCommandType.Move);
+        if( _character.Components.animator == null) return;
         _character.Components.animator.SetBool("isRunning", true);
     }
 
     public override void Exit()
     {
         _commandManager.UnSubscribeCommand(CharacterCommandType.Move);
+        if( _character.Components.animator == null) return;
         _character.Components.animator.SetBool("isRunning", false);
     }
 }

@@ -11,8 +11,10 @@ public class Death_State : State
 
     public override void Enter()
     {
-        Debug.Log("Death");
         _character.Components.animator.SetBool("isDead", true);
+        
+        _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Throw);
+        TorchCanvas.current.DeactivateSlider();
         
         DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
         RestartButton.current.OpenRestartCanvas();

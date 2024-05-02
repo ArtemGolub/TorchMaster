@@ -12,9 +12,14 @@ public class MainMenuModel
         canvas.enabled = true;
     }
 
-    public void LoadLevel(string levelName)
+    public void LoadLevel(string levelName, LoadingScreenController loadingScreenController)
     {
-        SceneManager.LoadSceneAsync(levelName);
+        if (loadingScreenController == null)
+        {
+            Debug.LogError("Lost Loading Screen"); 
+            return;
+        }
+        loadingScreenController.LoadNewScene(levelName);
     }
 
     public void ExitGame()

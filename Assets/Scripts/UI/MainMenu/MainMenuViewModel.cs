@@ -19,7 +19,7 @@ public class MainMenuViewModel
         _model.EnableCanvas(_levelsCanvas);
     }
 
-    public void OnLevelClick(string levelName, LevelState state)
+    public void OnLevelClick(string levelName, LevelState state, LoadingScreenController loadingScreenController)
     {
         if (state == LevelState.Locked)
         {
@@ -27,7 +27,7 @@ public class MainMenuViewModel
         }
         _model.DisableCanvas(_menuCanvas);
         _model.DisableCanvas(_levelsCanvas);
-        _model.LoadLevel(levelName);
+        _model.LoadLevel(levelName, loadingScreenController);
     }
 
     public void OnExitClick()
