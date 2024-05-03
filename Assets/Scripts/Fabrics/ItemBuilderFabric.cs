@@ -15,6 +15,16 @@
                     var itemBuilder = new OilBuilder();;
                     return itemBuilder;
                 }
+                case ItemType.TrueSight:
+                {
+                    var itemBuilder = new TrueSightBuilder();
+                    return itemBuilder;
+                }
+                case ItemType.Key:
+                {
+                    var itemBuilder = new KeyBuilder();
+                    return itemBuilder;
+                }
             }
 
             return null;

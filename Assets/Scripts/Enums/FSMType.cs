@@ -5,5 +5,7 @@
         Skeleton,
         Gost,
         Torch,
-        Oil
+        Oil,
+        TrueSight,
+        Key
     }

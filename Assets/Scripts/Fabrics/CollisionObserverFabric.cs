@@ -89,6 +89,19 @@ public static class CollisionObserverFabric
                 observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
                 break;
             }
+            case CollisionTags.Door:
+            {
+                CollisionObserver<IDoor> observer =
+                    character.Components.characterTransform.GetComponent<DoorObserver>();
+                if (observer == null)
+                {
+                    observer = character.Components.characterTransform.AddComponent<DoorObserver>();
+                }
+
+                var collisionHandler = new DoorCollisionHandler(character);
+                observer.AddCollisionHandler(CollisionTagsConverter(tag), collisionHandler);
+                break;
+            }
                 
         }
     }
@@ -124,6 +137,10 @@ public static class CollisionObserverFabric
             case CollisionTags.LightPoint:
             {
                 return "LightPoint";
+            }
+            case CollisionTags.Door:
+            {
+                return "Door";
             }
             default:
             {

@@ -2,5 +2,7 @@
     public enum ItemType
     {
         Torch,
-        Oil
+        Oil,
+        TrueSight,
+        Key
     }

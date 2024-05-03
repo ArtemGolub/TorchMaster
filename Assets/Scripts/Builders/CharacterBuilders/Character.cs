@@ -12,6 +12,7 @@ public class Character
     public float raloadTime;
     public float curMadness;
     public float maxMadness;
+    public bool hasKey;
     
     public CharacterComponents Components;
     

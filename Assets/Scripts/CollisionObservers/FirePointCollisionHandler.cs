@@ -23,4 +23,9 @@ public class FirePointCollisionHandler : ICollisionHandler<IFirePoint>
     {
         
     }
+
+    public void HandleCollisionStay(IFirePoint collidedObject)
+    {
+        
+    }
 }

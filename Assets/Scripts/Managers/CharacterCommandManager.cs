@@ -4,9 +4,16 @@ using UnityEngine;
 public class CharacterCommandManager
 {
     private Dictionary<CharacterCommandType, IStrategy> commands = new Dictionary<CharacterCommandType, IStrategy>();
+
+    private Dictionary<CharacterCommandType, ICharacterCommand> _characterCommands =
+        new Dictionary<CharacterCommandType, ICharacterCommand>();
     public void AddCommand(CharacterCommandType type, IStrategy command)
     {
         commands.Add(type, command);
+    }
+    public void AddCharacterCommand(CharacterCommandType type, ICharacterCommand command)
+    {
+        _characterCommands.Add(type, command);
     }
     
     public void SubscribeCommand(CharacterCommandType type)
@@ -20,7 +27,18 @@ public class CharacterCommandManager
         IStrategy command = commands[type];
         command.Subscribe();
     }
-
+    
+    public void ExecuteCommand(CharacterCommandType characterCommandType, Character character = null)
+    {
+        if (_characterCommands.TryGetValue(characterCommandType, out ICharacterCommand command))
+        {
+            command.Execute(character);
+        }
+        else
+        {
+            Debug.Log("No command find with type: " + characterCommandType);
+        }
+    }
     public void UnSubscribeCommand(CharacterCommandType type)
     {
         if (!commands.ContainsKey(type))
@@ -32,7 +50,9 @@ public class CharacterCommandManager
         IStrategy command = commands[type];
         command.UnSubscribe();
     }
-
+    
+    
+    
     public void UnSubscribeAll()
     {
         foreach (var command in commands.Keys)

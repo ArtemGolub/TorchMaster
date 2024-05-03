@@ -19,4 +19,9 @@ public class EndZoneCollisionHandler: ICollisionHandler<IEndZone>
     {
         
     }
+
+    public void HandleCollisionStay(IEndZone collidedObject)
+    {
+       
+    }
 }//  PlayerData.current.UpdateLevelProgress();

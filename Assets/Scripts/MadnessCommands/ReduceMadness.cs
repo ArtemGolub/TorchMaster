@@ -23,7 +23,7 @@ public class ReduceMadness : IMadnessCommand
     {
         if (character.curMadness > 0)
         {
-            character.curMadness -= Time.deltaTime;
+            character.curMadness -= 10 * Time.deltaTime;
             MadnessCanvas.current.UpdateSlider(character.curMadness);
         }
         else

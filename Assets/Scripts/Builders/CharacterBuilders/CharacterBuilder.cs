@@ -13,6 +13,8 @@ public class CharacterBuilder : ICharacterBuilder
     public void SetCommandManager()
     {
         _character.CommandManager = new CharacterCommandManager();
+        
+        _character.CommandManager.AddCharacterCommand(CharacterCommandType.Use, new KeyCollectCommand());
     }
 
     public void SetName(string name)
@@ -48,6 +50,7 @@ public class CharacterBuilder : ICharacterBuilder
         
         _character.InventoryCommandManager.AddCommand(CharacterCommandType.Collect, new CollectCommand(_character.Inventory));
         _character.InventoryCommandManager.AddCommand(CharacterCommandType.Throw, new ThrowCommand(_character.Inventory));
+        _character.InventoryCommandManager.AddCommand(CharacterCommandType.Use, new UseCommand(_character.Inventory));
         // TODO InventorySO
         _character.InventoryCommandManager.InitInventory(capactiy,0 );
         

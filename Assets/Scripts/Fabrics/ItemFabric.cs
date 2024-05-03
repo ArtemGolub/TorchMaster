@@ -26,6 +26,7 @@ public class ItemFabric : MonoBehaviour
 
     }
     
+    // TODO Refactor
     public Transform SpawnItem(ItemSO preset, Transform spawnPose)
     {
         switch (preset.itemType)
@@ -37,6 +38,18 @@ public class ItemFabric : MonoBehaviour
                 return obj;
             }
             case ItemType.Oil:
+            {
+                var obj = Instantiate(preset.prefab, spawnPose.position, spawnPose.rotation);
+                //obj.SetParent(spawnPose);
+                return obj;
+            }
+            case ItemType.TrueSight:
+            {
+                var obj = Instantiate(preset.prefab, spawnPose.position, spawnPose.rotation);
+                //obj.SetParent(spawnPose);
+                return obj;
+            }
+            case ItemType.Key:
             {
                 var obj = Instantiate(preset.prefab, spawnPose.position, spawnPose.rotation);
                 //obj.SetParent(spawnPose);

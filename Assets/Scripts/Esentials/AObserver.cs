@@ -14,4 +14,13 @@ public abstract class AObserver<T> : MonoBehaviour
     {
         observers.Remove(observer);
     }
+
+    public bool ContainObserver(T observer)
+    {
+        if (observers.Contains(observer))
+        {
+            return true;
+        }
+        return false;
+    }
 }

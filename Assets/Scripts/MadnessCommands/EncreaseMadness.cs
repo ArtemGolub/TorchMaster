@@ -26,10 +26,6 @@ public class EncreaseMadness: IMadnessCommand
             character.curMadness += Time.deltaTime;
             MadnessCanvas.current.UpdateSlider(character.curMadness);
         }
-        else
-        {
-            Debug.Log("Implement Death");
-        }
     }
     
     private void EncreaseValue(Character character, float value)

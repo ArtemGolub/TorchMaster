@@ -1,9 +1,5 @@
 public sealed class Torch : AItem
 {
-    private void Awake()
-    {
-        
-    }
     private void Start()
     {
         InitItem();

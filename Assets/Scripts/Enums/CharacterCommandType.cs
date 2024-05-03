@@ -10,6 +10,8 @@ public enum CharacterCommandType
     ReduceMadness,
     EncreaseMadness,
     ReduceMadnessValue,
-    EncreaseMadnessValue
+    EncreaseMadnessValue,
+    Use,
+    KeyCollect,
     
 }

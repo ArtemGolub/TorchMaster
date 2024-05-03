@@ -43,6 +43,8 @@ public class TorchObserver
                     if (item.FSM.CheckState(ItemStateType.Active))
                     {
                         anyActive = true;
+                        character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.EncreaseMadness);
+                        character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.ReduceMadness);
                         character.Components.animator.SetBool("isTorch", true);
                         break;
                     }
@@ -51,7 +53,7 @@ public class TorchObserver
         }
         if (!anyActive)
         {
-            ActivateTorch();
+            ActivateTorch(character);
         }
     }
     
@@ -69,6 +71,8 @@ public class TorchObserver
                     {
                         _inventory.RemoveItem(item);
                         character.Components.animator.SetBool("isTorch", false);
+                        character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.ReduceMadness);
+                        character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.EncreaseMadness);
                         return;
                     }
                 }
@@ -76,7 +80,7 @@ public class TorchObserver
         }
     }
     
-    private void ActivateTorch()
+    private void ActivateTorch(Character character)
     {
         if (_inventory._items.ContainsKey(ItemType.Torch))
         {
@@ -88,6 +92,8 @@ public class TorchObserver
                     {
                         if (!item.FSM.CheckState(ItemStateType.Active))
                         {
+                            character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.EncreaseMadness);
+                            character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.ReduceMadness);
                             item.FSM.ChangeState(ItemStateType.Active);
                             return;
                         }

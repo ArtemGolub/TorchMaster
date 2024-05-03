@@ -7,5 +7,6 @@
         FirePoint,
         DeathWall,
         EndZone,
-        LightPoint
+        LightPoint,
+        Door
     }

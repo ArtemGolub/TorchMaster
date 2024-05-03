@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MadnessCommandManager
 {
@@ -25,7 +26,11 @@ public class MadnessCommandManager
     {
         if (commands.TryGetValue(characterCommandType, out IMadnessCommand command))
         {
-            MadnessObserver.current.AddObserver(command);
+            if (!MadnessObserver.current.ContainObserver(command))
+            {
+                MadnessObserver.current.AddObserver(command);
+                Debug.Log("subscribed: " + characterCommandType);
+            }
         }
     }
 
@@ -33,7 +38,11 @@ public class MadnessCommandManager
     {
         if (commands.TryGetValue(characterCommandType, out IMadnessCommand command))
         {
-            MadnessObserver.current.RemoveObserver(command);
+            if (MadnessObserver.current.ContainObserver(command))
+            {
+                MadnessObserver.current.RemoveObserver(command);
+                Debug.Log("unsubscribed: " + characterCommandType);
+            }
         }
     }
 }

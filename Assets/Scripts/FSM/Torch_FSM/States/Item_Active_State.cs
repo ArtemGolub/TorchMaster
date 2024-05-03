@@ -10,6 +10,7 @@ public class Item_Active_State : State
     {
         _item.ItemCommandManager.SubscribeCommand(ItemCommandType.Active);
         _item.Collider.enabled = false;
+        _item.Transform.GetComponentInChildren<LightingPoint>().EnableLighting();
     }
     public override void Exit()
     {

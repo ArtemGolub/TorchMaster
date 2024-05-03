@@ -11,9 +11,12 @@ public class Item_Grabed_State : State
 
     public override void Enter()
     {
-        foreach (Transform lightPoint in  _item.LightPoint)
+        if (_item.ItemType == ItemType.Torch)
         {
-            lightPoint.transform.gameObject.SetActive(false);
+            foreach (Transform lightPoint in  _item.LightPoint)
+            {
+                lightPoint.transform.gameObject.SetActive(false);
+            }
         }
     }
 }

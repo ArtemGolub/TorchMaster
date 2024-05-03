@@ -10,6 +10,7 @@ public class LightingCollisionHandler: ICollisionHandler<ILightingPoint>
     }
     public void HandleCollision(ILightingPoint collidedObject)
     {
+        if(!collidedObject.myLight.enabled) return;
         _character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.ReduceMadness);
         _character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.EncreaseMadness);
     }
@@ -18,5 +19,12 @@ public class LightingCollisionHandler: ICollisionHandler<ILightingPoint>
     {
         _character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.EncreaseMadness);
         _character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.ReduceMadness);
+    }
+
+    public void HandleCollisionStay(ILightingPoint collidedObject)
+    {
+        if(!collidedObject.myLight.enabled) return;
+        _character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.ReduceMadness);
+        _character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.EncreaseMadness);
     }
 }

@@ -26,6 +26,10 @@
                     return new Torch_SM(item);
                 case FSMType.Oil:
                     return new Oil_SM(item);
+                case FSMType.TrueSight:
+                    return new TrueSight_SM(item);
+                case FSMType.Key:
+                    return new Key_SM(item);
                 default:
                     throw new ArgumentException("Invalid FSM type");
             }

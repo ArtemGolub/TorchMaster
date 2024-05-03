@@ -3,13 +3,41 @@ using UnityEngine;
 
 public class LightingPoint :MonoBehaviour, ILightingPoint
 {
+    public Light myLight { get; set; }
+    
+    private void OnEnable()
+    {
+        myLight = GetComponent<Light>();
+
+        if (myLight == null)
+        {
+            Debug.LogError("Light component is not assigned to myLight.");
+        }
+        else
+        {
+            var lightRange = myLight.range / 2;
+            var collider = GetComponent<SphereCollider>();
+            collider.radius = lightRange;
+            myLight.enabled = false;
+        }
+    }
+    
     public void DisableCollider()
     {
-       // transform.GetComponent<Collider>().enabled = false;
+        //transform.GetComponent<Collider>().enabled = false;
     }
 
-    public void EnableCollider()
+    public void EnableLighting()
     {
-       // transform.GetComponent<Collider>().enabled = true;
+        if (myLight != null)
+        {
+            Debug.Log(myLight.enabled + " " + myLight.gameObject.transform.position);
+            myLight.enabled = true;
+            Debug.Log(myLight.enabled + " " + myLight.gameObject.transform.position);
+        }
+        else
+        {
+            Debug.LogError("Light component is not assigned to myLight.");
+        }
     }
 }

@@ -12,6 +12,7 @@ TagManager:
   - Wall
   - EndZone
   - LightPoint
+  - Door
   layers:
   - Default
   - TransparentFX

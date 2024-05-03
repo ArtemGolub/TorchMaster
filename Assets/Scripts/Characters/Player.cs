@@ -17,6 +17,8 @@ public sealed class Player : ACharacter
         InvokeRepeating("CheckTargets", 0, 0.1f);
 
         FindObjectOfType<CamraControll>().InitCamera(transform);
+        
+        Character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.ReduceMadness);
     }
 
     private void Update()

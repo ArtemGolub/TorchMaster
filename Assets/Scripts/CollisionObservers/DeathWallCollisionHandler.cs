@@ -19,4 +19,8 @@ public class DeathWallCollisionHandler : ICollisionHandler<IDeathWall>
     {
         
     }
+
+    public void HandleCollisionStay(IDeathWall collidedObject)
+    {
+    }
 }

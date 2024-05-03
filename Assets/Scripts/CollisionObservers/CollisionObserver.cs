@@ -54,4 +54,22 @@ public class CollisionObserver<T> : MonoBehaviour, ICollisionObserver<T>
             collisionHandlers[tag].HandleCollisionExit(other.transform.GetComponent<T>());
         }
     }
+
+    private void OnCollisionStay(Collision other)
+    {
+        string tag = other.gameObject.tag;
+        if (collisionHandlers.ContainsKey(tag))
+        {
+            collisionHandlers[tag].HandleCollisionStay(other.transform.GetComponent<T>());
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        string tag = other.gameObject.tag;
+        if (collisionHandlers.ContainsKey(tag))
+        {
+            collisionHandlers[tag].HandleCollisionStay(other.transform.GetComponent<T>());
+        }
+    }
 }

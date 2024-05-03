@@ -11,6 +11,12 @@
         public void Execute(Item item)
         {
             if(item.FSM.CheckState(ItemStateType.Used)) return;
+            if (item.ItemType == ItemType.TrueSight)
+            {
+                item.FSM.ChangeState(ItemStateType.Used);
+                return;
+            }
+            
             if (_inventory.AddItem(item))
             {
                 item.FSM.ChangeState(ItemStateType.Grab);

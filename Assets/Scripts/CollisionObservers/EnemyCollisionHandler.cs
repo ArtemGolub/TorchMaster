@@ -24,4 +24,9 @@
         {
             
         }
+
+        public void HandleCollisionStay(IEnemy collidedObject)
+        {
+          
+        }
     }
