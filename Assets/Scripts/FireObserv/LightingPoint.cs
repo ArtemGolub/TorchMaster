@@ -31,9 +31,7 @@ public class LightingPoint :MonoBehaviour, ILightingPoint
     {
         if (myLight != null)
         {
-            Debug.Log(myLight.enabled + " " + myLight.gameObject.transform.position);
             myLight.enabled = true;
-            Debug.Log(myLight.enabled + " " + myLight.gameObject.transform.position);
         }
         else
         {

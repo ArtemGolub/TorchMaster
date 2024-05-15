@@ -19,4 +19,6 @@ public interface ICharacterBuilder
     void SetRaloadTime(float time);
     void SetMadness(float maxMadness);
     void SetMadnessCommandManager();
+    void SetCharacterType(CharacterType type);
+    void SetAnimationEventHandler(AnimationEventHandler animationEventHandler);
 }

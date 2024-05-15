@@ -24,6 +24,9 @@ public class RoomDirector
         _roomBuilder.SetPossibleItems(roomData.possibleItems);
         _roomBuilder.SetPossibleEnemies(roomData.possibleEnimies);
         _roomBuilder.SetContentCapacity(roomData.ContentCapacity);
+        
+        // TODO Replace to builder
+        _roomBuilder.GetRoom().isStartRoom = roomData.isStartRoom;
     }
 
     private void SetSpawnPoints(List<Transform> ItemSpawnPoints, List<Transform> EnemiesSpawnPoints, Dictionary<Transform, bool> allSpawnPoints)

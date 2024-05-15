@@ -25,8 +25,6 @@ public sealed class RoomContentGenerator : MonoBehaviour
 
         SetParams();
     }
-
-
     
     public RoomContent SetContent(RoomSO roomData, List<Transform> ItemSpawnPoints, List<Transform> EnemiesSpawnPoint, Dictionary<Transform, bool> allSpawnPoints)
     {
@@ -52,19 +50,28 @@ public sealed class RoomContentGenerator : MonoBehaviour
 
     private void TrySpawnContent(RoomContent roomContent)
     {
-        int randomNumber = GenerateRandomNumber(0, 100);
-        if (randomNumber <= 20)
+        if (roomContent.isStartRoom)
         {
-            TrySpawnEnemies(roomContent.PossibleEnemies, roomContent.SpawnPoints);
+            SpawnItem(roomContent.PossbileItems[0], roomContent.SpawnPoints);
+            SpawnItem(roomContent.PossbileItems[0], roomContent.SpawnPoints);
         }
-        else if (randomNumber <= 50)
+        else
         {
-            TrySpawnItem(roomContent.PossbileItems, roomContent.SpawnPoints);
+            int randomNumber = GenerateRandomNumber(0, 100);
+            if (randomNumber <= 30)
+            {
+                TrySpawnEnemies(roomContent.PossibleEnemies, roomContent.SpawnPoints);
+            }
+            else if (randomNumber <= 80)
+            {
+                TrySpawnItem(roomContent.PossbileItems, roomContent.SpawnPoints);
+            }
+            else if (randomNumber <= 100)
+            {
+                TrySpawnObstacles(roomContent.SpawnPoints);
+            }
         }
-        else if (randomNumber <= 100)
-        {
-            TrySpawnObstacles(roomContent.SpawnPoints);
-        }
+
     }
     
     private bool TryGetSpawnPoint(out Transform spawnPoint, Dictionary<Transform, bool> spawnPoints)
@@ -85,7 +92,7 @@ public sealed class RoomContentGenerator : MonoBehaviour
             return false;
         }
         
-        int randomIndex = UnityEngine.Random.Range(0, availableSpawnPoints.Count);
+        int randomIndex = Random.Range(0, availableSpawnPoints.Count);
         spawnPoint = availableSpawnPoints[randomIndex];
         return true;
     }
@@ -94,7 +101,7 @@ public sealed class RoomContentGenerator : MonoBehaviour
     {
         if (spawnPoints.ContainsKey(spawnPoint))
         {
-            spawnPoints[spawnPoint] = true; // Помечаем спаунпоинт как использованный
+            spawnPoints[spawnPoint] = true; 
         }
     }
     
@@ -112,7 +119,7 @@ public sealed class RoomContentGenerator : MonoBehaviour
         }
         else
         {
-            // Логика для случая, когда все спаунпоинты заняты
+        
         }
     }
     private void TrySpawnObstacles(Dictionary<Transform, bool> spawnPoints)
@@ -126,7 +133,7 @@ public sealed class RoomContentGenerator : MonoBehaviour
         }
         else
         {
-            // Логика для случая, когда все спаунпоинты заняты
+           
         }
     }
     
@@ -138,8 +145,15 @@ public sealed class RoomContentGenerator : MonoBehaviour
         {
             if (maxItems <= 0) return;
             if(possibleItemList == null) return;
-            ItemSO item = possibleItemList[GenerateRandomNumber(0, possibleItems.Count)];
 
+            ItemSO item = possibleItemList[GenerateRandomNumber(0, possibleItems.Count)];
+            foreach (var itemS in possibleItemList)
+            {
+                if (itemS.itemType == ItemType.Key)
+                {
+                    item = itemS;
+                }
+            }
             if (item.itemType == ItemType.Key)
             {
                 if (maxKeys == 0)
@@ -150,7 +164,6 @@ public sealed class RoomContentGenerator : MonoBehaviour
                 else
                 {
                     maxKeys--;
-                    Debug.Log("Key Spawned");
                 }
             }
             else
@@ -161,37 +174,17 @@ public sealed class RoomContentGenerator : MonoBehaviour
             MarkSpawnPointUsed(chosenSpawnPoint, spawnPoints);
         }
     }
-    
-    // private void TrySpawnEnemies(List<CharacterSO> possibleEnemies, List<Transform> enemiesSpawnPoint)
-    // {
-    //     if (maxEnimies <= 0) return;
-    //     if(possibleEnemies == null) return;
-    //     if(enemiesSpawnPoint.Count <= 0) return;
-    //     
-    //     CharacterSO character = possibleEnemies[GenerateRandomNumber(0, possibleEnemies.Count)];
-    //     Transform spawnPoint = enemiesSpawnPoint[GenerateRandomNumber(0, enemiesSpawnPoint.Count)];
-    //     CharacterFabric.current.SpawnCharacterAtPoint(character, spawnPoint);
-    //     maxEnimies -= 1;
-    // }
-    //
-    // private void TrySpawnItem(List<ItemSO> possibleItems, List<Transform> itemSpawnPoints)
-    // {
-    //     if(maxItems <= 0) return;
-    //     if(possibleItems == null) return;
-    //     if(itemSpawnPoints.Count <= 0) return;
-    //     
-    //     ItemSO item = possibleItems[GenerateRandomNumber(0, possibleItems.Count)];
-    //     Transform spawnPoint =  itemSpawnPoints[GenerateRandomNumber(0, itemSpawnPoints.Count)];
-    //     ItemFabric.current.SpawnItem(item, spawnPoint);
-    //     maxItems -= 1;
-    // }
-    //
-    // private void TrySpawnObstacle( List<Transform> itemSpawnPoint)
-    // {
-    //     if(itemSpawnPoint.Count <= 0) return;
-    //     Transform spawnPoint =  itemSpawnPoint[GenerateRandomNumber(0, itemSpawnPoint.Count)];
-    //     var obj = Instantiate(obstacle, spawnPoint.position - new Vector3(0,0.9f,0), spawnPoint.rotation);
-    // }
+
+    private void SpawnItem(ItemSO item, Dictionary<Transform, bool> spawnPoints)
+    {
+        Transform chosenSpawnPoint = null;
+        if (TryGetSpawnPoint(out chosenSpawnPoint, spawnPoints))
+        {
+            ItemFabric.current.SpawnItem(item, chosenSpawnPoint);
+            MarkSpawnPointUsed(chosenSpawnPoint, spawnPoints);
+            Debug.Log("spawned");
+        }
+    }
     
     private int GenerateRandomNumber(int min, int max)
     {

@@ -29,7 +29,6 @@ public class MadnessCommandManager
             if (!MadnessObserver.current.ContainObserver(command))
             {
                 MadnessObserver.current.AddObserver(command);
-                Debug.Log("subscribed: " + characterCommandType);
             }
         }
     }
@@ -41,7 +40,6 @@ public class MadnessCommandManager
             if (MadnessObserver.current.ContainObserver(command))
             {
                 MadnessObserver.current.RemoveObserver(command);
-                Debug.Log("unsubscribed: " + characterCommandType);
             }
         }
     }

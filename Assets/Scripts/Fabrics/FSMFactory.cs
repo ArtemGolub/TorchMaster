@@ -13,6 +13,8 @@
                     return new Player_SM(character);
                 case FSMType.Skeleton:
                     return new Enemy_SM(character);
+                case FSMType.Gost:
+                    return new Ghost_SM(character);
                 default:
                     throw new ArgumentException("Invalid FSM type");
             }

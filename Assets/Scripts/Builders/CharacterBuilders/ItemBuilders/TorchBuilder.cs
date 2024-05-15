@@ -37,7 +37,7 @@
             SetBurnCommand();
         }
         
-        public void SetBurnCommand()
+        private void SetBurnCommand()
         {
             var burnCommand = new BurnStrategy(_item, burnTime);
             TorchCanvas.current.InitSlider(burnTime);

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using FSM;
 using UnityEngine;
 
-public class Player_SM: StateMachine, ICharacterStateMachine
+public sealed class Player_SM: StateMachine, ICharacterStateMachine
 {
     private Character _character;
     
@@ -22,7 +22,10 @@ public class Player_SM: StateMachine, ICharacterStateMachine
         AddState(CharacterStateType.Move, new Move_State(_character,_character.CommandManager));
         AddState(CharacterStateType.Fear, new Fear_State(_character));
         AddState(CharacterStateType.Death, new Death_State(_character));
-        _sm.Initialize(_states[CharacterStateType.Move]);
+        AddState(CharacterStateType.Attack, new PlayerAttack_State(_character));
+        AddState(CharacterStateType.Use, new PlayerUse_State(_character));
+        
+        _sm.Initialize(_states[CharacterStateType.Idle]);
         Subscribe();
     }
     

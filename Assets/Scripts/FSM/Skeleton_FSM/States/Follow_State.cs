@@ -2,20 +2,26 @@ using FSM;
 using Movement;
 public class Follow_State : State
 {
-    readonly IMovementStategy _movementStategy;
+    private CharacterCommandManager _commandManager;
+    private Character _character;
     
-    public Follow_State(IMovementStategy movementStategy)
+    public Follow_State(Character character,CharacterCommandManager commandManager)
     {
-        _movementStategy = movementStategy;
+        _character = character;
+        _commandManager = commandManager;
     }
 
     public override void Enter()
     {
-        EnemyMovementController.current.AddObserver(_movementStategy);
+        _commandManager.SubscribeCommand(CharacterCommandType.Follow);
+        if( _character.Components.animator == null) return;
+        _character.Components.animator.SetBool("isRunning", true);
     }
 
     public override void Exit()
     {
-        EnemyMovementController.current.RemoveObserver(_movementStategy);
+        _commandManager.UnSubscribeCommand(CharacterCommandType.Follow);
+        if( _character.Components.animator == null) return;
+        _character.Components.animator.SetBool("isRunning", false);
     }
 }

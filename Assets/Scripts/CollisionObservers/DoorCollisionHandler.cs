@@ -10,7 +10,7 @@ public class DoorCollisionHandler : ICollisionHandler<IDoor>
     
     public void HandleCollision(IDoor collidedObject)
     {
-        collidedObject.TryOpen(_character.hasKey);
+        collidedObject.TryOpen(_character);
     }
 
     public void HandleCollisionExit(IDoor collidedObject)

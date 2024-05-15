@@ -18,7 +18,15 @@ public class BurnObserver : AObserver<IBurnStategy>
         }
         Burn();
     }
-    
+
+    public void ReduceBurn(float value)
+    {
+        for (int i = 0; i < observers.Count; i++)
+        {
+            if (observers[i] == null) continue;
+            observers[i].ReduceBurn(value);
+        }
+    }
     private void Burn()
     {
         for (int i = 0; i < observers.Count; i++)

@@ -7,5 +7,7 @@
         Fired,
         Fear,
         Death,
-        Attack
+        Attack,
+        Follow,
+        Use
     }

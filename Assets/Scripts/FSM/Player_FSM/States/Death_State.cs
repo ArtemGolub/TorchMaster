@@ -20,7 +20,10 @@ public class Death_State : State
         TorchCanvas.current.DeactivateSlider();
         MadnessCanvas.current.DeactivateSlider();
         
-        DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
+        if (_character.Components.characterTransform != null)
+        {
+            DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
+        }
         RestartButton.current.OpenRestartCanvas();
     }
 }

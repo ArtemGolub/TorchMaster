@@ -22,6 +22,8 @@ public class Character
 
     public TorchObserver TorchObserver;
     public OilObserver OilObserver;
+
+    public AnimationEventHandler AnimationEventHandler;
     
     public CharacterType CharacterType;
     public AmmoType AmmoType;

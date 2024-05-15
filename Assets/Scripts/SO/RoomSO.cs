@@ -6,7 +6,9 @@ public class RoomSO : ScriptableObject
 {
     [Header("Content")] 
     public int ContentCapacity;
+
     [Header("Items")]
+    public bool isStartRoom;
     public List<ItemSO> possibleItems;
     [Header("Enemies")]
     public List<CharacterSO> possibleEnimies;

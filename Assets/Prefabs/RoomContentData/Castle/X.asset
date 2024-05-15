@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b49f448ea24ddcb36afa149130546f, type: 3}
   m_Name: X
   m_EditorClassIdentifier: 
-  ContentCapacity: 2
+  ContentCapacity: 3
   possibleItems:
   - {fileID: 11400000, guid: 328edcb70162c492fb6f89834e65d9cc, type: 2}
   - {fileID: 11400000, guid: 3271d6be2c0a44a65a5f958cfc44e209, type: 2}
   - {fileID: 11400000, guid: 6596c7d1c4edd46718ec9adf1ba41dc2, type: 2}
   possibleEnimies:
-  - {fileID: 11400000, guid: 46758530d0a16414c9ba8bcd3e410816, type: 2}
+  - {fileID: 11400000, guid: e07f32f997d034c23b4451459f27b146, type: 2}

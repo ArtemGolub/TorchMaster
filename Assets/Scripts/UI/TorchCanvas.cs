@@ -8,7 +8,7 @@ public class TorchCanvas : MonoBehaviour
 {
     public static TorchCanvas current;
     public Slider slider;
-    private void Start()
+    private void Awake()
     {
         current = this;
     }

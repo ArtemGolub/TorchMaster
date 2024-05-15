@@ -26,6 +26,16 @@ public class BurnStrategy : IBurnStategy, IStrategy
         }
     }
 
+    public void ReduceBurn(float value)
+    {
+        _burnTime -= value;
+        TorchCanvas.current.UpdateSlider(_burnTime);
+        if (_burnTime <= 0)
+        {
+            _item.FSM.ChangeState(ItemStateType.Used);
+        }
+    }
+
     public void Subscribe()
     {
         foreach (var point in lightPoint)

@@ -23,6 +23,11 @@ public class CharBuilder : MonoBehaviour
         _characterBuilder = CharacterBuilderFabric.CharacterBuilder(characterData.characterType);
         
         _characterBuilder.SetComponents(SetComponents(characterTransform, inventoryTransform, animator));
+
+        if (characterData.characterType == CharacterType.Player)
+        {
+            _characterBuilder.SetAnimationEventHandler(animator.transform.GetComponent<AnimationEventHandler>());
+        }
         
         SetParams(characterData);
         SetBehaviour(characterData);
@@ -50,6 +55,7 @@ public class CharBuilder : MonoBehaviour
         _characterBuilder.SetSpeed(characterData.speed);
         _characterBuilder.SetAttackRange(characterData.attackRange);
         _characterBuilder.SetRaloadTime(characterData.raloadTime);
+        _characterBuilder.SetCharacterType(characterData.characterType);
     }
 
     private void SetBehaviour(CharacterSO characterData)

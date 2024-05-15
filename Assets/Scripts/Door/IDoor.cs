@@ -1,5 +1,5 @@
 
     public interface IDoor
     {
-        void TryOpen(bool hasKey);
+        void TryOpen(Character _character);
     }

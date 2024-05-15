@@ -13,5 +13,6 @@ public enum CharacterCommandType
     EncreaseMadnessValue,
     Use,
     KeyCollect,
+    Follow
     
 }

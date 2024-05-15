@@ -10,5 +10,6 @@ public sealed class RoomContent : IRoomContent
     public Dictionary<Transform, bool> SpawnPoints { get; set; }
     public List<Transform> ItemSpawnPoints { get; set; }
     public List<Transform> EnemiesSpawnPoints { get; set; }
-    
+    public bool isStartRoom { get; set; }
+
 }

@@ -30,6 +30,7 @@ public class CharacterBuilder : ICharacterBuilder
     {
         _character.MovementType = StrategyFabric.CreateMovementStrategy(_character, type);
         _character.CommandManager.AddCommand(CharacterCommandType.Move, _character.MovementType);
+        _character.CommandManager.AddCommand(CharacterCommandType.Follow, new Follow_Strategy(_character));
     }
 
     public void SetAttackType(AttackType type)
@@ -105,6 +106,16 @@ public class CharacterBuilder : ICharacterBuilder
         
         _character.MadnessCommandManager.AddCommand(CharacterCommandType.EncreaseMadness, new EncreaseMadness(_character));
         _character.MadnessCommandManager.AddCommand(CharacterCommandType.ReduceMadness, new ReduceMadness(_character));
+    }
+
+    public void SetCharacterType(CharacterType type)
+    {
+        _character.CharacterType = type;
+    }
+
+    public void SetAnimationEventHandler(AnimationEventHandler animationEventHandler)
+    {
+        _character.AnimationEventHandler = animationEventHandler;
     }
 
     public Character GetCharacter()

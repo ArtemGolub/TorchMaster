@@ -28,4 +28,6 @@ public class Enemy : ACharacter, IEnemy
             return Character;
         }
     }
+
+    public bool canSeePlayer { get; set; }
 }

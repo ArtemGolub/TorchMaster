@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IFirePoint
 {
+    Transform _transform { get; set; }
     bool burned { get; set; }
     void Burn();
 }

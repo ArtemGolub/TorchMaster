@@ -1316,6 +1316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2514739798074953613}
   - component: {fileID: 2514739798067709463}
+  - component: {fileID: 6298133754910636658}
   m_Layer: 9
   m_Name: Character_Hero_Knight_Male
   m_TagString: Untagged
@@ -1353,7 +1354,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 0f16acc535a164cd68b07c5fb8980162, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1361,6 +1362,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6298133754910636658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514739798075146991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a2638765bd4992aa0f013088db7684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2514739798075147937
 GameObject:
   m_ObjectHideFlags: 0

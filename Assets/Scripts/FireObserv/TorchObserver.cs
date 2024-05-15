@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class TorchObserver
 {
     private IInventory _inventory;
@@ -59,7 +61,11 @@ public class TorchObserver
     
     private void CheckBurnedObjects(Character character)
     {
-        if (!_inventory._items.ContainsKey(ItemType.Torch)) return;
+        if (!_inventory._items.ContainsKey(ItemType.Torch))
+        {
+            character.Components.animator.SetLayerWeight(1, 0f);
+            return;
+        }
         foreach (var kvp in _inventory._items)
         {
             if (kvp.Key == ItemType.Torch)
@@ -73,6 +79,7 @@ public class TorchObserver
                         character.Components.animator.SetBool("isTorch", false);
                         character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.ReduceMadness);
                         character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.EncreaseMadness);
+                        character.Components.animator.SetLayerWeight(1, 0f);
                         return;
                     }
                 }
@@ -95,11 +102,18 @@ public class TorchObserver
                             character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.EncreaseMadness);
                             character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.ReduceMadness);
                             item.FSM.ChangeState(ItemStateType.Active);
+                            character.Components.animator.SetLayerWeight(1, 1f);
                             return;
                         }
                     }
                 }
             }
+        }
+        else
+        {
+            character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.ReduceMadness);
+            character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.EncreaseMadness);
+            character.Components.animator.SetLayerWeight(1, 0f);
         }
     }
 }

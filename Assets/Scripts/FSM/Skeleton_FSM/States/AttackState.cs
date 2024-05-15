@@ -6,7 +6,7 @@ public class AttackState : State
     private Character _character;
 
     private float curTimer;
-    private float maxTimer = 2;
+    private float maxTimer = 1.6f;
     
     public AttackState(Character character)
     {
@@ -26,6 +26,10 @@ public class AttackState : State
         if (curTimer <= 0)
         {
             _character.SM.ChancgeState(CharacterStateType.Move);
+            if (_character.Name == "GhostFollow")
+            {
+                DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
+            }
         }
     }
 

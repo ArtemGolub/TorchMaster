@@ -14,7 +14,6 @@ public sealed class ItemCollisionHandler : ICollisionHandler<IItem>
         if (collidedObject.item.ItemType == ItemType.Key)
         {
             _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Use, collidedObject.item);
-            Debug.Log("key");
         }
         else
         {
