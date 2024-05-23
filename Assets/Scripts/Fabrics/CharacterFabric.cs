@@ -57,7 +57,10 @@ public class CharacterFabric: MonoBehaviour
     {
         var character = Instantiate(preset.prefab, spawnPoint.position, spawnPoint.rotation);
         character.SetParent(spawnPoint);
-        character.GetComponent<Enemy>().Character.patrolPoints = spawnPoint.GetComponentInParent<Room>().PatrolPoints;
+        if ( character.GetComponent<Enemy>().Character.patrolPoints == null)
+        {
+            character.GetComponent<Enemy>().Character.patrolPoints = spawnPoint.GetComponentInParent<Room>().PatrolPoints;
+        }
         return character;
     }
 

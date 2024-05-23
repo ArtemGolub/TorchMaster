@@ -21,8 +21,9 @@ public class AnimationEventHandler: MonoBehaviour
     }
     private void BurnFirePoint(IFirePoint firePoint, Item torch, Character _character)
     {
-        _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Throw, torch);
-        torch.FSM.ChangeState(ItemStateType.Used);
+       // _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Throw, torch);
+       // torch.FSM.ChangeState(ItemStateType.Used);
+       BurnObserver.current.ReduceBurn(2);
         firePoint.Burn();
         _character.SM.ChancgeState(CharacterStateType.Idle);
     }

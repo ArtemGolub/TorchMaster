@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Oil
   m_EditorClassIdentifier: 
   Name: Oil
-  iD: 4
   prefab: {fileID: 7950075373133631704, guid: b389fde53d9b14617b203bd5d244df89, type: 3}
+  soundSource: {fileID: 0}
+  cantCollectSoundSource: {fileID: 2374931336728965728, guid: 813936eb43ae147da96517cdcbb884bc, type: 3}
   itemType: 1
   fsmType: 3
-  lifeTime: 2

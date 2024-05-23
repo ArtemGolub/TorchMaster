@@ -52,4 +52,12 @@ public class OilBuilder: IItemBuilder
     {
         throw new System.NotImplementedException();
     }
+    public void SetCollectSound(AudioSource sound)
+    {
+        _item.collectSound = sound;
+    }
+    public void SetCantCollectSound(AudioSource sound)
+    {
+        _item.cantCollectSound = sound;
+    }
 }

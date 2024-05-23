@@ -22,19 +22,22 @@ public sealed class Inventory : IInventory
             if (_items[item.ItemType].Add(item))
             {
                 _visualaser.PlaceItem(item);
+                UpdateTorchCount();
                 return true;
             }
         }
+        item.cantCollectSound.Play();
         return false;
     }
 
     public void RemoveItem(Item item)
     {
-        if(item == null) return;
+        if(item == null) {return;}
         if (_items.ContainsKey(item.ItemType))
         {
             _items[item.ItemType].Remove(item);
             _visualaser.RemoveItem(item);
+            UpdateTorchCount();
         }
     }
 
@@ -42,5 +45,15 @@ public sealed class Inventory : IInventory
     {
         _items[ItemType.Torch] = new ItemList<Item>(torchCapacity);
         _items[ItemType.Oil] = new ItemList<Item>(oilCapacity);
+        UpdateTorchCount();
+    }
+    
+    private void UpdateTorchCount()
+    {
+        if (_items.ContainsKey(ItemType.Torch))
+        {
+            int torchCount = _items[ItemType.Torch].Count;
+            TorchCanvas.current.UpdateTorchCount(torchCount, _items[ItemType.Torch].Capacity - 1);
+        }
     }
 }

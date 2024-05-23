@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b92a9f4aa1864330b5a2228fee4018b, type: 3}
-  m_Name: Test
+  m_Name: LoadingScreen
   m_EditorClassIdentifier: 
   Hints:
-  - 1
-  - 2
+  - Torch is good way to get light everything up
+  - Beware of ghosts
   mainImages:
-  - {fileID: 21300012, guid: 7188e9d0ec465034995ea794e337b4bd, type: 3}
-  - {fileID: 21300000, guid: 92aed355811f74647a8a12fc00cbe8c5, type: 3}
+  - {fileID: 21300036, guid: 64a7c8f38d213274f8f497bb697b41a8, type: 3}
+  - {fileID: 21300036, guid: 64a7c8f38d213274f8f497bb697b41a8, type: 3}

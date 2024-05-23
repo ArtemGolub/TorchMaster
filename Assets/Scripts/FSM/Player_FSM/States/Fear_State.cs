@@ -13,13 +13,22 @@ public class Fear_State : State
     public override void Enter()
     {
         _character.Components.animator.SetBool("isFeared", true);
-        _character.Components.animator.SetBool("isTorch", false);
+        
         var itemToRemove = _character.InventoryCommandManager.GetItem(ItemType.Torch);
         if (itemToRemove != null)
         {
             itemToRemove.FSM.ChangeState(ItemStateType.Used);
             _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Throw, itemToRemove);
         }
+        
+        _character.Components.animator.SetBool("isTorch", false);
+        if (_character.Components.animator.GetLayerWeight(1) == 0)
+        {
+            _character.Components.animator.SetLayerWeight(1, 0f);
+        }
+        
+        // TODO Refactor to fear Audio
+        _character.attackAudio.Play();
         
         _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Move);
         _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Attack);

@@ -4,10 +4,18 @@ using UnityEngine;
 public class Door : MonoBehaviour, IDoor
 {
     private bool isOpened;
+
+    public AudioSource keyUse;
+    public AudioSource iNeedKey;
+    public AudioSource openDoor;
     public void TryOpen(Character _character)
     {
         if(isOpened) return;
-        if (!_character.hasKey) return;
+        if (!_character.hasKey)
+        {
+            iNeedKey.Play();
+            return;
+        }
         
         isOpened = true;
         KeyCanvas.current.Enable(false);
@@ -22,6 +30,8 @@ public class Door : MonoBehaviour, IDoor
     // TODO Dotween refactor
     private IEnumerator DoorDown()
     {
+        keyUse.Play();
+        openDoor.Play();
         Vector3 startPos = transform.position;
         Vector3 endPos = startPos - new Vector3(0, 5.5f, 0);
 

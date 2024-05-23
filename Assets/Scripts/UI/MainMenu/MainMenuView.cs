@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +18,8 @@ public class MainMenuView : MonoBehaviour
     private MainMenuViewModel _viewModel;
     public LoadingScreenController LoadingScreenController = null;
 
+    [SerializeField] private Canvas thanksGanvas;
+    
     private void Awake()
     {
         // Переместите инициализацию LoadingScreenController сюда из Start
@@ -51,5 +55,17 @@ public class MainMenuView : MonoBehaviour
                 _viewModel.OnLevelClick(levelName, levelState, LoadingScreenController);
             });
         }
+    }
+    
+    public void OnPurchaseComplete()
+    {
+        StartCoroutine(ShowThanksCanvas());
+    }
+
+    private IEnumerator ShowThanksCanvas()
+    {
+        thanksGanvas.enabled = true;
+        yield return new WaitForSeconds(1);
+        thanksGanvas.enabled = false;
     }
 }

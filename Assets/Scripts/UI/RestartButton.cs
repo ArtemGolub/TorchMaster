@@ -10,19 +10,20 @@ public class RestartButton : MonoBehaviour
     
     public Canvas restartCanvas;
     public Button restartButton;
+    
+    public Button toNextLevel;
     public Button toMainMenu;
 
     public LoadingScreenController LoadingScreenController = null;
 
-
+    public AudioSource DeathAudioSource;
 
     private void Start()
     {
         current = this;
         restartButton.onClick.AddListener(RestartGame);
         toMainMenu.onClick.AddListener(ToMainMenu);
-
-
+        
         this.LoadingScreenController = FindObjectOfType<LoadingScreenController>();
 
     }
@@ -30,6 +31,7 @@ public class RestartButton : MonoBehaviour
     public void OpenRestartCanvas()
     {
         restartCanvas.enabled = true;
+        DeathAudioSource.Play();
     }
     
     private void RestartGame()
@@ -57,4 +59,6 @@ public class RestartButton : MonoBehaviour
             Debug.LogWarning("LoadingScreenController is not initialized. Skipping scene reload.");
         }
     }
+
+
 }

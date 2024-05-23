@@ -1,12 +1,14 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 public class Enemy : ACharacter, IEnemy
 {
-    private void Awake()
-    {
-        InitCharacter();
-    }
+   public List<Transform> patroolPoints;
 
     private void Start()
     {
+        InitCharacter();
+        _Character.patrolPoints = patroolPoints;
         Character.SM.InitBehaviour();
     }
 
@@ -17,7 +19,7 @@ public class Enemy : ACharacter, IEnemy
 
     private void OnDestroy()
     {
-        Destroy();
+       // Destroy();
     }
     
     // TODO Refactor

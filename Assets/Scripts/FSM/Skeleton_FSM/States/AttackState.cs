@@ -6,17 +6,21 @@ public class AttackState : State
     private Character _character;
 
     private float curTimer;
-    private float maxTimer = 1.6f;
+    private float maxTimer = 2f;
+
+    private AudioSource _attackAudio;
     
-    public AttackState(Character character)
+    public AttackState(Character character, AudioSource attackAudio)
     {
         _character = character;
+        _attackAudio = attackAudio;
     }
 
     public override void Enter()
     {
         _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Move);
         _character.Components.animator.SetBool("isFear", true);
+        _attackAudio.Play();
         curTimer = maxTimer;
     }
 

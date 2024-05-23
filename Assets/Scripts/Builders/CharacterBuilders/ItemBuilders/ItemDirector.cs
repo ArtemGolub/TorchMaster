@@ -27,6 +27,9 @@ public class ItemDirector
         _itemBuilder.SetItemCommandManager();
         
         _itemBuilder.SetFSM(itemData.fsmType);
+        
+        _itemBuilder.SetCollectSound(itemData.soundSource);
+        _itemBuilder.SetCantCollectSound(itemData.cantCollectSoundSource);
     }
     
 }

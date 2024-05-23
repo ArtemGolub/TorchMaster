@@ -23,6 +23,12 @@
         {
             _itemDirector = new ItemDirector();
             Item item = _itemDirector.CreateItem(transform, itemData, collider, lightPoints);
+            var collectSound = Instantiate(item.collectSound, item.Transform);
+            item.collectSound = collectSound;
+
+            var cantCollectSound = Instantiate(item.cantCollectSound, item.Transform);
+            item.cantCollectSound = cantCollectSound;
+            
             return item;
         }
     }

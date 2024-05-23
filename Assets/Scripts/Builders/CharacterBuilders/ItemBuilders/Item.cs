@@ -14,4 +14,7 @@ public class Item
     public Collider Collider;
 
     public IItemStateMachine FSM;
+
+    public AudioSource collectSound;
+    public AudioSource cantCollectSound;
 }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Player
   prefab: {fileID: 5158191798327346186, guid: 3c023d4c4231e4ac89c4f612fa6dbb83, type: 3}
+  attackAudio: {fileID: 4556711258276666041, guid: 3ee34e65b210c498b99c45500d6fa7f6, type: 3}
   characterType: 0
   movementType: 0
   fsmType: 0

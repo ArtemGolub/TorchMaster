@@ -11,4 +11,6 @@ public interface IItemBuilder
     void SetItemCommandManager();
     void SetFSM(FSMType type);
     void SetLightPoints(List<Transform> lightPoints);
+    void SetCollectSound(AudioSource sound);
+    void SetCantCollectSound(AudioSource sound);
 }

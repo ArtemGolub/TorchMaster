@@ -7,14 +7,17 @@ public class TorchObserver
     public bool IsTorchBurning()
     {        
         bool anyActive = false;
-        if (!_inventory._items.ContainsKey(ItemType.Torch)) return false;
+        if (!_inventory._items.ContainsKey(ItemType.Torch))
+        {
+            return false;
+        }
         foreach (var kvp in _inventory._items)
         {
             if (kvp.Key == ItemType.Torch)
             {
                 foreach (Item item in kvp.Value)
                 {
-                    if(item == null) return false;
+                    if(item == null){ return false;}
                     if (item.FSM.CheckState(ItemStateType.Active))
                     {
                         anyActive = true;
@@ -34,7 +37,15 @@ public class TorchObserver
     {
         CheckBurnedObjects(character);
         bool anyActive = false;
-        if (!_inventory._items.ContainsKey(ItemType.Torch)) return;
+        if (!_inventory._items.ContainsKey(ItemType.Torch))
+        {
+            Debug.Log("No torch in CheckBurningObjects");
+            if (character.Components.animator.GetLayerWeight(1) == 0)
+            {
+                character.Components.animator.SetLayerWeight(1, 0f);
+            }
+            return;
+        }
         foreach (var kvp in _inventory._items)
         {
             if (kvp.Key == ItemType.Torch)
@@ -48,6 +59,10 @@ public class TorchObserver
                         character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.EncreaseMadness);
                         character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.ReduceMadness);
                         character.Components.animator.SetBool("isTorch", true);
+                        if (character.Components.animator.GetLayerWeight(1) == 0)
+                        {
+                            character.Components.animator.SetLayerWeight(1, 1f);
+                        }
                         break;
                     }
                 }
@@ -63,6 +78,7 @@ public class TorchObserver
     {
         if (!_inventory._items.ContainsKey(ItemType.Torch))
         {
+            Debug.Log("No torch in CheckBurnedObjects");
             character.Components.animator.SetLayerWeight(1, 0f);
             return;
         }
@@ -111,6 +127,7 @@ public class TorchObserver
         }
         else
         {
+            Debug.Log("No torch in ActivateTorch");
             character.MadnessCommandManager.SubscribeCommand(CharacterCommandType.ReduceMadness);
             character.MadnessCommandManager.UnSubscribeCommand(CharacterCommandType.EncreaseMadness);
             character.Components.animator.SetLayerWeight(1, 0f);

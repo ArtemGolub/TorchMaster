@@ -13,6 +13,9 @@ public class EndZoneCollisionHandler: ICollisionHandler<IEndZone>
     {
         string currentLevelName = SceneManager.GetActiveScene().name;
         DataPersistanceManager.current.CompleteLevel(currentLevelName);
+        collidedObject.OnWin();
+        _character.SM.ChancgeState(CharacterStateType.Win);
+        
     }
 
     public void HandleCollisionExit(IEndZone collidedObject)

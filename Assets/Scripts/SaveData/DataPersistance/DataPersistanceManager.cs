@@ -151,6 +151,20 @@ public class DataPersistanceManager : MonoBehaviour
             _gameData.Levels[nextLevelName] = LevelState.Unlocked;
         }
         SaveGame();
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
+    }
+
+    public string GetNextLevel(string currentLevelName)
+    {
+        int currentLevelIndex = progress.LevelName.IndexOf(currentLevelName);
+        if (currentLevelIndex < progress.LevelName.Count - 1)
+        {
+            string nextLevelName = progress.LevelName[currentLevelIndex + 1];
+            return nextLevelName;
+        }
+        else
+        { 
+           return null;
+        }
     }
 }

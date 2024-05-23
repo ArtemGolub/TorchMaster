@@ -10,6 +10,9 @@ public abstract class ACharacter : MonoBehaviour
     protected void InitCharacter()
     {
         Character = CharBuilder.current.CreateCharacter(CharacterPreset, transform, inventoryTransform, _animator);
+
+        var attackSound = Instantiate(Character.attackAudio, Character.Components.characterTransform);
+        Character.attackAudio = attackSound;
     }
 
     protected void Destroy()

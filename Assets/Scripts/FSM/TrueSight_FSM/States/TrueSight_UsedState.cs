@@ -14,6 +14,7 @@ public class TrueSight_UsedState : State
     {
         if (_item.Transform == null) return;
         GameObject.FindObjectOfType<Player>().Character.MadnessCommandManager.ExecuteCommand(CharacterCommandType.EncreaseMadnessValue, 25);
+        _item.collectSound.Play();
         DestroyHelper.Destroy(_item.Transform.gameObject);
     }
 }

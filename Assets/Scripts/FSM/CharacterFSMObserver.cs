@@ -16,6 +16,8 @@ public class CharacterFSMObserver : AObserver<ICharacterStateMachine>
             if(observer.StateCondition(CharacterStateType.Fear)) return;
             if(observer.StateCondition(CharacterStateType.Attack)) return;
             if(observer.StateCondition(CharacterStateType.Use)) return;
+            if(observer.StateCondition(CharacterStateType.Death)) return;
+            if(observer.StateCondition(CharacterStateType.Win)) return;
             observer.ChancgeState(CharacterStateType.Move);
         }
     }
@@ -27,6 +29,8 @@ public class CharacterFSMObserver : AObserver<ICharacterStateMachine>
             if(observer.StateCondition(CharacterStateType.Fear)) return;
             if(observer.StateCondition(CharacterStateType.Attack)) return;
             if(observer.StateCondition(CharacterStateType.Use)) return;
+            if(observer.StateCondition(CharacterStateType.Death)) return;
+            if(observer.StateCondition(CharacterStateType.Win)) return;
             observer.ChancgeState(CharacterStateType.Idle);
         }
     }

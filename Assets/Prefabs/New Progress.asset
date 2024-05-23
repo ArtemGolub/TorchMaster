@@ -15,4 +15,5 @@ MonoBehaviour:
   LevelName:
   - Level1
   - Level2
-  LevelState: 0100000000000000
+  - Level3
+  LevelState: 010000000000000000000000

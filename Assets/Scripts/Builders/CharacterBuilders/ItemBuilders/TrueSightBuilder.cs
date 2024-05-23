@@ -54,4 +54,12 @@
         {
            // _item.LightPoint = lightPoints;
         }
+        public void SetCantCollectSound(AudioSource sound)
+        {
+            _item.cantCollectSound = sound;
+        }
+        public void SetCollectSound(AudioSource sound)
+        {
+            _item.collectSound = sound;
+        }
     }

@@ -13,6 +13,8 @@ public class Character
     public float curMadness;
     public float maxMadness;
     public bool hasKey;
+
+    public AudioSource attackAudio;
     
     public CharacterComponents Components;
     

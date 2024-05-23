@@ -24,7 +24,7 @@ public class Ghost_SM: StateMachine, ICharacterStateMachine
         AddState(CharacterStateType.Move, new Move_State(_character,_character.CommandManager));
         AddState(CharacterStateType.Follow, new Follow_State(_character, _character.CommandManager));
         
-        AddState(CharacterStateType.Attack, new AttackState(_character));
+        AddState(CharacterStateType.Attack, new AttackState(_character, _character.attackAudio));
         
         AddState(CharacterStateType.Death, new GhostDeath_State(_character));
         

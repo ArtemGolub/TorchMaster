@@ -9,5 +9,6 @@
         Death,
         Attack,
         Follow,
-        Use
+        Use,
+        Win
     }

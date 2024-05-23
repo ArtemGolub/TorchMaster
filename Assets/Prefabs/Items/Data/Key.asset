@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Key
   prefab: {fileID: 7950075373133631704, guid: 9da2f8d1c427f41679343bda9c2c729a, type: 3}
+  soundSource: {fileID: 4264592629659681238, guid: 63d90ec5bda134844ac8f8b5b7fa6b39, type: 3}
+  cantCollectSoundSource: {fileID: 2374931336728965728, guid: 813936eb43ae147da96517cdcbb884bc, type: 3}
   itemType: 3
   fsmType: 6

@@ -7,7 +7,13 @@ namespace Movement
     {
         public static JoystickMovementController current;
         private Joystick _joystick;
-        
+        private Canvas joysticCanvas;
+
+        public void DeactivateCanvas()
+        {
+            joysticCanvas = transform.GetChild(0).transform.GetComponent<Canvas>();
+            joysticCanvas.enabled = false;
+        }
         private void Awake()
         {
             current = this;

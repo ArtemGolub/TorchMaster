@@ -36,5 +36,9 @@ public class ReduceMadness : IMadnessCommand
     {
         character.curMadness -= value;
         MadnessCanvas.current.UpdateSlider(character.curMadness);
+        if (character.curMadness <= 0)
+        {
+            character.SM.ChancgeState(CharacterStateType.Death);
+        }
     }
 }

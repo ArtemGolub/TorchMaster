@@ -76,6 +76,7 @@ public class CharBuilder : MonoBehaviour
             _characterBuilder.SetMadnessCommandManager();
         }
         _characterBuilder.SetFSM(characterData.fsmType);
+        _characterBuilder.SetAttackAudio(characterData.attackAudio);
     }
 
 

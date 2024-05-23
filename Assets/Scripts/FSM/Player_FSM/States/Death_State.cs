@@ -1,4 +1,5 @@
 using FSM;
+using Movement;
 using UnityEngine;
 
 public class Death_State : State
@@ -19,10 +20,15 @@ public class Death_State : State
         _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Throw);
         TorchCanvas.current.DeactivateSlider();
         MadnessCanvas.current.DeactivateSlider();
+        JoystickMovementController.current.DeactivateCanvas();
+        
+        _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Move);
+        _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Attack);
         
         if (_character.Components.characterTransform != null)
         {
-            DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
+            _character.Components.characterTransform.GetChild(1).transform.gameObject.SetActive(false);
+            //DestroyHelper.Destroy(_character.Components.characterTransform.gameObject);
         }
         RestartButton.current.OpenRestartCanvas();
     }

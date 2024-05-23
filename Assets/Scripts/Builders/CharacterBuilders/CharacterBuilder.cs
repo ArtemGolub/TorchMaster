@@ -118,6 +118,11 @@ public class CharacterBuilder : ICharacterBuilder
         _character.AnimationEventHandler = animationEventHandler;
     }
 
+    public void SetAttackAudio(AudioSource audioSource)
+    {
+        _character.attackAudio = audioSource;
+    }
+
     public Character GetCharacter()
     {
         return _character;

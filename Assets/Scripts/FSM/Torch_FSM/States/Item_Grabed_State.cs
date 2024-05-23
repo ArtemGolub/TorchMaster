@@ -16,6 +16,7 @@ public class Item_Grabed_State : State
             foreach (Transform lightPoint in  _item.LightPoint)
             {
                 lightPoint.transform.gameObject.SetActive(false);
+                _item.collectSound.Play();
             }
         }
     }

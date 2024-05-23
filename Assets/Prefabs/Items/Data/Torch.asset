@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Torch
   prefab: {fileID: 8326640968398993352, guid: 3e280dc29866f4bc7b10be3b89d4bfec, type: 3}
+  soundSource: {fileID: 4264592629659681238, guid: 9e75ee76e84cf47dd9e45894d9b3df0d, type: 3}
+  cantCollectSoundSource: {fileID: 2374931336728965728, guid: 813936eb43ae147da96517cdcbb884bc, type: 3}
   itemType: 0
   fsmType: 3

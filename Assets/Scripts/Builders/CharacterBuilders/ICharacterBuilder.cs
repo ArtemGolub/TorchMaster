@@ -21,4 +21,5 @@ public interface ICharacterBuilder
     void SetMadnessCommandManager();
     void SetCharacterType(CharacterType type);
     void SetAnimationEventHandler(AnimationEventHandler animationEventHandler);
+    void SetAttackAudio(AudioSource audioSource);
 }

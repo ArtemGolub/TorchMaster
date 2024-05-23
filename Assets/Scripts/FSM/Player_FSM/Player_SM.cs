@@ -24,6 +24,7 @@ public sealed class Player_SM: StateMachine, ICharacterStateMachine
         AddState(CharacterStateType.Death, new Death_State(_character));
         AddState(CharacterStateType.Attack, new PlayerAttack_State(_character));
         AddState(CharacterStateType.Use, new PlayerUse_State(_character));
+        AddState(CharacterStateType.Win, new PlayerWin_State(_character));
         
         _sm.Initialize(_states[CharacterStateType.Idle]);
         Subscribe();

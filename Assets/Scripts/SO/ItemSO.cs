@@ -6,7 +6,11 @@ public class ItemSO : ScriptableObject
     public string Name;
 
     public Transform prefab;
-
+    
+    [Header("Sounds")]
+    public AudioSource soundSource;
+    public AudioSource cantCollectSoundSource;
+    
     [Header("Behaviour Types")] 
     public ItemType itemType;
     public FSMType fsmType;

@@ -4,8 +4,9 @@ using UnityEngine;
 public class CharacterSO : ScriptableObject
 {
     public string Name;
-
+    
     public Transform prefab;
+    public AudioSource attackAudio;
     
     [Header("Behaviour Types")]
     public CharacterType characterType;

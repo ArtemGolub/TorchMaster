@@ -4,6 +4,7 @@ using UnityEngine;
 public class LightingPoint :MonoBehaviour, ILightingPoint
 {
     public Light myLight { get; set; }
+    [SerializeField] private bool isEnabled;
     
     private void OnEnable()
     {
@@ -18,7 +19,7 @@ public class LightingPoint :MonoBehaviour, ILightingPoint
             var lightRange = myLight.range / 2;
             var collider = GetComponent<SphereCollider>();
             collider.radius = lightRange;
-            myLight.enabled = false;
+            myLight.enabled = isEnabled;
         }
     }
     

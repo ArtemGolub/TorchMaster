@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: GhostFollow
   prefab: {fileID: 4220031496458638459, guid: 28272145449934236ad5000533238ea8, type: 3}
+  attackAudio: {fileID: 4556711258276666041, guid: a2405efa35cc048d3b03db081873fc50, type: 3}
   characterType: 1
   movementType: 2
   fsmType: 2

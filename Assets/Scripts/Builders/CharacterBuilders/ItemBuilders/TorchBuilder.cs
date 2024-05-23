@@ -5,10 +5,20 @@
     public class TorchBuilder: IItemBuilder
     {
         private Item _item = new Item();
-        private float burnTime = 10f;
+        private float burnTime = 100f;
         public Item GetItem()
         {
             return _item;
+        }
+
+        public void SetCollectSound(AudioSource sound)
+        {
+            _item.collectSound = sound;
+        }
+
+        public void SetCantCollectSound(AudioSource sound)
+        {
+            _item.cantCollectSound = sound;
         }
 
         public void SetName(string name)

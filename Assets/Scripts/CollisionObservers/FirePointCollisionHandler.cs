@@ -15,7 +15,7 @@ public class FirePointCollisionHandler : ICollisionHandler<IFirePoint>
         var torch = _character.InventoryCommandManager.GetItem(ItemType.Torch);
         if (torch != null && !collidedObject.burned)
         {
-            _character.Components.animator.SetBool("isTorch", false);
+            //_character.Components.animator.SetBool("isTorch", false);
             _character.SM.ChancgeState(CharacterStateType.Use);
             _character.AnimationEventHandler.HandleCollision(collidedObject, torch, _character);
             
