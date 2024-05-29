@@ -21,16 +21,15 @@ public class DataPersistanceManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
-        if (current != null)
+        if (current == null)
         {
-            if (current != this)
-            {
-                Destroy(this.gameObject);
-            }
+            current = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-        current = this;
+        else
+        {
+            Destroy(gameObject);
+        }
 
         _dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
     }

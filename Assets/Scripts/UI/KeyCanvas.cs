@@ -4,7 +4,7 @@ public class KeyCanvas : MonoBehaviour
 {
     public static KeyCanvas current;
     [SerializeField] private Canvas _keyCanvas;
-    private void Start()
+    private void Awake()
     {
         current = this;
         Enable(false);

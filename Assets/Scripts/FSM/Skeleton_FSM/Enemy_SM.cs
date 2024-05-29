@@ -20,7 +20,7 @@ public class Enemy_SM : StateMachine, ICharacterStateMachine
         AddState(CharacterStateType.Move, new Move_State(_character,_character.CommandManager));
         AddState(CharacterStateType.Slowed, new Slowed_State(_character));
         AddState(CharacterStateType.Fired, new Fired_State(_character));
-        AddState(CharacterStateType.Attack, new AttackState(_character, _character.attackAudio));
+        AddState(CharacterStateType.Attack, new AttackState(_character));
         _sm.Initialize(_states[CharacterStateType.Move]);
     }
     

@@ -1,23 +1,27 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TorchCanvas : MonoBehaviour
+public class TorchCanvas : MonoBehaviour, IInitialize
 {
     public static TorchCanvas current;
     public Slider slider;
     public TextMeshProUGUI torchCountText;
-    
+    private Player player;
+    public bool isInit { get; set; }
     private void Awake()
     {
         current = this;
     }
-    
+    public void Init()
+    {
+        isInit = true;
+        player = FindObjectOfType<Player>();
+    }
     public void UpdateSlider(float value)
     {
+        if(!isInit) return;
+        if(player.Character.SM.StateCondition(CharacterStateType.Death)) return;
         ActivateSlider();
         slider.value = value;
         if (slider.value == 0)
@@ -44,15 +48,12 @@ public class TorchCanvas : MonoBehaviour
         slider.maxValue = torchValue;
         slider.value = torchValue;
     }
-
+    
     public void UpdateTorchCount(int torchCount, int inventoryCapacity)
     {
         torchCountText.text = $"{torchCount} / {inventoryCapacity}";
-
-
         if (torchCount == 0)
         {
-            var player = FindObjectOfType<Player>();
             if(player == null) return;
             if(player.Character == null) return;
             if(player.Character.Components == null) return;
@@ -60,4 +61,5 @@ public class TorchCanvas : MonoBehaviour
             player.Character.Components.animator.SetLayerWeight(1, 0);
         }
     }
+
 }

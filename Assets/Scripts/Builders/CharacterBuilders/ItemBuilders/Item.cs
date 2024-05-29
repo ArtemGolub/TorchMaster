@@ -17,4 +17,6 @@ public class Item
 
     public AudioSource collectSound;
     public AudioSource cantCollectSound;
+
+    public float TrueSightRestore;
 }

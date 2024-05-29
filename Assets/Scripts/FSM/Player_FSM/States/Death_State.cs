@@ -12,14 +12,19 @@ public class Death_State : State
 
     public override void Enter()
     {
+        AudioManager.current.PlayPlayerSpeak(SoundType.PlayerScream);
+        
         if (_character.Components.animator != null)
         {
             _character.Components.animator.SetBool("isDead", true);
         }
         
         _character.InventoryCommandManager.ExecuteCommand(CharacterCommandType.Throw);
+        
         TorchCanvas.current.DeactivateSlider();
         MadnessCanvas.current.DeactivateSlider();
+        KeyCanvas.current.Enable(false);
+        
         JoystickMovementController.current.DeactivateCanvas();
         
         _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Move);

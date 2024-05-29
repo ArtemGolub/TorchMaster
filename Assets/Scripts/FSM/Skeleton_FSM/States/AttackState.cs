@@ -7,20 +7,18 @@ public class AttackState : State
 
     private float curTimer;
     private float maxTimer = 2f;
-
-    private AudioSource _attackAudio;
     
-    public AttackState(Character character, AudioSource attackAudio)
+    
+    public AttackState(Character character)
     {
         _character = character;
-        _attackAudio = attackAudio;
     }
 
     public override void Enter()
     {
         _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Move);
         _character.Components.animator.SetBool("isFear", true);
-        _attackAudio.Play();
+       AudioManager.current.PlaySFX(SoundType.GhostAttack);
         curTimer = maxTimer;
     }
 

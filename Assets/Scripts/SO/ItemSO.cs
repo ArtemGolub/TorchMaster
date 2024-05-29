@@ -6,6 +6,8 @@ public class ItemSO : ScriptableObject
     public string Name;
 
     public Transform prefab;
+    public float burnTime;
+    public float trueSightRestore;
     
     [Header("Sounds")]
     public AudioSource soundSource;

@@ -31,6 +31,11 @@ public class OilBuilder: IItemBuilder
         _item.Collider = collider;
     }
 
+    public void SetItemCommandManager(ItemSO itemSo)
+    {
+        
+    }
+
     public void SetItemCommandManager()
     {
         _item.ItemCommandManager = new ItemCommandManager();

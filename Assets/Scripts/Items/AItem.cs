@@ -13,5 +13,6 @@ public abstract class AItem : MonoBehaviour, IItem
     {
         collider = GetComponent<Collider>();
         item = ItemsBuilder.current.CreateItem(transform, itemPreset, collider, lightPoint);
+        item.TrueSightRestore = itemPreset.trueSightRestore;
     }
 }

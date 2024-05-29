@@ -106,6 +106,8 @@ public class CharacterBuilder : ICharacterBuilder
         
         _character.MadnessCommandManager.AddCommand(CharacterCommandType.EncreaseMadness, new EncreaseMadness(_character));
         _character.MadnessCommandManager.AddCommand(CharacterCommandType.ReduceMadness, new ReduceMadness(_character));
+
+        MadnessCanvas.current.InitSlider(100);
     }
 
     public void SetCharacterType(CharacterType type)

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1010408289533077538}
   - component: {fileID: 1049010547016521052}
+  - component: {fileID: 4047414490428028327}
   m_Layer: 0
   m_Name: Audio Source_DoorOpen
   m_TagString: Untagged
@@ -128,3 +129,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4047414490428028327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105634628105696070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30ff2d8cd01547c082cb4212c49052f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -31,6 +31,11 @@
             _item.Collider = collider;
         }
 
+        public void SetItemCommandManager(ItemSO itemSo)
+        {
+            
+        }
+
 
         public void SetItemCommandManager()
         {

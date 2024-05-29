@@ -8,7 +8,7 @@ public interface IItemBuilder
     void SetItemType(ItemType type);
     void SetTransform(Transform transform);
     void SetCollider(Collider collider);
-    void SetItemCommandManager();
+    void SetItemCommandManager(ItemSO itemSo);
     void SetFSM(FSMType type);
     void SetLightPoints(List<Transform> lightPoints);
     void SetCollectSound(AudioSource sound);

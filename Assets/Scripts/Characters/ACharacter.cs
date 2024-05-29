@@ -17,7 +17,7 @@ public abstract class ACharacter : MonoBehaviour
 
     protected void Destroy()
     {
-        Character.CommandManager.UnSubscribeAll();
-        Destroy(Character.Components.characterTransform.gameObject);
+       // Character.CommandManager.UnSubscribeAll();
+        //Destroy(Character.Components.characterTransform.gameObject);
     }
 }

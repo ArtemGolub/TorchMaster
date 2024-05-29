@@ -16,7 +16,7 @@ public class TrueSight_SM : StateMachine, IItemStateMachine
     {
         _sm = new StateMachine();
 
-        AddState(ItemStateType.Idle, new Item_Idle_State());
+        AddState(ItemStateType.Idle, new Item_Idle_State(_item));
         AddState(ItemStateType.Used, new TrueSight_UsedState(_item));
         
         _sm.Initialize(_states[ItemStateType.Idle]);

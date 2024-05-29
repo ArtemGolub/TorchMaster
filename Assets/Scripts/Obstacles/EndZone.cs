@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndZone: MonoBehaviour, IEndZone
 {
-    public Canvas winCanvas;
-    public Button menu;
-    public Button nextLevel;
-
+    [SerializeField]private Canvas winCanvas;
+    [SerializeField]private  Button menu;
+    [SerializeField]private  Button nextLevel;
+    [SerializeField] private SettingsCanvas settingCanvas;
     private void Start()
     {
         winCanvas.enabled = false;
@@ -17,6 +16,8 @@ public class EndZone: MonoBehaviour, IEndZone
     public void OnWin()
     {
         winCanvas.enabled = true;
+        settingCanvas.EnableCanvas(false);
+        
         menu.onClick.AddListener(LoadMainMenu);
         
         string NextLevelName = DataPersistanceManager.current.GetNextLevel(SceneManager.GetActiveScene().name);

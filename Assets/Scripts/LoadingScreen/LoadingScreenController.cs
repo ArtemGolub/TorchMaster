@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,33 +7,32 @@ public class LoadingScreenController : MonoBehaviour
 {
     public static LoadingScreenController current;
 
-    public LoadingScreenSO LoadingScreenPreset;
+    [SerializeField]private LoadingScreenSO LoadingScreenPreset;
     private LoadingScreenModel _loadingScreenModel;
     private LoadingScreenView _loadingScreenView;
 
     private void Awake()
     {
-        if (current != null)
+        if (current == null)
         {
-            if (current != this)
-            {
-                Destroy(this.gameObject);
-            }
+            current = this;
+            DontDestroyOnLoad(gameObject);
         }
-        current = this;
+        else
+        {
+            Destroy(gameObject);
+        }
         
         _loadingScreenModel = new LoadingScreenModel(LoadingScreenPreset, this);
         _loadingScreenView = GetComponent<LoadingScreenView>();
-        
-        DontDestroyOnLoad(this);
     }
-
+    
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SetLoadingScreen();
         SceneEvents.EventLoadScene.AddListener(LoadNewScene);
-        
-        Debug.Log(current + " " +LoadingScreenPreset +" "+ _loadingScreenModel+ " "+ _loadingScreenView);
+
+        // Debug.Log(current + " " +LoadingScreenPreset +" "+ _loadingScreenModel+ " "+ _loadingScreenView);
     }
 
     public void OnSceneUnloaded(Scene scene)

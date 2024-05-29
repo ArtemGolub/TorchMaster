@@ -5,7 +5,7 @@
     public class TorchBuilder: IItemBuilder
     {
         private Item _item = new Item();
-        private float burnTime = 100f;
+       
         public Item GetItem()
         {
             return _item;
@@ -41,16 +41,16 @@
             _item.Collider = collider;
         }
 
-        public void SetItemCommandManager()
+        public void SetItemCommandManager(ItemSO itemSo)
         {
             _item.ItemCommandManager = new ItemCommandManager();
-            SetBurnCommand();
+            SetBurnCommand(itemSo);
         }
         
-        private void SetBurnCommand()
+        private void SetBurnCommand(ItemSO itemSo)
         {
-            var burnCommand = new BurnStrategy(_item, burnTime);
-            TorchCanvas.current.InitSlider(burnTime);
+            var burnCommand = new BurnStrategy(_item, itemSo.burnTime);
+            TorchCanvas.current.InitSlider(itemSo.burnTime);
             _item.ItemCommandManager.AddCommand(ItemCommandType.Active, burnCommand);
         }
 

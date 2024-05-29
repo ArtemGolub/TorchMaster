@@ -4,7 +4,7 @@ using UnityEngine;
 public class Enemy : ACharacter, IEnemy
 {
    public List<Transform> patroolPoints;
-
+   public bool canSeePlayer { get; set; }
     private void Start()
     {
         InitCharacter();
@@ -16,11 +16,7 @@ public class Enemy : ACharacter, IEnemy
     {
         Character.SM.UpdateBehaviour();
     }
-
-    private void OnDestroy()
-    {
-       // Destroy();
-    }
+    
     
     // TODO Refactor
     public Character _Character
@@ -31,5 +27,5 @@ public class Enemy : ACharacter, IEnemy
         }
     }
 
-    public bool canSeePlayer { get; set; }
+
 }

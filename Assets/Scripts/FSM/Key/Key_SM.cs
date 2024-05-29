@@ -17,7 +17,7 @@ public class Key_SM : StateMachine, IItemStateMachine
     {
         _sm = new StateMachine();
 
-        AddState(ItemStateType.Idle, new Item_Idle_State());
+        AddState(ItemStateType.Idle, new Item_Idle_State(_item));
         
         AddState(ItemStateType.Used, new KeyGrab_State(_item));
         

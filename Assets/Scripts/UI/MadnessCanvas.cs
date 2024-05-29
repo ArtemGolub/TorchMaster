@@ -1,18 +1,30 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MadnessCanvas: MonoBehaviour
+public class MadnessCanvas: MonoBehaviour, IInitialize
 {
     public static MadnessCanvas current;
+    
+
     public Slider slider;
-    private void Start()
+    private Player player;
+    public bool isInit { get; set; }
+
+    private void Awake()
     {
         current = this;
-        InitSlider(100);
     }
-    
+
+    public void Init()
+    {
+        player = FindObjectOfType<Player>();
+        isInit = true;
+    }
     public void UpdateSlider(float value)
     {
+        if(!isInit) return;
+        if(player.Character.SM.StateCondition(CharacterStateType.Death)) return;
         ActivateSlider();
         slider.value = value;
         if (slider.value == 0)
@@ -21,7 +33,7 @@ public class MadnessCanvas: MonoBehaviour
         }
     }
 
-    public void ActivateSlider()
+    private void ActivateSlider()
     {
         if(GetComponent<Canvas>().enabled) return;
         GetComponent<Canvas>().enabled = true;
@@ -39,4 +51,7 @@ public class MadnessCanvas: MonoBehaviour
         slider.maxValue = madnessValue;
         slider.value = madnessValue;
     }
+
+
+
 }

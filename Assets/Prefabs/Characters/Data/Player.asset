@@ -24,6 +24,6 @@ MonoBehaviour:
   speed: 4
   attackRange: 5
   raloadTime: 0.5
-  TorchCapacity: 3
-  maxMadness: 100
+  TorchCapacity: 2
+  maxMadness: 75
   collisionTags: 01000000020000000300000004000000050000000600000007000000

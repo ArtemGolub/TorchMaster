@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,12 +9,12 @@ public class RestartButton : MonoBehaviour
     public Canvas restartCanvas;
     public Button restartButton;
     
-    public Button toNextLevel;
     public Button toMainMenu;
 
     public LoadingScreenController LoadingScreenController = null;
 
-    public AudioSource DeathAudioSource;
+    
+    [SerializeField] private SettingsCanvas _settingsCanvas;
 
     private void Start()
     {
@@ -31,11 +29,12 @@ public class RestartButton : MonoBehaviour
     public void OpenRestartCanvas()
     {
         restartCanvas.enabled = true;
-        DeathAudioSource.Play();
+        _settingsCanvas.EnableCanvas(false);
     }
     
     private void RestartGame()
     {
+        AudioManager.current.PlaySFX(SoundType.ButtonClick);
         // Проверяем наличие LoadingScreenController перед загрузкой сцены
         if (LoadingScreenController != null)
         {
@@ -49,6 +48,7 @@ public class RestartButton : MonoBehaviour
 
     private void ToMainMenu()
     {
+        AudioManager.current.PlaySFX(SoundType.ButtonClick);
         // Проверяем наличие LoadingScreenController перед загрузкой сцены
         if (LoadingScreenController != null)
         {

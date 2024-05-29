@@ -4,12 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPause
 {
     public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
     public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
-
+    public bool isPause { get; set; }
+    public void Pause()
+    {
+        if (isPause)
+        {
+            isPause = false;
+        }
+        else
+        {
+            isPause = true;
+        }
+    }
     public float HandleRange
     {
         get { return handleRange; }
@@ -61,6 +72,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if (isPause) return;
         OnDrag(eventData);
     }
 
@@ -139,6 +151,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
     {
+
         Vector2 localPoint = Vector2.zero;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(baseRect, screenPosition, cam, out localPoint))
         {
@@ -147,6 +160,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         }
         return Vector2.zero;
     }
+
+
 }
 
 public enum AxisOptions { Both, Horizontal, Vertical }

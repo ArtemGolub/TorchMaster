@@ -26,7 +26,7 @@ public sealed class Inventory : IInventory
                 return true;
             }
         }
-        item.cantCollectSound.Play();
+        AudioManager.current.PlayPlayerSpeak(SoundType.ICantHandleMore);
         return false;
     }
 
@@ -53,7 +53,7 @@ public sealed class Inventory : IInventory
         if (_items.ContainsKey(ItemType.Torch))
         {
             int torchCount = _items[ItemType.Torch].Count;
-            TorchCanvas.current.UpdateTorchCount(torchCount, _items[ItemType.Torch].Capacity - 1);
+            TorchCanvas.current.UpdateTorchCount(torchCount, _items[ItemType.Torch].Capacity);
         }
     }
 }

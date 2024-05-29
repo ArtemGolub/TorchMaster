@@ -27,8 +27,7 @@ public class Fear_State : State
             _character.Components.animator.SetLayerWeight(1, 0f);
         }
         
-        // TODO Refactor to fear Audio
-        _character.attackAudio.Play();
+        AudioManager.current.PlayPlayerSpeak(SoundType.PlayerScream);
         
         _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Move);
         _character.CommandManager.UnSubscribeCommand(CharacterCommandType.Attack);

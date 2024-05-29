@@ -51,6 +51,7 @@ MonoBehaviour:
   CharacterPreset: {fileID: 11400000, guid: e07f32f997d034c23b4451459f27b146, type: 2}
   _animator: {fileID: 1123536380061699857}
   inventoryTransform: {fileID: 7834722146567709700}
+  patroolPoints: []
 --- !u!65 &4972783076257441344
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -158,7 +159,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 104012, guid: 5eb5272116a5d0548840121eb9bb813d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 118822, guid: 5eb5272116a5d0548840121eb9bb813d, type: 3}
       propertyPath: m_IsActive
@@ -174,7 +175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 176130, guid: 5eb5272116a5d0548840121eb9bb813d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 187830, guid: 5eb5272116a5d0548840121eb9bb813d, type: 3}
       propertyPath: m_IsActive
@@ -228,6 +229,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: fd3a621ea7415469780dafc8957fbac9, type: 2}
+    - target: {fileID: 13784538, guid: 5eb5272116a5d0548840121eb9bb813d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 68eda989c02f74186b1baeadcd713174, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eb5272116a5d0548840121eb9bb813d, type: 3}
 --- !u!4 &1123536380053950355 stripped
