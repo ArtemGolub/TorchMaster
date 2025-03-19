@@ -28,7 +28,6 @@ public class MainMenuView : MonoBehaviour
     
     private void Awake()
     {
-        // Переместите инициализацию LoadingScreenController сюда из Start
         this.LoadingScreenController = FindObjectOfType<LoadingScreenController>();
     }
     private void Start()
@@ -69,6 +68,14 @@ public class MainMenuView : MonoBehaviour
             });
         }
     }
-    
 
+    private void RemoveListeners()
+    {
+        btnLevels.onClick.RemoveListener(_viewModel.OnLevelsClick);
+        btnExit.onClick.RemoveListener(_viewModel.OnExitClick);
+        btnUpgrades.onClick.RemoveListener(_viewModel.OnUpgradesClick);
+        btnReturn.onClick.RemoveListener(_viewModel.OnReturnClick);
+        btnSettings.onClick.RemoveListener(_viewModel.OnSettingsClick);
+        btnPurchase.onClick.RemoveListener(_viewModel.OnPurchaseClick);
+    }
 }
